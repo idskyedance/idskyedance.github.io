@@ -160,11 +160,10 @@
 
 .post-md code
 {
+    font-size: 13px;
+    background: #fafbfc;
+    border: 1px solid hsla(213, 7%, 75%, .5);
     border-radius: 4px;
-    background: #2b2b2b;
-    padding: 2px 4px;
-    color: #f8f8f2;
-    font-size: 1rem;
 }
 
 .post-md .hljs-ln-numbers
