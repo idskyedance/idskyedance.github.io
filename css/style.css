@@ -314,8 +314,8 @@ a
 }
 
 .archive-header  {
+    margin-top: 24px;
     margin-bottom: 24px;
-    padding-bottom: 22px;
     padding-bottom: 1.571428571rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
