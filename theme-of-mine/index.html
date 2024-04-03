@@ -20,8 +20,9 @@
 <meta property="og:description" content="如果看到这个页面，我想你应该是对博客的主题感兴趣。如果你不想听我唠叨的话，可以直接去看看  ZenMind 主题。 之前一直使用 Wordpress，且个人希望页面干净一点，就在官方的 Twenty Twelve 主题上改了改，变成下面这个样子，直到现在我还是非常喜欢。 今年，在腾讯云上购买的服务器快到期了，看了看续费价格，1 核 2G 内存的服务器每年要六百多，再看了看自己如今的更新频率，心里只">
 <meta property="og:locale">
 <meta property="og:image" content="https://graph.hicsc.com/works/065235-1.png">
+<meta property="og:image" content="https://graph.hicsc.com/works/rloiv1.jpg">
 <meta property="article:published_time" content="2024-03-24T06:26:46.000Z">
-<meta property="article:modified_time" content="2024-04-03T11:04:15.546Z">
+<meta property="article:modified_time" content="2024-04-03T11:52:09.115Z">
 <meta property="article:author" content="Skye">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://graph.hicsc.com/works/065235-1.png">
@@ -68,8 +69,8 @@
 <p>首先，增加 <a target="_blank" rel="noopener" href="https://fa5.dashgame.com/#/">Font Awesome 图标库</a> V5 版本，用于在页面上展示一些小图标，网页顶部菜单和底部版权信息都能看到它们的身影。</p>
 <p>其次，为了让顶部菜单展示小图标，我把菜单配置改成了这样：</p>
 <pre><code>menu:
-  &lt;i class=&quot;fas fa-volleyball-ball&quot;&gt;&lt;/i&gt; 知识: /categories/知识
-  &lt;i class=&quot;fas fa-feather&quot;&gt;&lt;/i&gt; 生活漫记: /categories/生活漫记
+  &lt;i class=&quot;fas fa-volleyball-ball&quot;&gt;&lt;/i&gt; 知识: /books/
+  &lt;i class=&quot;fas fa-feather&quot;&gt;&lt;/i&gt; 生活漫记: /ramble/
 </code></pre>
 <p>正常情况下，这样配置后，会直接把 HTML 标签展示在页面上，所以就把显示菜单的代码由 <code>&lt;%= name %&gt;</code> 改成了 <code>&lt;%- name %&gt;</code>。这样能实现我需要的效果，但有一丢丢注入的风险。</p>
 <p>还有，并不是所有文章都需要展示在首页上。比如，这篇文章就不需要展示在首页上，所以在文章中增加了 <code>hidden:true</code> 的配置：</p>
@@ -91,6 +92,24 @@ hidden: true
 <pre><code class="html">&lt;div class=&quot;post-except post-md&quot;&gt;
     &lt;%- post.excerpt %&gt;
 &lt;/div&gt;
+</code></pre>
+<p>还有一个很重要的功能就是，分类页面的展示。页面上展示的是分类的中文名称，但访问的链接是英文，这个可以通过配置实现：</p>
+<pre><code class="dtd">category_map:
+  知识: knowledge
+  生活漫记: ramble
+</code></pre>
+<p>同时，将配置 <code>category_dir: categories</code> 修改为 <code>category_dir: &#39;&#39;</code>，这样访问分类页面的访问链接就由原来的 <code>xxx.com/categories/知识</code> 变成了 <code>xxx.com/knowledge/</code>。</p>
+<p>除此之外，我还需要在页面上展示分类的名称：<br><img src="https://graph.hicsc.com/works/rloiv1.jpg" alt="分类页面示例"><br>不知道是否可以通过配置实现，我通过一个简单的方法实现，具体的实现代码如下所示。简而言之，利用页面的访问链接找到分类的英文名称，然后取得配置的分类映射，遍历映射找到对应分类的中文名称。</p>
+<pre><code class="html">&lt;header class=&quot;archive-header&quot;&gt;
+    &lt;h1 class=&quot;archive-header-title&quot;&gt;
+        分类目录归档：
+        &lt;% Object.keys(config.category_map).forEach(function(key) &#123; %&gt;
+            &lt;% if (config.category_map[key] === page.path.split(&quot;/&quot;)[0]) &#123; %&gt;
+                &lt;span&gt;&lt;%= key %&gt;&lt;/span&gt;
+            &lt;% &#125; %&gt;
+        &lt;% &#125;); %&gt;
+    &lt;/h1&gt;
+&lt;/header&gt;
 </code></pre>
 <p>另外，我还升级了 <code>highlightjs</code> 插件到最新版本(11.9)，我不太喜欢黑色背景，就选了一个 <code>xcode</code> 的主题，更多主题，你可以在 <a target="_blank" rel="noopener" href="https://highlightjs.org/examples">highlight.js官方主题</a> 预览。</p>
 <p>最后，就是 CSS 和一些细节的调整，也没啥可说的，留给大家慢慢发现吧。</p>
