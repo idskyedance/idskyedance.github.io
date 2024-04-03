@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>橙子陈绩好</title>
+  
+  <subtitle>This is my private zine, I write whatever I want.</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2024-04-03T12:01:05.488Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Skye</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo主题：SKYE DANCE</title>
+    <link href="http://example.com/theme-of-hicsc/"/>
+    <id>http://example.com/theme-of-hicsc/</id>
+    <published>2024-03-24T06:26:46.000Z</published>
+    <updated>2024-04-03T12:01:05.488Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>M型社会：我们从哪儿开始？</title>
+    <link href="http://example.com/m-type-society/"/>
+    <id>http://example.com/m-type-society/</id>
+    <published>2024-03-13T13:36:03.000Z</published>
+    <updated>2024-04-03T11:53:47.390Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;三十年前，日本经济开始衰退，人民收入开始减少，年收入在600万日元以下的中低阶层，已经占了日本总人口的八成。原先占比八成的中产阶级，一大部分人落到中低阶层，一小部分人挤入富裕阶层。中产彻底解体，一个人要么是富人，要么是穷人，没有中间层，收入严重两极分化，这就是所谓的M型社会。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/M-type%20society.jpeg&quot; alt=&quot;M型社会文章题图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;中国在经历了三十年的高速发展之后，也不可避免的慢了下来。经历了这几年的经济不景气，谁也不知道我们会不会经历日本那种长期的经济衰退，但短期的衰退是不可避免了。那我们应该怎么办？也许这本书能给我们些启发。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>聊聊回家过年那点事</title>
+    <link href="http://example.com/chinese-new-year-2024/"/>
+    <id>http://example.com/chinese-new-year-2024/</id>
+    <published>2024-02-18T13:14:30.000Z</published>
+    <updated>2024-04-03T11:55:27.013Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;从年三十到正月初七这八天是我过去一年过得最轻松的一周，这一周没有客户需求、没有业绩目标、没有技术难题、更没有不学习的罪恶感，真的是太爽了。&lt;/p&gt;
+&lt;p&gt;跟以往一样，腊月二十九在家大扫除，年三十为年夜饭从早忙到晚，初一逛逛街看看电影，初二我和老婆各回各家拜年走亲戚。我很喜欢回家走亲戚，也很喜欢和他们聊天，他们会告诉我过去一年身边发生的趣事，我也会跟他们说说我所看到的世界。这样毫无压力的聊天氛围，让我特别的放松。&lt;/p&gt;
+&lt;p&gt;过去几年，都是开车回家，堵怕了，今年坐火车回去，稍微轻松一点，火车上也发生了不少趣事。接下来就说说，过年回家的新体验。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>笔记的方法</title>
+    <link href="http://example.com/the-method-of-taking-notes/"/>
+    <id>http://example.com/the-method-of-taking-notes/</id>
+    <published>2024-02-07T09:37:06.000Z</published>
+    <updated>2024-04-03T11:54:34.922Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在电子书上划过很多线、在浏览器中裁剪过很多网页、在微信中也收藏过不少文章，如果这些能够算作笔记的话，我确实记录过不少东西。然并卵，这些文字于我而言有什么意义？也许只是在当时多了些情绪价值而已。因此，在阅读这本书以后，我重新开始审视记笔记这个动作。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062032.png&quot; alt=&quot;笔记的方法&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;用自己的话来记笔记&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;记笔记的核心是用自己的话来记录。为什么？&lt;/p&gt;
+&lt;p&gt;首先，人的记忆有两种机制：存储和提取。研究表明，信息存入记忆越容易，提取就越困难；反之，存入记忆越困难，知识提取会更方便，这就是「必要难度理论」。用自己的话来记录，就是为了增加存储时的难度，以便未来遇到难题时，更有可能想起（提取）记过的笔记。&lt;/p&gt;
+&lt;p&gt;其次，记录和收集信息是有巨大区别的。大量收集的信息，很多时候并不会给我们太多帮助，因为我们遇到问题时，更习惯直接使用搜索引擎或AI。你可能会说，那我可以先去笔记中搜索呀。当然可以，但我想告诉你的时候，搜索没有加工过的笔记，跟搜索网页并没有太大的区别。&lt;/p&gt;
+&lt;p&gt;因此，&lt;strong&gt;记录并不那么重要，重要的是思考&lt;/strong&gt;。只要用自己的话来复述或是总结，你一定会思考，这种倒逼自己思考的过程，才是记录的意义。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>这个艰辛颠簸的世界：我在北京送快递</title>
+    <link href="http://example.com/this-difficult-and-bumpy-world/"/>
+    <id>http://example.com/this-difficult-and-bumpy-world/</id>
+    <published>2024-01-14T08:02:37.000Z</published>
+    <updated>2024-04-03T11:54:42.912Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;看多了网络上灯红酒绿的生活，读读「我在北京送快递」吧，作者胡安焉用类似于“流水账”的方式记录他在约十多年间干的近二十份工作，写下了这个艰辛颠簸的世界。&lt;/p&gt;
+&lt;p&gt;我对现实世界的反应有点迟钝，很多人会误以为这是乐观，觉得什么问题在我这儿都云淡风轻似的，但实际上可能是我对现实并没有那么多期待，甚至有点迟钝而已。在整个阅读过程中，其实我并没有那么感同身受，也没有那种窥探到另一个阶层生活的快感，尽管我并不认为我和快递员不在同一个阶层。&lt;/p&gt;
+&lt;p&gt;但作为一个社畜，同为社会的最底层，总还能找到些许共鸣。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062129.png&quot; alt=&quot;我在北京送快递&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我经历的2023年</title>
+    <link href="http://example.com/went-through-in-2023/"/>
+    <id>http://example.com/went-through-in-2023/</id>
+    <published>2024-01-01T10:36:19.000Z</published>
+    <updated>2024-04-03T11:55:18.461Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;新年第一天，坐在桌前，试着想回忆过去一年干了些什么，除了些许情绪，脑袋一片空白。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062057.png&quot; alt=&quot;Photo by Morgan Sessions&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/@morgansessions?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Morgan Sessions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们六个人的团队运营着一款B端产品，这一年，我们在研发、销售、客户成功方面都做了不少尝试，营收相较于22年并没有太大的提升，但付出的代价却是账上的现金消耗一空。这也意味着，24年我们必须要实现收支平衡，否则团队就要散了。当然这一年也不是完全没有收获，最大的收获就是知道哪些事我们做不了，哪些路我们走不通。最重要的是，仍然有小伙伴愿意继续坚持，愿意乐观的相信我们仍能成功。&lt;/p&gt;
+&lt;p&gt;2024年，我们六人团队的营收目标是200万，如果这个目标能够实现，除了能够保证大家的收入不减少以外，还能验证我们的一些猜想，为后年打下一个好的基础。感兴趣的话，年底再来看看，如果目标实现了，我就详细地说说我们这一年是怎么做的；如果目标没实现，我就发个简历找工作。&lt;/p&gt;
+&lt;p&gt;工作就说这么多吧，接下来是一些碎碎念。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>舅舅的骄傲</title>
+    <link href="http://example.com/my-uncles-price/"/>
+    <id>http://example.com/my-uncles-price/</id>
+    <published>2023-03-01T07:03:06.000Z</published>
+    <updated>2024-04-03T12:32:30.915Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;早上跑步听&lt;a href=&quot;https://podcasts.apple.com/cn/podcast/mactalk-%E5%A4%9C%E8%88%AA%E8%A5%BF%E9%A3%9E/id1619054900&quot;&gt;播客&lt;/a&gt;，小盖讲了一个故事。&lt;/p&gt;
+&lt;p&gt;他叔叔有次开车回老家，在高速路上遇到一个人车坏了。叔叔也没多想，二话没说，就趴倒车底修车。他甚至没有顾及自己的新衣服。修好车之后，只象征性的要了一点费用。&lt;/p&gt;
+&lt;p&gt;不少人知道这件事，觉得你这人有点傻呀，你得多要点钱。当时那种情况，前不着村后不着店，你要几千他也得给呀。&lt;/p&gt;
+&lt;p&gt;小盖当时也觉得他傻，但现在对他刮目相看。叔叔是一个工匠，一个手艺人，当时那种情况如果管人要很多钱，甚至是勒索人家，作为手艺人的心气儿就会被破坏。&lt;/p&gt;
+&lt;p&gt;直到现在，叔叔也不是大富大贵，但每次看到他沉浸在自己的手艺里面的那种神采，那个心气儿，你会由衷为他开心。&lt;/p&gt;
+&lt;p&gt;听完这个故事，我突然想到自己的舅舅。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我度过了怎样的2022年?</title>
+    <link href="http://example.com/my-2022/"/>
+    <id>http://example.com/my-2022/</id>
+    <published>2022-12-31T12:11:00.000Z</published>
+    <updated>2024-04-03T13:26:58.827Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;2022年，疫情进入第三个年头，经历无尽的封控和核酸后，却在年底来了个大转弯，老司机的方向盘都差点甩飞出去。这一年因为国际局势和疫情，周围的人失业的失业，破产的破产，过得尤为不容易。我们盼望2022年早点过去，期望2023年能够不那么艰难。&lt;/p&gt;
+&lt;p&gt;2022年我印象最深刻的国际事件当属俄乌战争，让人真切地感受到战争的残酷——几百万人流亡欧洲、城镇变成废墟、大量士兵和平民伤亡…… 战争给乌克兰造成至少超千亿美元损失，重建至少需要2000亿美元。在我们看来的一串串数字，是千千万万乌克兰人支离破碎的生活。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/6thdvr.png&quot; alt=&quot;2022年的乌克兰&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>先让父母成熟起来</title>
+    <link href="http://example.com/let-the-parents-mature-first/"/>
+    <id>http://example.com/let-the-parents-mature-first/</id>
+    <published>2022-12-12T12:11:00.000Z</published>
+    <updated>2024-04-03T13:20:15.343Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;作为一个父亲，自然而然对孩子的教育特别关心，但我们的关心与其他父母的焦虑完全不同。我和老婆都没有望子成龙的心思，只要孩子自己过得开心就好。所以，我估计他周围很多小朋友都比较羡慕他：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;他可以无限制地看奥特曼、熊出没、汪汪队、小猪佩奇……&lt;/li&gt;
+&lt;li&gt;他可以随时玩自己喜欢的玩具，马上就该叫他打游戏了&lt;/li&gt;
+&lt;li&gt;他每年自己想去哪个地方旅游，我们就带着他出去走走&lt;/li&gt;
+&lt;li&gt;他可以自己决定什么时候睡觉、要不要吃饭、出不出去玩&lt;/li&gt;
+&lt;li&gt;……&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;反正我们就是完全放养，他可以自由决定自己的一切，除非我看不惯他的时候。我们对他的唯一要求就是不要让老师来找我麻烦。&lt;/p&gt;
+&lt;p&gt;我非常喜欢何帆和吴军两位老师，他们在教育孩子的观点大致一致。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>为值得的客户至上</title>
+    <link href="http://example.com/serve-worthwhile-customers/"/>
+    <id>http://example.com/serve-worthwhile-customers/</id>
+    <published>2022-12-09T03:21:48.000Z</published>
+    <updated>2024-04-03T11:53:51.463Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;之前，我很少读访谈和传记类的书，感觉里面的人物离自己都太远，不能共情。浑浑噩噩地过了这么些年，越发觉得无聊，突然想看看别人的生活是咋样的，遂开始读访谈和传记。我和团队正在开发和运营一款零代码的SaaS产品，因此对科技圈要更关注一点，比如最近刚读完 &lt;a href=&quot;https://book.douban.com/subject/35254632&quot;&gt;详谈：左晖&lt;/a&gt;，这本小册子记录了李翔围绕组织、使命、价值观、行业竞争、选人用人等话题，与左晖进行的两次深度访谈。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061920.png&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/iWTamkU5kiI&quot;&gt;David Iskander&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在我看来，左晖是一个很低调的人，不对外界或是竞争对手做过多的评价，不在乎自己是否成功，也不在乎外界对自己的误解，只关心自己做的事是否正确，关心自己是否让行业变得更好。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>美国为什么可以在芯片上“卡”中国脖子？</title>
+    <link href="http://example.com/chip-wars/"/>
+    <id>http://example.com/chip-wars/</id>
+    <published>2022-12-04T12:11:00.000Z</published>
+    <updated>2024-04-03T13:20:37.292Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近万维钢老师在他的 &lt;a href=&quot;https://www.dedao.cn/course/article?id=Ay7GQpR6ndOgX6k2gOK8eBvPzMN4lw&quot;&gt;精英日课&lt;/a&gt; 中讲解「Chip War」这本书，从中可以了解到整个芯片产业的发展历程、美方视角下的中美芯片之争、美国为什么可以在芯片上“卡”中国脖子，以及中国的破局之道。下面我抽两个可能是大家最关注的问题，跟你讲讲。&lt;/p&gt;
+&lt;p&gt;像台积电和ASML并不是美国公司，为啥听美国的呢？总不至于说我用了你的技术就得接受你的长臂管辖吧？其实美国并没有直接动用什么霸权，它只用了一个简单的商业逻辑：如果你违反禁令，我就会要求美国公司不卖上游设备给你。&lt;/p&gt;
+&lt;p&gt;美国手里的牌：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;几乎所有芯片设计软件都是美国的&lt;/li&gt;
+&lt;li&gt;ASML用的一些关键部件，包括光刻的光源，是美国生产的&lt;/li&gt;
+&lt;li&gt;三星和台积电都需要的一些关键工具和原材料是美国和日本控制的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于此，美国并不需要什么政治霸权、更不需要走什么法律程序，直接从芯片产业链的逻辑上把中国卡死。这个原理，被美国学者称为“武器化的互相依赖”，因为在这几个关键技术上，你只能依赖我，那么我就可以控制你，我就可以利用这个依赖对付你。&lt;/p&gt;
+&lt;p&gt;那中国该如何破局？米勒在书中分享了三个策略。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="http://example.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>美国生活中的反智主义</title>
+    <link href="http://example.com/anti-intellectualism-in-american/"/>
+    <id>http://example.com/anti-intellectualism-in-american/</id>
+    <published>2022-12-01T05:21:26.000Z</published>
+    <updated>2024-04-03T11:54:38.802Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;近年来，美国民间出现了很多反智现象，比如疫情之下拒绝戴口罩、游行抗议打疫苗、极端民众攻占国会等等，种种离奇现象让我们大为不解，崇尚民主和科学的美国为什么会这样？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/060935.png&quot; alt=&quot;图片来源于网络&quot;&gt;&lt;/p&gt;
+&lt;p&gt;反智不是反“智力”，毕竟没人会怀疑智力的价值，人们对从事科学创造、技术发面的高智力人群普遍是持推崇和赞赏态度的。反智的“智”指的是“智识”，它在含义上与智力没什么区别，只不过智力体现的是解决实际问题的能力，而智识更多的是体现人类思考、创新和批判的能力。也就是说，智力重在“务实”，而智识更“务虚”一点，反映在现实生活中，像科学家、实干者往往会比哲学家、基础理论研究者要更受欢迎。&lt;/p&gt;
+&lt;p&gt;如果一定要下一个定义，反智就是对运用智识的智识分子，抱有怀疑和怨恨。美国传染病专家安东尼·福奇就是一个很好的例子，比如特朗普吹嘘阿奇霉素等可以抑制新冠病毒，而福奇立即辟谣必须要进行足够的实现才能证实；副总统彭斯夸口要让每个美国人都能接受核酸检测，而福奇直言，美国的检测系统并不能达到……而福奇得到的是什么，被阻止出席关于疫情的众议院听证会，甚至遭到人身威胁。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何设计简单的用户体验？</title>
+    <link href="http://example.com/how-to-design-simple-user-experience/"/>
+    <id>http://example.com/how-to-design-simple-user-experience/</id>
+    <published>2022-11-25T13:46:48.000Z</published>
+    <updated>2024-04-03T11:54:08.206Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;团队最近几个月都在给产品做减法，作为一款2B的SaaS产品，想要删减功能实在是不容易。每当团队讨论是否应该删除某项功能时，头脑里总会有一些声音：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;假如有的客户想要…&lt;/li&gt;
+&lt;li&gt;都已经做了，也有客户在使用，何必要删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061647.png&quot; alt=&quot;Photo by UX Store&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后某些功能又会安然无恙地回到产品中。正好最近读到 &lt;a href=&quot;https://book.douban.com/subject/30253370/&quot;&gt;简约至上&lt;/a&gt; 这本书，其介绍了四种设计简单用户体验的策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;删除：仅保留最能打动用户的东西&lt;/li&gt;
+&lt;li&gt;组织：按照有意义的标准将信息分组&lt;/li&gt;
+&lt;li&gt;隐藏：尽可能彻底地隐藏所有需要隐藏的功能&lt;/li&gt;
+&lt;li&gt;转移：将复杂功能转移到其应用形式或设备上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作者经常思考如何简化其他设备和体验，会时不时地应用上述四个策略，它们不仅适用于简化功能，也适用于简化内容。而且，无论项目大小，这四个策略都同样适用。接下来，我根据自己的理解为你详细说说这四个策略。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>生活就像一个鱼缸</title>
+    <link href="http://example.com/life-is-like-a-fish-tank/"/>
+    <id>http://example.com/life-is-like-a-fish-tank/</id>
+    <published>2022-11-20T10:36:19.000Z</published>
+    <updated>2024-04-03T13:14:31.354Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这里我想向你推荐一下 &lt;a href=&quot;https://mp.weixin.qq.com/s/YgkrFPpFtoP_HtUR7m89nw&quot;&gt;马岩松在一席的演讲&lt;/a&gt;，这是我在 &lt;a href=&quot;https://telegra.ph/weekly-234-12-09&quot;&gt;阮一峰的科技爱好者周刊第233期&lt;/a&gt; 看到的一个小故事。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;事务所刚成立的时候，没有项目可做，有天在大街上溜达，看到一个售卖金鱼的摊位，所有鱼都生活在一个方形的小盒子里面。&lt;/p&gt;
+&lt;p&gt;金鱼在里面，看上去非常迷茫，似乎过得闷闷不乐，有时候还会撞在玻璃壁上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;他就想到，人在城市中生活的处境，不也像金鱼一样吗，被局限在一个看不见的盒子里面。&lt;/p&gt;
+&lt;p&gt;那么，作为一个设计师，能不能把鱼缸重新设计一下，让鱼过得快乐一些？&lt;/p&gt;
+&lt;p&gt;说干就干，他每隔几分钟，就去记录一下鱼的位置，画成散点图（下图）。结果发现，跟大家想的不一样，虽然关在鱼缸里面，鱼并不是什么角落都去，而是高度重复某些路线。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/rvzbbe.png&quot; alt=&quot;鱼的位置画成散点图&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>怎样成为一个内心强大的人？</title>
+    <link href="http://example.com/how-to-become-a-strong-person/"/>
+    <id>http://example.com/how-to-become-a-strong-person/</id>
+    <published>2022-11-16T14:06:21.000Z</published>
+    <updated>2024-04-03T11:54:16.523Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近开始断断续续的听万维钢的&lt;a href=&quot;https://www.dedao.cn/course/article?id=Ozpeyw8lG6QaXknQkEJRd1ZoA75NLB&quot;&gt;「精英日课」第5季&lt;/a&gt;，刚听完他讲的第一本书，内容还挺丰富的，简单地做做笔记，也聊聊自己的理解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061545.png&quot; alt=&quot;Photo by Alex Lehner&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;什么是领导力？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;瓦德瓦讲过这样一个故事。&lt;/p&gt;
+&lt;p&gt;他有个女学生，13岁的时候得了一场重病，在医院里等待手术。有一天医生将她的父亲叫到病房外，说了两个坏消息。第一，你女儿的病情已经非常严重，原计划一星期之后的手术必须得提前到今天晚上。第二，医院出现了一个状况，没法给孩子提供麻醉，手术只能在没有麻醉的情况下进行。&lt;/p&gt;
+&lt;p&gt;没有哪个父亲受得了这样的消息……但是父亲回到病房，带给女儿的，却是两个好消息。&lt;/p&gt;
+&lt;p&gt;第一，医生说今天就可以做手术了，不用再等一星期，这意味着三天之后你就能出院回家了！第二，医生们一直在观察你，他们认为你是最勇敢的少年，所以手术甚至不需要麻醉！&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>我在为谁创造内容？</title>
+    <link href="http://example.com/who-am-i-creating-content-for/"/>
+    <id>http://example.com/who-am-i-creating-content-for/</id>
+    <published>2022-11-15T12:00:02.000Z</published>
+    <updated>2024-04-03T13:12:36.200Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;写博客的初衷只是为了养成随时记录点什么的习惯，并没有仔细思考对面的读者是谁？他为什么要花时间阅读你的文字？直到这周读了某期 &lt;a href=&quot;https://xiaobot.net/p/pmthinking2022&quot;&gt;产品沉思录&lt;/a&gt;，里面关于创造的话题，我深以为然，也在逐步思考未来应该提供什么有价值的内容。&lt;/p&gt;
+&lt;p&gt;一个人创作内容，你问他是在为谁创作时，如果他回答：「我是为自己做内容」时，他往往是为了避免回答「我的内容到底能帮助别人解决什么问题」。因为是你关注的问题，决定了受众的大小，而非内容的质量。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何看待阶层固化？</title>
+    <link href="http://example.com/how-to-view-class-solidification/"/>
+    <id>http://example.com/how-to-view-class-solidification/</id>
+    <published>2022-11-12T12:11:00.000Z</published>
+    <updated>2024-04-03T13:28:58.035Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;全世界任何地方，任何时代都存在阶层问题，稍微好一点的社会不过是有一个上下层之间的通道，让人员可以流动而已。我们今天所处的社会，可以说不仅是中国历史上最好的社会，横向对比在全世界也算是相对公平的社会，因此才会有“逆袭”这个词出现。处在底层的人，首先要认清楚这个现实，才能有希望。&lt;/p&gt;
+&lt;p&gt;之前看《重走》这本书时，有个感慨，即使是抗战时期，中国顶尖知识分子仍然可以生活得很好，他们是这个国家宝贵的资源，是重点保护的对象。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>直接操作数据库能否作为解决问题的常规手段</title>
+    <link href="http://example.com/how-to-update-data-in-db/"/>
+    <id>http://example.com/how-to-update-data-in-db/</id>
+    <published>2022-11-09T12:57:57.000Z</published>
+    <updated>2024-04-03T11:54:57.286Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;前段时间在网上看到一个讨论，就是目前很多业务和产研同学会习惯直接通过修改数据的方式来解决一些问题，比如修改订单状态、修改用户状态等。提出问题的同学觉得这不合适，他提出的理由是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;本来是临时方案，现在却成了常规手段，团队会习惯这种思考和做事的方式&lt;/li&gt;
+&lt;li&gt;不经过正常的功能修改数据，可能会导致数据不一致，引起业务上的问题&lt;/li&gt;
+&lt;li&gt;没有经过测试的数据变更，小则引起bug，大可能导致数据丢失等灾难性后果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061802.png&quot; alt=&quot;Photo by Rubaitul Azad&quot;&gt;&lt;/p&gt;
+&lt;p&gt;很多数据变更的操作都有时效性要求，比如功能不完善引起的数据错误需要及时修正，这时候客户不可能等你完善产品功能。还有些数据变更，比如修改某个字段的默认值，就是临时性的操作，也不可能开发相应的功能来支持。提出问题的同学也承认，当出现这些情况时，直接修改数据库确实是最方便、最有效的手段。那么我们是否应该把它作为常规手段呢？还有更妥善的解决方案吗？如果有其他方案，有什么好的流程&amp;#x2F;方式能避免大家通过更改数据库解决问题的？&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="http://example.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>谨慎阅读参考资料</title>
+    <link href="http://example.com/carefully-read-reference-materials/"/>
+    <id>http://example.com/carefully-read-reference-materials/</id>
+    <published>2022-11-05T12:11:00.000Z</published>
+    <updated>2024-04-03T13:29:23.675Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;疫情在大面积传播，奥密克戎自然而然地成为了社交媒体上的热点。很多人喜欢去爬各种论文，用以支撑自己的观点。最近读到&lt;a href=&quot;https://mp.weixin.qq.com/s/_KgUIbS-7-aEfKduf1I6Bw&quot;&gt;一篇文章&lt;/a&gt;，建议普通人不要太关注相关信息，即使它引用了不少看似权威的论文来支撑自己的观点。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="http://example.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何写出简洁有力的文章</title>
+    <link href="http://example.com/how-to-write-concise-articles/"/>
+    <id>http://example.com/how-to-write-concise-articles/</id>
+    <published>2022-11-03T14:44:58.000Z</published>
+    <updated>2024-04-03T11:53:55.875Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;《文思泉涌》是一本关于如何成为一名深思熟虑且训练有素的写作者的书，虽然这是一本写给学术研究人员看的写作实用指南。它教你如何干净利落的写文章，你教你如何高效写作，甚至帮你克服写作拖延症，但它又不会讨论新的技能，只是尽可能的改变你对写作的态度和习惯，让写作过程变得很有趣，变得更容易。&lt;/p&gt;
+&lt;p&gt;这里挑选出我最喜欢的一段分享给你。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="http://example.com/books/"/>
+    
+    
+  </entry>
+  
+</feed>
