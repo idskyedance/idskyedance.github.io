@@ -3,11 +3,11 @@
   <title>橙子陈绩好</title>
   
   <subtitle>This is my private zine, I write whatever I want.</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://hicsc.com/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://hicsc.com/"/>
   <updated>2024-04-03T12:01:05.488Z</updated>
-  <id>http://example.com/</id>
+  <id>https://hicsc.com/</id>
   
   <author>
     <name>Skye</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hexo主题：SKYE DANCE</title>
-    <link href="http://example.com/theme-of-hicsc/"/>
-    <id>http://example.com/theme-of-hicsc/</id>
+    <link href="https://hicsc.com/theme-of-hicsc/"/>
+    <id>https://hicsc.com/theme-of-hicsc/</id>
     <published>2024-03-24T06:26:46.000Z</published>
     <updated>2024-04-03T12:01:05.488Z</updated>
     
@@ -39,8 +39,8 @@
   
   <entry>
     <title>M型社会：我们从哪儿开始？</title>
-    <link href="http://example.com/m-type-society/"/>
-    <id>http://example.com/m-type-society/</id>
+    <link href="https://hicsc.com/m-type-society/"/>
+    <id>https://hicsc.com/m-type-society/</id>
     <published>2024-03-13T13:36:03.000Z</published>
     <updated>2024-04-03T11:53:47.390Z</updated>
     
@@ -51,15 +51,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>聊聊回家过年那点事</title>
-    <link href="http://example.com/chinese-new-year-2024/"/>
-    <id>http://example.com/chinese-new-year-2024/</id>
+    <link href="https://hicsc.com/chinese-new-year-2024/"/>
+    <id>https://hicsc.com/chinese-new-year-2024/</id>
     <published>2024-02-18T13:14:30.000Z</published>
     <updated>2024-04-03T11:55:27.013Z</updated>
     
@@ -70,15 +70,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>笔记的方法</title>
-    <link href="http://example.com/the-method-of-taking-notes/"/>
-    <id>http://example.com/the-method-of-taking-notes/</id>
+    <link href="https://hicsc.com/the-method-of-taking-notes/"/>
+    <id>https://hicsc.com/the-method-of-taking-notes/</id>
     <published>2024-02-07T09:37:06.000Z</published>
     <updated>2024-04-03T11:54:34.922Z</updated>
     
@@ -93,15 +93,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>这个艰辛颠簸的世界：我在北京送快递</title>
-    <link href="http://example.com/this-difficult-and-bumpy-world/"/>
-    <id>http://example.com/this-difficult-and-bumpy-world/</id>
+    <link href="https://hicsc.com/this-difficult-and-bumpy-world/"/>
+    <id>https://hicsc.com/this-difficult-and-bumpy-world/</id>
     <published>2024-01-14T08:02:37.000Z</published>
     <updated>2024-04-03T11:54:42.912Z</updated>
     
@@ -113,15 +113,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>我经历的2023年</title>
-    <link href="http://example.com/went-through-in-2023/"/>
-    <id>http://example.com/went-through-in-2023/</id>
+    <link href="https://hicsc.com/went-through-in-2023/"/>
+    <id>https://hicsc.com/went-through-in-2023/</id>
     <published>2024-01-01T10:36:19.000Z</published>
     <updated>2024-04-03T11:55:18.461Z</updated>
     
@@ -134,15 +134,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>舅舅的骄傲</title>
-    <link href="http://example.com/my-uncles-price/"/>
-    <id>http://example.com/my-uncles-price/</id>
+    <link href="https://hicsc.com/my-uncles-price/"/>
+    <id>https://hicsc.com/my-uncles-price/</id>
     <published>2023-03-01T07:03:06.000Z</published>
     <updated>2024-04-03T12:32:30.915Z</updated>
     
@@ -156,15 +156,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>我度过了怎样的2022年?</title>
-    <link href="http://example.com/my-2022/"/>
-    <id>http://example.com/my-2022/</id>
+    <link href="https://hicsc.com/my-2022/"/>
+    <id>https://hicsc.com/my-2022/</id>
     <published>2022-12-31T12:11:00.000Z</published>
     <updated>2024-04-03T13:26:58.827Z</updated>
     
@@ -174,15 +174,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>先让父母成熟起来</title>
-    <link href="http://example.com/let-the-parents-mature-first/"/>
-    <id>http://example.com/let-the-parents-mature-first/</id>
+    <link href="https://hicsc.com/let-the-parents-mature-first/"/>
+    <id>https://hicsc.com/let-the-parents-mature-first/</id>
     <published>2022-12-12T12:11:00.000Z</published>
     <updated>2024-04-03T13:20:15.343Z</updated>
     
@@ -200,15 +200,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>为值得的客户至上</title>
-    <link href="http://example.com/serve-worthwhile-customers/"/>
-    <id>http://example.com/serve-worthwhile-customers/</id>
+    <link href="https://hicsc.com/serve-worthwhile-customers/"/>
+    <id>https://hicsc.com/serve-worthwhile-customers/</id>
     <published>2022-12-09T03:21:48.000Z</published>
     <updated>2024-04-03T11:53:51.463Z</updated>
     
@@ -219,15 +219,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>美国为什么可以在芯片上“卡”中国脖子？</title>
-    <link href="http://example.com/chip-wars/"/>
-    <id>http://example.com/chip-wars/</id>
+    <link href="https://hicsc.com/chip-wars/"/>
+    <id>https://hicsc.com/chip-wars/</id>
     <published>2022-12-04T12:11:00.000Z</published>
     <updated>2024-04-03T13:20:37.292Z</updated>
     
@@ -245,15 +245,15 @@
     
     
     
-    <category term="知识" scheme="http://example.com/knowledge/"/>
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
     
     
   </entry>
   
   <entry>
     <title>美国生活中的反智主义</title>
-    <link href="http://example.com/anti-intellectualism-in-american/"/>
-    <id>http://example.com/anti-intellectualism-in-american/</id>
+    <link href="https://hicsc.com/anti-intellectualism-in-american/"/>
+    <id>https://hicsc.com/anti-intellectualism-in-american/</id>
     <published>2022-12-01T05:21:26.000Z</published>
     <updated>2024-04-03T11:54:38.802Z</updated>
     
@@ -265,15 +265,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>如何设计简单的用户体验？</title>
-    <link href="http://example.com/how-to-design-simple-user-experience/"/>
-    <id>http://example.com/how-to-design-simple-user-experience/</id>
+    <link href="https://hicsc.com/how-to-design-simple-user-experience/"/>
+    <id>https://hicsc.com/how-to-design-simple-user-experience/</id>
     <published>2022-11-25T13:46:48.000Z</published>
     <updated>2024-04-03T11:54:08.206Z</updated>
     
@@ -295,15 +295,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>生活就像一个鱼缸</title>
-    <link href="http://example.com/life-is-like-a-fish-tank/"/>
-    <id>http://example.com/life-is-like-a-fish-tank/</id>
+    <link href="https://hicsc.com/life-is-like-a-fish-tank/"/>
+    <id>https://hicsc.com/life-is-like-a-fish-tank/</id>
     <published>2022-11-20T10:36:19.000Z</published>
     <updated>2024-04-03T13:14:31.354Z</updated>
     
@@ -319,15 +319,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>怎样成为一个内心强大的人？</title>
-    <link href="http://example.com/how-to-become-a-strong-person/"/>
-    <id>http://example.com/how-to-become-a-strong-person/</id>
+    <link href="https://hicsc.com/how-to-become-a-strong-person/"/>
+    <id>https://hicsc.com/how-to-become-a-strong-person/</id>
     <published>2022-11-16T14:06:21.000Z</published>
     <updated>2024-04-03T11:54:16.523Z</updated>
     
@@ -342,15 +342,15 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
   
   <entry>
     <title>我在为谁创造内容？</title>
-    <link href="http://example.com/who-am-i-creating-content-for/"/>
-    <id>http://example.com/who-am-i-creating-content-for/</id>
+    <link href="https://hicsc.com/who-am-i-creating-content-for/"/>
+    <id>https://hicsc.com/who-am-i-creating-content-for/</id>
     <published>2022-11-15T12:00:02.000Z</published>
     <updated>2024-04-03T13:12:36.200Z</updated>
     
@@ -360,15 +360,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>如何看待阶层固化？</title>
-    <link href="http://example.com/how-to-view-class-solidification/"/>
-    <id>http://example.com/how-to-view-class-solidification/</id>
+    <link href="https://hicsc.com/how-to-view-class-solidification/"/>
+    <id>https://hicsc.com/how-to-view-class-solidification/</id>
     <published>2022-11-12T12:11:00.000Z</published>
     <updated>2024-04-03T13:28:58.035Z</updated>
     
@@ -378,15 +378,15 @@
     
     
     
-    <category term="生活漫记" scheme="http://example.com/ramble/"/>
+    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
   
   <entry>
     <title>直接操作数据库能否作为解决问题的常规手段</title>
-    <link href="http://example.com/how-to-update-data-in-db/"/>
-    <id>http://example.com/how-to-update-data-in-db/</id>
+    <link href="https://hicsc.com/how-to-update-data-in-db/"/>
+    <id>https://hicsc.com/how-to-update-data-in-db/</id>
     <published>2022-11-09T12:57:57.000Z</published>
     <updated>2024-04-03T11:54:57.286Z</updated>
     
@@ -402,15 +402,15 @@
     
     
     
-    <category term="知识" scheme="http://example.com/knowledge/"/>
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
     
     
   </entry>
   
   <entry>
     <title>谨慎阅读参考资料</title>
-    <link href="http://example.com/carefully-read-reference-materials/"/>
-    <id>http://example.com/carefully-read-reference-materials/</id>
+    <link href="https://hicsc.com/carefully-read-reference-materials/"/>
+    <id>https://hicsc.com/carefully-read-reference-materials/</id>
     <published>2022-11-05T12:11:00.000Z</published>
     <updated>2024-04-03T13:29:23.675Z</updated>
     
@@ -419,15 +419,15 @@
     
     
     
-    <category term="知识" scheme="http://example.com/knowledge/"/>
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
     
     
   </entry>
   
   <entry>
     <title>如何写出简洁有力的文章</title>
-    <link href="http://example.com/how-to-write-concise-articles/"/>
-    <id>http://example.com/how-to-write-concise-articles/</id>
+    <link href="https://hicsc.com/how-to-write-concise-articles/"/>
+    <id>https://hicsc.com/how-to-write-concise-articles/</id>
     <published>2022-11-03T14:44:58.000Z</published>
     <updated>2024-04-03T11:53:55.875Z</updated>
     
@@ -437,7 +437,7 @@
     
     
     
-    <category term="读万卷书" scheme="http://example.com/books/"/>
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>
