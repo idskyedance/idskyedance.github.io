@@ -14,7 +14,7 @@
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: var(--font-color-2);
     margin: 12px 0;
 }
 .post-md h1
@@ -69,6 +69,7 @@
 .post-md strong
 {
     font-weight: 700;
+    color: #D23918;
 }
 .post-md em
 {

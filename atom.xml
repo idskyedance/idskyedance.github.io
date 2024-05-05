@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-04-22T13:29:48.379Z</updated>
+  <updated>2024-05-05T08:43:39.814Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于运动和减脂的一些小误区</title>
+    <link href="https://hicsc.com/how-to-eat-better/"/>
+    <id>https://hicsc.com/how-to-eat-better/</id>
+    <published>2024-05-05T08:16:49.000Z</published>
+    <updated>2024-05-05T08:43:39.814Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近一段时间想控制下体重，随手翻的健康类书籍比较多，在这本&lt;a href=&quot;https://book.douban.com/subject/35238738/&quot;&gt;「非奋斗减肥」&lt;/a&gt;中确实收获到不少与常规认知有差异的知识。&lt;/p&gt;
+&lt;h3 id=&quot;Part-ONE&quot;&gt;&lt;a href=&quot;#Part-ONE&quot; class=&quot;headerlink&quot; title=&quot;Part ONE&quot;&gt;&lt;/a&gt;Part ONE&lt;/h3&gt;&lt;p&gt;首先，介绍几种日常生活中随处都能听到，但又说不明白的几种物质。&lt;/p&gt;
+&lt;h4 id=&quot;胰岛素&quot;&gt;&lt;a href=&quot;#胰岛素&quot; class=&quot;headerlink&quot; title=&quot;胰岛素&quot;&gt;&lt;/a&gt;胰岛素&lt;/h4&gt;&lt;p&gt;当我们摄入糖类食物时，食物中的糖开始被不同的酶分解，最终被小肠吸收后转化成为葡萄糖，通过血液输送到全身。血液中的葡萄糖转化为糖原后，会优先储存在肝脏和肌肉当中，但是肝脏和肌肉中储存糖原的空间十分有限。剩余的大量糖原就会进入脂肪细胞，转化成为脂肪储存在人体内，于是肥胖就形成了。&lt;/p&gt;
+&lt;p&gt;当血液中的葡萄糖升高时，胰腺就开始工作了。胰腺会分泌胰岛素，胰岛素的作用就是促进血液中的葡萄糖转移到细胞中，帮助调节血糖，保证血糖值维持在一定的安全水平。因此，你摄入的糖越多，胰腺就要分泌更多的胰岛素来调节血糖，那么就会有更多的糖原进入脂肪细胞中。更重要的是，&lt;strong&gt;如果血液中的胰岛素水平长期居高不下，那么细胞对胰岛素的敏感度就会降低，形成胰岛素抵抗&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;胰岛素抵抗，跟抗生素的耐药性是一样的道理，对于有胰岛素抵抗的人来说，同等剂量的胰岛素无法使原先血液中的糖原进入细胞，于是胰腺就需要分泌更多的胰岛素才能把血糖降下来。而胰岛素又是促进脂肪合成的激素，这些大量的胰岛素会使身体合成更多的脂肪，所以胰岛素抵抗是现代人日渐肥胖的主要原因之一。胰岛素抵抗最容易导致腹部脂肪堆积。如果你的腰围和臀围的比例大于 0.9，就有较大可能存在明显的胰岛素抵抗。&lt;/p&gt;
+&lt;p&gt;因此，&lt;strong&gt;胰岛素又被称为肥胖激素&lt;/strong&gt;，想要把胰岛素控制在很低的水平，关键就是控制糖的摄入。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/h76pea.jpg&quot; alt=&quot;非奋斗减肥&quot;&gt; Photo by &lt;a href=&quot;https://unsplash.com/photos/sliced-vegetables-ocnsb17U6FE&quot;&gt;Dose Juice&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>我要开始卷腹肌</title>
@@ -429,23 +452,6 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061802.png&quot; alt=&quot;Photo by Rubaitul Azad&quot;&gt;&lt;/p&gt;
 &lt;p&gt;很多数据变更的操作都有时效性要求，比如功能不完善引起的数据错误需要及时修正，这时候客户不可能等你完善产品功能。还有些数据变更，比如修改某个字段的默认值，就是临时性的操作，也不可能开发相应的功能来支持。提出问题的同学也承认，当出现这些情况时，直接修改数据库确实是最方便、最有效的手段。那么我们是否应该把它作为常规手段呢？还有更妥善的解决方案吗？如果有其他方案，有什么好的流程&amp;#x2F;方式能避免大家通过更改数据库解决问题的？&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>谨慎阅读参考资料</title>
-    <link href="https://hicsc.com/carefully-read-reference-materials/"/>
-    <id>https://hicsc.com/carefully-read-reference-materials/</id>
-    <published>2022-11-05T12:11:00.000Z</published>
-    <updated>2024-04-03T13:29:23.675Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;疫情在大面积传播，奥密克戎自然而然地成为了社交媒体上的热点。很多人喜欢去爬各种论文，用以支撑自己的观点。最近读到&lt;a href=&quot;https://mp.weixin.qq.com/s/_KgUIbS-7-aEfKduf1I6Bw&quot;&gt;一篇文章&lt;/a&gt;，建议普通人不要太关注相关信息，即使它引用了不少看似权威的论文来支撑自己的观点。&lt;/p&gt;</summary>
     
     
     
