@@ -57,11 +57,12 @@ a
 
 .logo
 {
-    padding-top: 4px;
+    padding-top: 6px;
     font-size: 2rem;
     font-weight: 600;
     color: var(--font-color-1);
 }
+
 .nav
 {
     margin: 0 0 4px;
@@ -90,6 +91,10 @@ a
 {
     opacity: 1;
     transition: opacity ease-in-out .5s;
+}
+
+.nav-item {
+    padding-top: 4px;
 }
 
 .post-header
@@ -403,4 +408,22 @@ a
 .tags .fix,.tags .bugfix {
     --color: #FF4772;
     color: #fff
+}
+
+#pc-nav {
+  display: flex;
+}
+
+#mob-nav {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  #pc-nav {
+    display: none;
+  }
+
+  #mob-nav {
+    display: flex;
+  }
 }
