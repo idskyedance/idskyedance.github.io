@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-05-08T01:18:39.348Z</updated>
+  <updated>2024-06-19T07:08:32.837Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解 ClassLoader</title>
+    <link href="https://hicsc.com/jvm-class-loader/"/>
+    <id>https://hicsc.com/jvm-class-loader/</id>
+    <published>2024-06-19T07:01:04.000Z</published>
+    <updated>2024-06-19T07:08:32.837Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;ClassLoader-源码初探&quot;&gt;&lt;a href=&quot;#ClassLoader-源码初探&quot; class=&quot;headerlink&quot; title=&quot;ClassLoader 源码初探&quot;&gt;&lt;/a&gt;ClassLoader 源码初探&lt;/h3&gt;&lt;p&gt;类加载器用于加载 Java 类到虚拟机中，其实现类 &lt;code&gt;java.lang.ClassLoader&lt;/code&gt; 是一个抽象类，其职责是通过指定类的完全限定名 ( &lt;code&gt;binary name&lt;/code&gt; )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 &lt;code&gt;java.lang.Class&lt;/code&gt; 对象。&lt;/p&gt;
+&lt;p&gt;每个 Class 对象都包含一个定义它的类加载器的引用，而数组的 Class 对象不是用类加载器创建的，而是在 Java 运行时根据需要自动创建的，如果调用数组的 Class 对象的 &lt;code&gt;getClassLoader()&lt;/code&gt; 方法返回的类加载器与其元素类型的类加载器相同，如果数组元素是基本数据类，则没有类加载，返回空。比如：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;// C为自定义类
+C[] cs = new C[2];
+// jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69
+System.out.println(cs.getClass().getClassLoader());
+
+int[] is = new int[2];
+// null
+System.out.println(is.getClass().getClassLoader());
+&lt;/code&gt;&lt;/pre&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解JVM类加载机制</title>
+    <link href="https://hicsc.com/jvm-class-loading-mechanism/"/>
+    <id>https://hicsc.com/jvm-class-loading-mechanism/</id>
+    <published>2024-06-19T01:12:06.000Z</published>
+    <updated>2024-06-19T06:08:55.441Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。&lt;/p&gt;
+&lt;h3 id=&quot;类编译过程&quot;&gt;&lt;a href=&quot;#类编译过程&quot; class=&quot;headerlink&quot; title=&quot;类编译过程&quot;&gt;&lt;/a&gt;类编译过程&lt;/h3&gt;&lt;p&gt;Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/m9lohs.png&quot; alt=&quot;Java类编译过程示意图&quot;&gt;&lt;br&gt;一般会把&lt;code&gt;.java&lt;/code&gt;文件编译成&lt;code&gt;.class&lt;/code&gt;文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。&lt;/p&gt;
+&lt;p&gt;编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。&lt;/p&gt;
+&lt;p&gt;接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;解释执行：逐条将字节码翻译成机器码并执行&lt;/li&gt;
+&lt;li&gt;即时编译：将一个方法中所包含的所有字节码编译出机器码后再执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在起始阶段，JVM 中的字节码是由解释器(Interpreter)完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁时，这些代码块就会被认定为热点代码。为了提高热点代码的执行效率，在运行时，JIT 会把这些代码编译成本地平台相关的机器码，并进行各层次的优化，然后保存到内存中，这一过程就被称为即时编译。&lt;/p&gt;
+&lt;p&gt;这种将两种编译方式混合执行的策略，在上图中被描述为“运行时编译”，也是 Hotspot 默认采用的策略。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>非奋斗减肥：关于运动和减脂的一些小误区</title>
@@ -414,48 +467,6 @@
     
     
     <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>如何看待阶层固化？</title>
-    <link href="https://hicsc.com/how-to-view-class-solidification/"/>
-    <id>https://hicsc.com/how-to-view-class-solidification/</id>
-    <published>2022-11-12T12:11:00.000Z</published>
-    <updated>2024-04-03T13:28:58.035Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;全世界任何地方，任何时代都存在阶层问题，稍微好一点的社会不过是有一个上下层之间的通道，让人员可以流动而已。我们今天所处的社会，可以说不仅是中国历史上最好的社会，横向对比在全世界也算是相对公平的社会，因此才会有“逆袭”这个词出现。处在底层的人，首先要认清楚这个现实，才能有希望。&lt;/p&gt;
-&lt;p&gt;之前看《重走》这本书时，有个感慨，即使是抗战时期，中国顶尖知识分子仍然可以生活得很好，他们是这个国家宝贵的资源，是重点保护的对象。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>直接操作数据库能否作为解决问题的常规手段</title>
-    <link href="https://hicsc.com/how-to-update-data-in-db/"/>
-    <id>https://hicsc.com/how-to-update-data-in-db/</id>
-    <published>2022-11-09T12:57:57.000Z</published>
-    <updated>2024-04-03T11:54:57.286Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;前段时间在网上看到一个讨论，就是目前很多业务和产研同学会习惯直接通过修改数据的方式来解决一些问题，比如修改订单状态、修改用户状态等。提出问题的同学觉得这不合适，他提出的理由是：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;本来是临时方案，现在却成了常规手段，团队会习惯这种思考和做事的方式&lt;/li&gt;
-&lt;li&gt;不经过正常的功能修改数据，可能会导致数据不一致，引起业务上的问题&lt;/li&gt;
-&lt;li&gt;没有经过测试的数据变更，小则引起bug，大可能导致数据丢失等灾难性后果&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061802.png&quot; alt=&quot;Photo by Rubaitul Azad&quot;&gt;&lt;/p&gt;
-&lt;p&gt;很多数据变更的操作都有时效性要求，比如功能不完善引起的数据错误需要及时修正，这时候客户不可能等你完善产品功能。还有些数据变更，比如修改某个字段的默认值，就是临时性的操作，也不可能开发相应的功能来支持。提出问题的同学也承认，当出现这些情况时，直接修改数据库确实是最方便、最有效的手段。那么我们是否应该把它作为常规手段呢？还有更妥善的解决方案吗？如果有其他方案，有什么好的流程&amp;#x2F;方式能避免大家通过更改数据库解决问题的？&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
     
     
   </entry>

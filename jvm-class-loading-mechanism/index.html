@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+  <title>深入理解JVM类加载机制 - 橙子陈绩好</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。 类编译过程Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM类加载机制">
+<meta property="og:url" content="https://hicsc.com/jvm-class-loading-mechanism/index.html">
+<meta property="og:site_name" content="橙子陈绩好">
+<meta property="og:description" content="Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。 类编译过程Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码">
+<meta property="og:locale">
+<meta property="og:image" content="https://graph.hicsc.com/forest/m9lohs.png">
+<meta property="og:image" content="https://graph.hicsc.com/forest/fsvhyj.png">
+<meta property="og:image" content="https://graph.hicsc.com/forest/fsvhyj.png">
+<meta property="article:published_time" content="2024-06-19T01:12:06.000Z">
+<meta property="article:modified_time" content="2024-06-19T06:08:55.441Z">
+<meta property="article:author" content="Skye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://graph.hicsc.com/forest/m9lohs.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="https://hicsc.com/jvm-class-loading-mechanism/">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://graph.hicsc.com/orange/ologo_150.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/ologo_150.png">
+  <!-- CSS -->
+<!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
+  
+<link rel="stylesheet" href="/css/reset.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/markdown.css">
+
+  <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            深入理解JVM类加载机制
+        </div>
+        <div class="post-meta">
+            2024-06-19 ｜ 
+            
+                
+                    <a href="/knowledge/"><i class="fas fa-hashtag"></i> 知识 </a>
+                 ｜ 
+            
+            <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a> ｜
+            <i class="fas fa-fire-alt" title=本文访问量></i> <span id="busuanzi_value_page_pv" title="本文访问量"></span>
+        </div>
+        <div class="post-md">
+            <p>Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。</p>
+<h3 id="类编译过程"><a href="#类编译过程" class="headerlink" title="类编译过程"></a>类编译过程</h3><p>Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。<br><img src="https://graph.hicsc.com/forest/m9lohs.png" alt="Java类编译过程示意图"><br>一般会把<code>.java</code>文件编译成<code>.class</code>文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。</p>
+<p>编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。</p>
+<p>接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：</p>
+<ul>
+<li>解释执行：逐条将字节码翻译成机器码并执行</li>
+<li>即时编译：将一个方法中所包含的所有字节码编译出机器码后再执行</li>
+</ul>
+<p>在起始阶段，JVM 中的字节码是由解释器(Interpreter)完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁时，这些代码块就会被认定为热点代码。为了提高热点代码的执行效率，在运行时，JIT 会把这些代码编译成本地平台相关的机器码，并进行各层次的优化，然后保存到内存中，这一过程就被称为即时编译。</p>
+<p>这种将两种编译方式混合执行的策略，在上图中被描述为“运行时编译”，也是 Hotspot 默认采用的策略。</p>
+<span id="more"></span>
+
+<h3 id="何为类加载机制"><a href="#何为类加载机制" class="headerlink" title="何为类加载机制"></a>何为类加载机制</h3><p>Java 源码经过编译后成为字节码(Byte Code)存储在 Class 文件中，在 Class 文件中包含的各类信息都需要加载到虚拟机后才能被运行和使用。</p>
+<p>JVM 把描述类的数据从 Class 文件加载到内存，并对数据进行校验、解析和初始化，最终形成可以被虚拟机直接使用的 Java 类型，这个过程被称为虚拟机的类加载机制。一个类型(类或者接口)从被加载到虚拟机内存开始，到卸载出内存为止，它的整个生命周期将会经历如下 7 个阶段。<br><img src="https://graph.hicsc.com/forest/fsvhyj.png" alt="Java类型生命周期示意图"></p>
+<p>其中，验证、准备、解析是一个阶段统称为连接(Linking)。需要注意的是，加载、验证、准备、初始化和卸载这几个阶段的顺序是确定的，而解析阶段则不一定：它在某些情况下可以在初始化完成后再开始，这是为了支持 Java 语言的动态绑定特性。</p>
+<p>动态绑定是指程序在运行期间判断所引用对象的实际类型，然后再确定具体是哪个实例对象的方法。来看一个最简单的例子，下面的代码中，只有在运行时才知道 Bird 对象所引用实际类型是 Pigeon。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        Bird bird = new Pigeon();
+        bird.fly();
+    &#125;    
+&#125;
+
+class Pigeon extends Bird &#123;
+    void fly() &#123;
+        System.out.println(&quot;pigeon fly&quot;);
+    &#125;
+&#125;
+
+class Bird &#123;
+    void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>还有一点需要强调：上述的顺序或者说生命周期是相对于一个类来说的，而对于整个应用，这些阶段通常是相互交叉地混合进行的，就比如上面的示例中，在 Demo 的运行过程中，才会激活 Pigeon 类的初始化阶段。</p>
+<h3 id="虚拟机在何时加载类"><a href="#虚拟机在何时加载类" class="headerlink" title="虚拟机在何时加载类"></a><strong>虚拟机在何时加载类</strong></h3><p>什么情况下需要开始类加载的第一个阶段，《Java 虚拟机规范》中并没有进行强制约束，留给虚拟机自由发挥。但对于初始化阶段，虚拟机规范则严格规定：当且仅当出现以下六种情况时，必须立即对类进行初始化，而加载、验证、准备自然需要在此之前进行。虚拟机规范中把这六种场景中的行为统称为对一个类型进行主动引用。除此之外，所有引用类型(“引用”是动词，这里表示“引用”了类型)的方式都不会触发初始化，称为被动引用。接下来我会通过多个实例来介绍这六种情况。</p>
+<h4 id="1-遇到指定指令时"><a href="#1-遇到指定指令时" class="headerlink" title="1. 遇到指定指令时"></a>1. 遇到指定指令时</h4><p>在程序执行过程中，遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code>、<code>invokestatic</code> 这 4 条字节码执行时，如果类型没有初始化，则需要先触发其初始化阶段。能够生成这四条指令的典型场景有：</p>
+<p><strong>1.1 new</strong><br>这没什么好说的，使用 new 关键字创建对象，肯定会触发该类的初始化。</p>
+<p><strong>1.2 getstatic 与 putstatic</strong><br>当访问某个类或接口的静态变量，或对该静态变量进行赋值时，会触发类的初始化。关于这一点，我会使用一系列的例子来说明。首先来看第一个例子：</p>
+<pre><code class="java">// 示例1
+public class Demo &#123;
+    public static void main(String[] args) &#123;
+        System.out.println(Bird.a);
+    &#125;
+&#125;
+
+class Bird &#123;
+    static int a = 2;
+    // 在类初始化过程中不仅会执行构造方法，还会执行类的静态代码块
+    // 如果静态代码块里的语句被执行，说明类已开始初始化
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后会输出：</p>
+<pre><code class="text">bird init
+2
+</code></pre>
+<p>同样地，如果直接给 <code>Bird.a</code> 进行赋值，也会触发 Bird 类的初始化：</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        Bird.a = 2;
+    &#125;
+&#125;
+
+class Bird &#123;
+    static int a;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后会输出：</p>
+<pre><code class="text">bird init
+</code></pre>
+<p>接下来，再看下面的栗子。<code>a</code> 不再是一个静态变量，而变成了一个常量，运行代码后发现，并没有触发 Bird 类的初始化流程。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        Bird.a = 2;
+    &#125;
+&#125;
+
+class Bird &#123;
+     // 与前面的例子不同的是，这里使用final修饰
+    static final int a = 2;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>这是因为，常量在编译阶段已经存入到调用这个常量的方法所在类的常量池中。本质上，调用类(<code>Demo.class</code>)并没有直接引用定义常量的类(<code>Bird.class</code>)，因此并不会触发定义常量的(<code>Bird.class</code>)类的初始化。即这里已经将常量 <code>a=2</code> 存入到 Demo 类的常量池中，这之后，Demo 类与 Bird 类已经没有任何关系，即使把 Bird 类生成的 class 文件删除，Demo 也可以正常运行。使用<code>javap</code>命令反编译一下字节码：</p>
+<pre><code class="text">  // 前面已省略无关部分
+  public static void main(java.lang.String[]);
+    Code:
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: iconst_2
+       4: invokevirtual #4                  // Method java/io/PrintStream.println:(I)V
+       7: return
+&#125;
+</code></pre>
+<p>从反编译后的代码中可以看到：<code>Bird.a</code> 已经变成了助记符 <code>iconst_2</code>(将int类型2推送至栈顶)，和 Bird 类已经没有任何联系，这也从侧面证明，只有访问类的静态变量才会触发该类的初始化流程，而不是其他类型的变量。</p>
+<p>关于 Java 助记符，如果将上面一个示例中的常量修改为不同的值，会生成不同的助记符，比如：</p>
+<pre><code class="java">// bipush  20
+static int a = 20; 
+// 3: sipush        130
+static int a = 130
+// 3: ldc #4   // int 327670
+static int a = 327670;
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>iconst_n：将 int 类型数字 n 推送至栈顶，n 取值 0~5</li>
+<li>lconst_n：将 long 类型数字 n 推送至栈顶，n 取值 0,1，类似的还有 fconst_n、dconst_n</li>
+<li>bipush：将单字节的常量值(-128~127)推送至栈顶</li>
+<li>sipush：将一个短整类型常量值(-32768~32767) 推送至栈顶</li>
+<li>ldc：将 int、float 或 String 类型常量值从常量池中推送至栈顶</li>
+</ul>
+<p>最后再看一个例子：</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        System.out.println(Bird.a);
+    &#125;
+&#125;
+
+class Bird &#123;
+    static final String a = UUID.randomUUID().toString();
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后会输出：</p>
+<pre><code class="text">bird init
+d01308ed-8b35-484c-b440-04ce3ecb7c0e
+</code></pre>
+<p>在本例中，常量a的值在编译时不能确定，需要进行方法调用，这种情况下，编译后会产生 <code>getstatic</code> 指令，同样会触发类的初始化，所以才会输出 <code>bird init</code>。</p>
+<p>看下反编译字节码后的代码：</p>
+<pre><code class="text">// 已省略部分无关代码
+public static void main(java.lang.String[]);
+  Code:
+    0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+    3: getstatic     #3                  // Field com/hicsc/classloader/Bird.a:Ljava/lang/String;
+    6: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+    9: return
+</code></pre>
+<p><strong>1.3 invokestatic</strong><br>调用类的静态方法时，也会触发该类的初始化。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        Bird.fly();
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+    static void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后会输出：</p>
+<pre><code class="text">bird init
+bird fly
+</code></pre>
+<h4 id="2-反射调用时"><a href="#2-反射调用时" class="headerlink" title="2. 反射调用时"></a>2. 反射调用时</h4><p>使用 <code>java.lang.reflect</code> 包的方法对类型进行反射调用的时候，如果类型没有进行过初始化，则需要先触发其初始化。</p>
+<p>来看下面的例子：</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) throws Exception &#123;
+        ClassLoader loader = ClassLoader.getSystemClassLoader();
+        Class clazz = loader.loadClass(&quot;com.hicsc.classloader.Bird&quot;);
+        System.out.println(clazz);
+        clazz = Class.forName(“com.hicsc.classloader.Bird”);
+        System.out.println(clazz);
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后输出结果：</p>
+<pre><code class="text">class com.hicsc.classloader.Bird
+bird init
+class com.hicsc.classloader.Bird
+</code></pre>
+<p>本例中，调用 <code>ClassLoader.loadClass</code> 方法 <code>load</code> 一个类时，并不会触发该类的初始化，而使用反射包中的 <code>Class.forName</code> 方法，则触发了类的初始化。</p>
+<h4 id="3-初始化子类时"><a href="#3-初始化子类时" class="headerlink" title="3. 初始化子类时"></a>3. 初始化子类时</h4><p>当初始化类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) throws Exception &#123;
+        Pigeon.fly();
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+&#125;
+
+class Pigeon extends Bird &#123;
+    static &#123;
+        System.out.println(&quot;pigeon init&quot;);
+    &#125;
+    static void fly() &#123;
+        System.out.println(&quot;pigeon fly&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后输出：</p>
+<pre><code class="text">bird init
+pigeon init
+pigeon fly
+</code></pre>
+<p>本例中，在 main 方法调用 Pigeon 类的静态方法，最先初始化的是父类 Bird，然后才是子类 Pigeon。因此，在类初始化时，如果发现其父类并未初始化，则会先触发父类的初始化。</p>
+<p>再看下一个例子，可以先猜猜运行结果：</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) throws Exception &#123;
+        Pigeon.fly();
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+    static void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+
+class Pigeon extends Bird &#123;
+    static &#123;
+        System.out.println(&quot;pigeon init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后输出：</p>
+<pre><code class="text">bird init
+bird fly
+</code></pre>
+<p>本例中，由于 <code>fly</code> 方法是定义在父类中，那么方法的拥有者就是父类，因而，使用 <code>Pigeno.fly()</code> 并不是表示对子类的主动引用，而是表示对父类的主动引用，所以，只会触发父类的初始化。</p>
+<h4 id="4-遇到启动类时"><a href="#4-遇到启动类时" class="headerlink" title="4. 遇到启动类时"></a>4. 遇到启动类时</h4><p>当虚拟机启动时，如果一个类被标记为启动类(即：包含 mian 方法），虚拟机会先初始化这个主类。</p>
+<pre><code class="java">public class Demo &#123;
+    static &#123;
+        System.out.println(&quot;mian init&quot;);
+    &#125;
+    public static void main(String[] args) throws Exception &#123;
+        Bird.fly();
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+    static void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后输出：</p>
+<pre><code class="text">mian init
+bird init
+bird fly
+</code></pre>
+<h4 id="5-实现带有默认方法的接口的类被初始化时"><a href="#5-实现带有默认方法的接口的类被初始化时" class="headerlink" title="5. 实现带有默认方法的接口的类被初始化时"></a>5. 实现带有默认方法的接口的类被初始化时</h4><p>当一个接口中定义了 JDK8 新加入的默认方法(被 default 关键字修饰的接口方法)时，如果有这个接口的实现类发生了初始化，那该接口要在其之前被初始化。</p>
+<p>由于接口中没有 <code>static&#123;&#125;</code> 代码块，怎么判断一个接口是否初始化？来看下面这个例子：</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) throws Exception &#123;
+        Pigeon pigeon = new Pigeon();
+    &#125;
+&#125;
+
+interface Bird &#123;
+    // 如果接口被初始化,那么这句代码一定会执行
+    // 那么Intf类的静态代码块一定会被执行
+    public static Intf intf = new Intf();
+    default void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+
+class Pigeon implements Bird &#123;
+    static &#123;
+        System.out.println(&quot;pigeon init&quot;);
+    &#125;
+&#125;
+
+class Intf &#123;
+    &#123;
+        System.out.println(&quot;interface init&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>执行后输出：</p>
+<pre><code class="text">interface init
+pigeon init
+</code></pre>
+<p>可知，接口确实已被初始化，如果把接口中的 <code>default</code> 方法去掉，那么不会输出 <code>interface init</code>，即接口未被初始化，大家可以自己去试试看。</p>
+<h4 id="6-使用-JDK7-新加入的动态语言支持时"><a href="#6-使用-JDK7-新加入的动态语言支持时" class="headerlink" title="6 使用 JDK7 新加入的动态语言支持时"></a>6 使用 JDK7 新加入的动态语言支持时</h4><p>当使用 JDK7 新加入的动态类型语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果为 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。<br>简单点来说，即当初次调用 <code>MethodHandle</code> 实例时，如果其指向的方法所在类没有进行过初始化，则需要先触发其初始化。</p>
+<p>在举例之前，有几个问题需要大家先弄清楚：</p>
+<ul>
+<li>什么是动态类型语言，与 Java 等静态类型语言有什么不同？</li>
+<li>MethodHandle 使用方法和原理</li>
+<li>如果直接使用 MethodHandle 编码，其功能与反射类似，那么其与反射有何区别？</li>
+</ul>
+<p>首先，动态类型语言的关键特性是它的类型检查的主体过程是在运行期进行的，常见的语言比如：JavaScript、PHP、Python 等，相对地，在编译期进行类型检查过程的语言，就是静态类型语言，比如 Java 和 C#等。简单来说，对于动态类型语言，变量是没有类型的，变量的值才具有类型，在编译时，编译器最多只能确定方法的名称、参数、返回值这些，而不会去确认方法返回的具体类型以及参数类型。而 Java 等静态类型语言则不同，你定义了一个整型的变量 x，那么 x 的值也只能是整型，而不能是其他的，编译器在编译过程中就会检查变量的类型与值的类型是否一致，不一致编译就不能通过。因此，&#x3D;&#x3D;<strong>变量无类型而变量值才有类型</strong>&#x3D;&#x3D;是动态类型语言的一个核心特征。</p>
+<p>其次，关于MethodHandle的使用方法和原理等太过于细节，本文就不再说明，相关讨论可以参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/40427344">Java中MethodHandle的使用问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/floor/blog/1535062">JDK1.8下关于MethodHandle问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/Invokedynamic-Javas-secret-weapon">Invokedynamic:Java的秘密武器</a></li>
+</ul>
+<p>最后，关于 MethodHandle 与反射的区别，可以参考周志明著「深入理解 Java 虚拟机」第 8.4.3 小节，这里引用部分内容，方便理解。</p>
+<blockquote>
+<ol>
+<li>Reflection 和 MethodHandle 机制本质上都是在模拟方法调用，但是 Reflection 是在模拟 Java 代码层次的方法调用，而 MethodHandle 是在模拟字节码层次的方法调用。</li>
+<li>反射中的 Method 对象包含了方法签名、描述符以及方法属性列表、执行权限等各种信息，而 MethodHandle 仅包含执行该方法的相关信息，通俗来讲：Reflection 是重量级，而 MethodHandle 是轻量级。</li>
+</ol>
+</blockquote>
+<p>总的来说，反射是为 Java 语言服务的，而 MethodHandle 则可为所有 Java 虚拟机上的语言提供服务。</p>
+<p>最后，还是来看一个简单的栗子。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) throws Exception &#123;
+        new Pigeon().fly();
+    &#125;
+&#125;
+
+class Bird &#123;
+    static &#123;
+        System.out.println(&quot;bird init&quot;);
+    &#125;
+
+    static void fly() &#123;
+        System.out.println(&quot;bird fly&quot;);
+    &#125;
+&#125;
+
+class Pigeon &#123;
+    void fly() &#123;
+        try &#123;
+            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            // MethodType.methodType方法的第一个参数是返回值
+            // 然后按照目标方法接收的参数的顺序填写参数类型
+            // Bird.fly()方法返回值是空,没有参数
+            MethodType type = MethodType.methodType(void.class);
+            MethodHandle handle = lookup.findStatic(Bird.class, &quot;fly&quot;, type);
+            handle.invoke();
+        &#125; catch (Throwable a) &#123;
+            a.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>在 Pigeon 类中，使用 <code>MethodHandle</code> 来调用 Bird 类中的静态方法 <code>fly</code>，按照前面所述，初次调用 <code>MethodHandle</code> 实例时，如果其指向的方法所在类没有进行过初始化，则需要先触发其初始化。所以，这里一定会执行 Bird 类中的静态代码块。而最终的运行结果也与我们预想的一致：</p>
+<pre><code class="text">bird init
+bird fly
+</code></pre>
+<h3 id="虚拟机如何加载类-类的加载过程"><a href="#虚拟机如何加载类-类的加载过程" class="headerlink" title="虚拟机如何加载类( 类的加载过程 )"></a>虚拟机如何加载类( 类的加载过程 )</h3><p>类的加载全过程包括：加载、验证、准备、解析和初始化 5 个阶段，是一个非常复杂的过程。这里仅对这五个流程做一个简要介绍，如果其中有需要注意的点，我会举例说明。如果对这几个流程的细节很感兴趣的话，建议阅读：<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26418340">Java虚拟机规范</a>，但个人建议，了解熟悉即可。</p>
+<h4 id="1-加载-Loading"><a href="#1-加载-Loading" class="headerlink" title="1. 加载 ( Loading )"></a>1. 加载 ( Loading )</h4><p>Loading 是整个“类加载”过程的第一个阶段，这里插一句，我也不知道为什么要这样命名，希望你没有搞混。Loading 阶段主要是找到类的 class 文件，并把文件中的二进制字节流读取到内存，然后在内存中为每一个类创建一个 <code>java.lang.Class</code> 对象。<br>在虚拟机规范中，对这一过程的规定并不明确，全靠虚拟机厂商自由发挥，比如，“找到一个类的二进制字节流”都能玩出下面的花样来：</p>
+<ul>
+<li>从本地文件系统中直接读取，比如使用 IDE 调试代码时，直接从电脑的磁盘上读取的 class 文件</li>
+<li>从 ZIP 压缩包中读取，这也是 JAR、WAR 格式的基础</li>
+<li>从网络中下载，典型的应用场景是 Web Applet</li>
+<li>运行时计算生成，最常见的场景就是动态代理</li>
+<li>由其他文件生成，比如 JSP 文件生成对应的 Class 文件</li>
+<li>从加密文件中获取，这是典型的防 Class 文件被反编译的保护措施</li>
+</ul>
+<p>加载完成后，就进入连接阶段，但需要注意的是，加载阶段与连接阶段的部分动作（如一部分字节码文件格式验证动作）是交叉进行的，加载阶段尚未完成，连接阶段可能已经开始，但这些夹在加载阶段之中进行的动作，仍然属于连接阶段的一部分，这两个阶段的开始时间仍然保持着固定的先后顺序，也就是只有加载阶段开始后，才有可能进入连接阶段。<br><img src="https://graph.hicsc.com/forest/fsvhyj.png" alt="Java类型生命周期示意图"></p>
+<h4 id="2-验证-Verification"><a href="#2-验证-Verification" class="headerlink" title="2. 验证 ( Verification )"></a>2. 验证 ( Verification )</h4><p>验证是连接阶段的首个步骤，其目的是确保被加载的类的正确性，即要确保加载的字节流信息要符合 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/26418340">Java虚拟机规范</a> 的全部约束要求，确保这些信息被当做代码运行后不会危害虚拟机自身的安全。</p>
+<p>其实，Java 代码在编译过程中，已经做了很多安全检查工作，比如，不能将一个对象转型为它未实现的类型、不能使用未初始化的变量( 赋值除外 )、不能跳转到不存在的代码行等等。但 JVM 仍要对这些操作进行验证，这是因为 Class 文件并不一定是由 Java 源码编译而来，甚至你都可以通过键盘自己敲出来。如果 JVM 不作校验的话，很可能就会因为加载了错误或有恶意的字节流而导致整个系统受到攻击或崩溃。所以，验证字节码也是 JVM 保护自身的一项必要措施。</p>
+<p>整个验证阶段包含对文件格式、元数据、字节码、符号引用等信息的验证，这里不再细说，有兴趣可以自行阅读 <a target="_blank" rel="noopener" href="https://book.douban.com/subject/26418340">Java虚拟机规范</a>。在实际开发中，由于上线到生产环境的代码都经过严格测试，在生产环境想要加快类加载时间，可以使用 <code>-Xverify:none</code> 参数关闭大部分验证措施。</p>
+<h4 id="3-准备-Preparation"><a href="#3-准备-Preparation" class="headerlink" title="3. 准备 ( Preparation )"></a>3. 准备 ( Preparation )</h4><p>这一阶段主要是为类的静态变量分配内存，并将其初始化为默认值。这里有两点需要注意：</p>
+<ul>
+<li>仅为类的静态变量分配内存并初始化，并不包含实例变量</li>
+<li>初始化的值为默认值，并非代码给变量赋的值，比如 int 为 0，引用类型初始化为 null</li>
+</ul>
+<p><strong>准备阶段的主要目的并不是为了初始化，而是为静态变量分配内存，然后再填充一个默认的初始值</strong>而已。就比如：</p>
+<pre><code class="java">// 在 准备阶段 是把静态类型初始化为0，即默认值
+// 在 初始化阶段 才会把a的值赋为1
+public static int a = 1;
+</code></pre>
+<p>来看一个例子加深印象，可以先考虑一下运行结果。</p>
+<pre><code class="java">public class StaticVariableLoadOrder &#123;
+    public static void main(String[] args) &#123;
+        Singleton singleton = Singleton.getInstance();
+        System.out.println(&quot;counter1:&quot; + Singleton.counter1);
+        System.out.println(&quot;counter2:&quot; + Singleton.counter2);
+    &#125;
+&#125;
+
+class Singleton &#123;
+
+    public static Singleton instance = new Singleton();
+
+    private Singleton() &#123;
+        counter1++;
+        counter2++;
+        System.out.println(&quot;构造方法里：counter1:&quot; + counter1 + &quot;,counter2:&quot; + counter2);
+    &#125;
+
+    public static int counter1;
+    public static int counter2 = 0;
+
+    public static Singleton getInstance() &#123;
+        return instance;
+    &#125;
+&#125;
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="text">构造方法里：counter1:1,counter2:1
+counter1:1
+counter2:0
+</code></pre>
+<p>在准备阶段，<code>counter1</code> 和 <code>counter2</code> 都被初始化为默认值，因此，在构造方法中自增后，它们的值都变为 1，然后继续执行初始化，仅为 <code>counter2</code> 赋值为 0，<code>counter1</code> 的值不变。</p>
+<p>再看看下面这个例子，想想会输出什么？</p>
+<pre><code class="java">// main方法所在类的代码不变
+// 修改了counter1的位置，并为其初始化为1
+class Singleton &#123;
+    public static int counter1 = 1;
+    public static Singleton instance = new Singleton();
+
+    private Singleton() &#123;
+        counter1++;
+        counter2++;
+        System.out.println(&quot;构造方法里：counter1:&quot; + counter1 + &quot;,counter2:&quot; + counter2);
+    &#125;
+
+    public static int counter2 = 0;
+    public static Singleton getInstance() &#123;
+        return instance;
+    &#125;
+&#125;
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="text">构造方法里：counter1:2,counter2:1
+counter1:2
+counter2:0
+</code></pre>
+<p><code>counter2</code> 没有任何变化，但为什么 <code>counter1</code> 的值会变成 2？这是因为类在初始化时，是按照代码顺序来的。就比如上面的示例中，为 <code>counter1</code> 赋值以及构造方法的执行都是在初始化阶段执行的，但谁先谁后呢？按照顺序来，因此，在执行构造方法时，<code>counter1</code> 已经被赋值为 1，执行自增后，自然就变为 2 了。</p>
+<h4 id="4-解析-Resolution"><a href="#4-解析-Resolution" class="headerlink" title="4. 解析 ( Resolution )"></a>4. 解析 ( Resolution )</h4><p>在解析阶段，JVM将常量池类的符号引用替换为直接引用。在编译时，Java 类并不知道所引用的类的实际地址，只能使用符号引用来代替。符号引用存储在 class 文件的常量池中，比如类和接口的全限定名、类引用、方法引用以及成员变量引用等，如果要使用这些类和方法，就需要把它们转化为 JVM 可以直接获取的内存地址或指针，即直接引用。</p>
+<p>因此，解析的动作主要是针对类或接口、字段、类方法、接口方法、方法类型、方法句柄、调用点限定符这 7 类符号引用进行的。</p>
+<p>如果对符号引用和直接引用这两个概念有疑问的，可以参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30300585/answer/51335493">JVM里的符号引用如何存储？</a></p>
+<p>至于解析的具体过程，不在本文所述之内，可自行阅读虚拟机规范。</p>
+<h4 id="5-初始化-Initialization"><a href="#5-初始化-Initialization" class="headerlink" title="5. 初始化 ( Initialization )"></a>5. 初始化 ( Initialization )</h4><p>类的初始化是类加载过程的最后一个步骤，直到这一个步骤，JVM 才真正开始执行类中编写的 Java 代码。</p>
+<p>前面也曾说到，在准备阶段，类变量已经根据系统要求赋值为初始零值，而在初始化阶段，则会根据代码的逻辑去初始化类变量和其它资源。</p>
+<p>Java 编译器在编译过程中，会自动收集类中所有类变量的赋值动作以及静态代码块，将其合并到类构造器 <code>&lt;clinit&gt;()</code> 方法，编译器收集的顺序是由语句在源文件中出现的顺序决定的。</p>
+<p>而初始化阶段就是执行 <code>&lt;clinit&gt;()</code> 方法的过程。如果两个类存在父子关系，那么在执行子类的 <code>&lt;client&gt;()</code> 方法之前，会确保父类的 <code>&lt;clinit&gt;</code> 方法已执行完毕，因此，父类的静态代码块会优先于子类的静态代码块。我们前面举的很多例子，都可以证明这一过程。</p>
+<p>这里有一点需要特别强调，JVM 会保证一个类的 <code>&lt;clinit&gt;()</code> 方法在多线程环境中被正确的加锁同步，如果多个线程同时去初始化一个类，那么只会有其中一个线程去执行这个类的 <code>&lt;clinit&gt;()</code> 方法，其它线程都需要等待，直到 <code>&lt;clinit&gt;()</code> 方法执行完毕。如果在一个类的 <code>&lt;clinit&gt;()</code> 方法中有耗时很长的操作，那么可能会造成多个线程阻塞，在实际应用中这种阻塞往往是很隐蔽的。因此，在实际开发过程中，我们都会强调，<strong>不要在类的构造方法中加入过多的业务逻辑，甚至是一些非常耗时的操作</strong>。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>类型生命周期的七个阶段，我们详细的介绍和梳理了其中的五个，到此呢，整个类的加载过程就完了。类的“卸载”会在接下来的文章中详细介绍。如果对类的编译过程感兴趣，可以阅读参考资料 1 和 2 的部分章节。</p>
+<p>最后的最后，一句话总结：Java 源码是通过 javac 编译器编译成 class 文件的，文件中包含的代码我们称之为字节码。但字节码无法直接在计算机上运行，所以 JVM 将字节码加载到内存中，经过连接和初始化后，再由解释器和 JIT 将字节码编译成机器码，而后才能运行在计算机上。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://union-click.jd.com/jdc?e=&p=AyIGZRprFQEVBlMYUx0yVlgNRQQlW1dCFFlQCxxKQgFHREkdSVJKSQVJHFRXFk9FUlpGQUpLCVBaTFhbXQtWVmpSWRtYEgMUBF0Ta1YBR3oCGitvYVkAMGwAb1gMeT5PIGUOHjdUK1sUAxMGVRxaFwIiN1Uca0NsEgZUGloUBxMDVitaJQIWDlcZWhMDGgNTGVslBRIOZUYfQVBQVWUraxYyIjdVK1glQHxTAE8JQgAXV1NIDxUHEQ4GS1lCCxBVBkhYEVdAVFRICyUAEwZREg==">周志明著;深入理解Java虚拟机(第三版);机械工业出版社;2019-12</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/106953">刘超著;Java性能调优实战第22讲</a><br><a target="_blank" rel="noopener" href="http://www.iprogramming.cn/">圣思园张龙视频教程;深入理解JVM</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/40427344">Java中MethodHandle的使用问题</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30300585/answer/51335493">JVM里的符号引用如何存储？</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/floor/blog/1535062">JDK1.8下关于MethodHandle问题</a><br><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/Invokedynamic-Javas-secret-weapon">Invokedynamic:Java的秘密武器</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52749416">关于JVM字节码中dup指令的问题？</a></p>
+
+        </div>
+    
+<!-- tags -->
+
+<div class="post-back">
+    <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a>
+</div>
+</div>
+                <div class="footer">
+    <div>
+        ©2022 - 2024  橙子陈绩好. ALL RIGHTS RESERVED
+        <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-twitter"></i>
+		</a>
+		<a href="https://weibo.com/luecsc" title="在微博上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-weibo"></i>
+		</a>
+		<a href="mailto:yanxiaoyanx@gmail.com" title="发邮件给我">
+		    <i class="fas fa-at"></i>
+		</a>
+		<a href="/atom.xml" title="订阅RSS">
+            <i class="fas fa-rss"></i>
+        </a>
+		<a href="/archives" title="全部文章列表">
+            <i class="fas fa-archive"></i>
+        </a>&nbsp;
+        <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
+    </div>
+    <div>
+        <a target="_blank" rel="noopener" href="https://hexo.io">POWERED BY HEXO</a> |
+        <a href="/theme-of-hicsc/">DESIGNED BY SKYE</a> |
+        <a href="https://beian.miit.gov.cn" title="工信部域名备案查询" target="_blank">
+		    蜀ICP备2022026154号-1
+		</a> |
+		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
+			川公网安备51012202000545号
+		</a>
+    </div>	
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+    </body>
+</html>

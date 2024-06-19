@@ -78,6 +78,59 @@
     
     
     <div class="post">
+        <a class="post-title" href="/jvm-class-loader/">深入理解 ClassLoader</a>
+        <div class="post-except post-md">
+            <h3 id="ClassLoader-源码初探"><a href="#ClassLoader-源码初探" class="headerlink" title="ClassLoader 源码初探"></a>ClassLoader 源码初探</h3><p>类加载器用于加载 Java 类到虚拟机中，其实现类 <code>java.lang.ClassLoader</code> 是一个抽象类，其职责是通过指定类的完全限定名 ( <code>binary name</code> )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 <code>java.lang.Class</code> 对象。</p>
+<p>每个 Class 对象都包含一个定义它的类加载器的引用，而数组的 Class 对象不是用类加载器创建的，而是在 Java 运行时根据需要自动创建的，如果调用数组的 Class 对象的 <code>getClassLoader()</code> 方法返回的类加载器与其元素类型的类加载器相同，如果数组元素是基本数据类，则没有类加载，返回空。比如：</p>
+<pre><code class="java">// C为自定义类
+C[] cs = new C[2];
+// jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69
+System.out.println(cs.getClass().getClassLoader());
+
+int[] is = new int[2];
+// null
+System.out.println(is.getClass().getClassLoader());
+</code></pre>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-class-loader/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月19日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/jvm-class-loading-mechanism/">深入理解JVM类加载机制</a>
+        <div class="post-except post-md">
+            <p>Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。</p>
+<h3 id="类编译过程"><a href="#类编译过程" class="headerlink" title="类编译过程"></a>类编译过程</h3><p>Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。<br><img src="https://graph.hicsc.com/forest/m9lohs.png" alt="Java类编译过程示意图"><br>一般会把<code>.java</code>文件编译成<code>.class</code>文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。</p>
+<p>编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。</p>
+<p>接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：</p>
+<ul>
+<li>解释执行：逐条将字节码翻译成机器码并执行</li>
+<li>即时编译：将一个方法中所包含的所有字节码编译出机器码后再执行</li>
+</ul>
+<p>在起始阶段，JVM 中的字节码是由解释器(Interpreter)完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁时，这些代码块就会被认定为热点代码。为了提高热点代码的执行效率，在运行时，JIT 会把这些代码编译成本地平台相关的机器码，并进行各层次的优化，然后保存到内存中，这一过程就被称为即时编译。</p>
+<p>这种将两种编译方式混合执行的策略，在上图中被描述为“运行时编译”，也是 Hotspot 默认采用的策略。</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-class-loading-mechanism/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月19日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/how-to-eat-better/">非奋斗减肥：关于运动和减脂的一些小误区</a>
         <div class="post-except post-md">
             <p>最近一段时间想控制下体重，随手翻的健康类书籍比较多，在这本<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35238738/">「非奋斗减肥」</a>中确实收获到不少与常规认知有差异的知识。</p>
@@ -131,48 +184,10 @@
     
     
     
-    
-    <div class="post">
-        <a class="post-title" href="/m-type-society/">M型社会：我们从哪儿开始？</a>
-        <div class="post-except post-md">
-            <p>三十年前，日本经济开始衰退，人民收入开始减少，年收入在600万日元以下的中低阶层，已经占了日本总人口的八成。原先占比八成的中产阶级，一大部分人落到中低阶层，一小部分人挤入富裕阶层。中产彻底解体，一个人要么是富人，要么是穷人，没有中间层，收入严重两极分化，这就是所谓的M型社会。</p>
-<p><img src="https://graph.hicsc.com/works/M-type%20society.jpeg" alt="M型社会文章题图"></p>
-<p>中国在经历了三十年的高速发展之后，也不可避免的慢了下来。经历了这几年的经济不景气，谁也不知道我们会不会经历日本那种长期的经济衰退，但短期的衰退是不可避免了。那我们应该怎么办？也许这本书能给我们些启发。</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/m-type-society/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年03月13日，属于
-            
-                <a href="/books/"><i class="fas fa-hashtag"></i>读万卷书</a>
-            
-            分类
-        </div>
-    </div>
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/chinese-new-year-2024/">聊聊回家过年那点事</a>
-        <div class="post-except post-md">
-            <p>从年三十到正月初七这八天是我过去一年过得最轻松的一周，这一周没有客户需求、没有业绩目标、没有技术难题、更没有不学习的罪恶感，真的是太爽了。</p>
-<p>跟以往一样，腊月二十九在家大扫除，年三十为年夜饭从早忙到晚，初一逛逛街看看电影，初二我和老婆各回各家拜年走亲戚。我很喜欢回家走亲戚，也很喜欢和他们聊天，他们会告诉我过去一年身边发生的趣事，我也会跟他们说说我所看到的世界。这样毫无压力的聊天氛围，让我特别的放松。</p>
-<p>过去几年，都是开车回家，堵怕了，今年坐火车回去，稍微轻松一点，火车上也发生了不少趣事。接下来就说说，过年回家的新体验。</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/chinese-new-year-2024/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年02月18日，属于
-            
-                <a href="/ramble/"><i class="fas fa-hashtag"></i>生活漫记</a>
-            
-            分类
-        </div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
 </div>
 
                 <div class="footer">

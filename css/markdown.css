@@ -21,37 +21,37 @@
 {
     font-size: 2rem;
     line-height: 1.2;
-    padding: 24px 0;
+    padding: 12px 0;
 }
 .post-md h2
 {
     font-size: 1.6rem;
     line-height: 1.2;
-    padding: 20px 0;
+    padding: 10px 0;
 }
 .post-md h3
 {
     font-size: 1.4rem;
     line-height: 1.2;
-    padding: 18px 0;
+    padding: 9px 0;
 }
 .post-md h4
 {
     font-size: 1.2rem;
     line-height: 1.2;
-    padding: 16px 0;
+    padding: 8px 0;
 }
 .post-md h5
 {
     font-size: 1.15rem;
     line-height: 1.2;
-    padding: 14px 0;
+    padding: 7px 0;
 }
 .post-md h6
 {
     font-size: 1.1rem;
     line-height: 1.2;
-    padding: 12px 0;
+    padding: 6px 0;
 }
 .post-md a
 {
@@ -90,6 +90,7 @@
 .post-md ul
 {
     list-style: disc;
+    margin-top: -10px;
     padding-left: 24px;
 }
 .post-md img
@@ -97,7 +98,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     padding: 5px 5px;
-    border: 1px solid #ebebeb;
+    /*border: 1px solid #ebebeb;*/
 }
 .post-md hr
 {
