@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://graph.hicsc.com/forest/sr8nq9.png">
 <meta property="og:image" content="https://graph.hicsc.com/forest/hp6i87.png">
 <meta property="article:published_time" content="2024-06-19T07:01:04.000Z">
-<meta property="article:modified_time" content="2024-06-19T07:18:57.298Z">
+<meta property="article:modified_time" content="2024-06-19T07:37:24.751Z">
 <meta property="article:author" content="Skye">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://graph.hicsc.com/forest/li2cco.jpg">
@@ -194,8 +194,8 @@ System.out.println(System.getProperty(&quot;java.class.path&quot;));
      */
     private byte[] loadClassData(String name) &#123;
         // 将类的全路径名中的.替换成/，用来组装class文件的完整路径
-        String fileName = name.replace(&quot;.”, &quot;/&quot;);
-        try (InputStream is = new FileInputStream(new File(path + fileName + &quot;.class”));
+        String fileName = name.replace(&quot;.&quot;, &quot;/&quot;);
+        try (InputStream is = new FileInputStream(new File(path + fileName + &quot;.class&quot;));
              ByteArrayOutputStream baos = new ByteArrayOutputStream()) &#123;
             int ch = 0;
             while (-1 != (ch = is.read())) &#123;
@@ -296,15 +296,15 @@ com.hicsc.classloader.CustomClassLoader@33c7353a
 <p>由 Java 虚拟机自带的类加载器所加载的类，在虚拟机的生命周期中，始终不会被卸载。JVM 自带的类加载器包括启动类加载器、扩展类加载器、系统类加载器，JVM 会始终引用这些类加载器，而这些类加载器则会始终引用它们所加载的类的 Class 对象，因此，这些 Class 对象始终是可达的，只有被用户自定义类加载所加载的类才可以被卸载。</p>
 <p>来看一个简单的例子：</p>
 <pre><code class="java">public static void main(String[] args) throws Exception &#123;
-        CustomClassLoader loader = new CustomClassLoader();
+     CustomClassLoader loader = new CustomClassLoader();
      loader.path = &quot;/Users/Moon/Desktop/&quot;;
-     Class&lt;?&gt; clazz = loader.loadClass(&quot;com.hicsc.classloader.Demo”);
+     Class&lt;?&gt; clazz = loader.loadClass(&quot;com.hicsc.classloader.Demo&quot;);
      Object object = clazz.newInstance();
      System.out.println(&quot;loader1.clazz = &quot; + clazz.hashCode());
 
      loader = new CustomClassLoader();
      loader.path = &quot;/Users/Moon/Desktop/&quot;;
-     clazz = loader.loadClass(&quot;com.hicsc.classloader.Demo”);
+     clazz = loader.loadClass(&quot;com.hicsc.classloader.Demo&quot;);
      object = clazz.newInstance();
      System.out.println(&quot;loader1.clazz = &quot; + clazz.hashCode());
 

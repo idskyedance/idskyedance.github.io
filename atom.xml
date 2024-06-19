@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-06-19T07:18:57.298Z</updated>
+  <updated>2024-06-19T07:37:24.751Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hicsc.com/jvm-class-loader/"/>
     <id>https://hicsc.com/jvm-class-loader/</id>
     <published>2024-06-19T07:01:04.000Z</published>
-    <updated>2024-06-19T07:18:57.298Z</updated>
+    <updated>2024-06-19T07:37:24.751Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;ClassLoader-源码初探&quot;&gt;&lt;a href=&quot;#ClassLoader-源码初探&quot; class=&quot;headerlink&quot; title=&quot;ClassLoader 源码初探&quot;&gt;&lt;/a&gt;ClassLoader 源码初探&lt;/h3&gt;&lt;p&gt;类加载器用于加载 Java 类到虚拟机中，其实现类 &lt;code&gt;java.lang.ClassLoader&lt;/code&gt; 是一个抽象类，其职责是通过指定类的完全限定名 ( &lt;code&gt;binary name&lt;/code&gt; )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 &lt;code&gt;java.lang.Class&lt;/code&gt; 对象。&lt;/p&gt;
