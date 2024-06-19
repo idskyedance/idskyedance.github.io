@@ -162,7 +162,8 @@
 
 .post-md code
 {
-    font-size: 13px;
+    font-size: 14px;
+    padding: 1px 6px;
     background: #fafbfc;
     border: 1px solid hsla(213, 7%, 75%, .5);
     border-radius: 4px;
