@@ -80,7 +80,9 @@
     <div class="post">
         <a class="post-title" href="/jvm-constant-pool/">深入理解JVM内存结构番外篇：常量池</a>
         <div class="post-except post-md">
-            
+            <p>在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。</p>
+<h3 id="Class-文件常量池"><a href="#Class-文件常量池" class="headerlink" title="Class 文件常量池"></a>Class 文件常量池</h3><p>Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节存放魔数，用于确定这个文件是否能够被 JVM 接受，接下来的 4 个字节用于存放版本号，再接着存放的就是常量池。常量池的长度是不固定的，所以，在常量池的入口存放着常量池容量的计数值。</p>
+<p>常量池主要用于存放两大类常量：字面量和符号引用量，字面量相当于 Java 语言层面常量的概念，比如：字符串常量、声明为 final 的常量等等。符号引用是用一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。</p>
         </div>
         <div class="post-date"> <a class="read-more" href="/jvm-constant-pool/"> 继续阅读 </a> </div>
         <div class="post-date">
