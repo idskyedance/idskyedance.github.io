@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+  <title>深入理解JVM内存结构番外篇：常量池 - 橙子陈绩好</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。 Class 文件常量池Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM内存结构番外篇：常量池">
+<meta property="og:url" content="https://hicsc.com/jvm-constant-pool/index.html">
+<meta property="og:site_name" content="橙子陈绩好">
+<meta property="og:description" content="在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。 Class 文件常量池Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节">
+<meta property="og:locale">
+<meta property="og:image" content="https://graph.hicsc.com/forest/ulyuwn.png">
+<meta property="article:published_time" content="2024-06-23T06:34:12.000Z">
+<meta property="article:modified_time" content="2024-06-23T06:37:17.721Z">
+<meta property="article:author" content="Skye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://graph.hicsc.com/forest/ulyuwn.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="https://hicsc.com/jvm-constant-pool/">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <!-- CSS -->
+<!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
+  
+<link rel="stylesheet" href="/css/reset.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/markdown.css">
+
+  <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            深入理解JVM内存结构番外篇：常量池
+        </div>
+        <div class="post-meta">
+            2024-06-23 ｜ 
+            
+                
+                    <a href="/knowledge/"><i class="fas fa-hashtag"></i> 知识 </a>
+                 ｜ 
+            
+            <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a> ｜
+            <i class="fas fa-fire-alt" title=本文访问量></i> <span id="busuanzi_value_page_pv" title="本文访问量"></span>
+        </div>
+        <div class="post-md">
+            <p>在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。</p>
+<h3 id="Class-文件常量池"><a href="#Class-文件常量池" class="headerlink" title="Class 文件常量池"></a>Class 文件常量池</h3><p>Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节存放魔数，用于确定这个文件是否能够被 JVM 接受，接下来的 4 个字节用于存放版本号，再接着存放的就是常量池。常量池的长度是不固定的，所以，在常量池的入口存放着常量池容量的计数值。</p>
+<p>常量池主要用于存放两大类常量：字面量和符号引用量，字面量相当于 Java 语言层面常量的概念，比如：字符串常量、声明为 final 的常量等等。符号引用是用一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。</p>
+<p>首先，简单介绍下如何查看分析字节码，其实这部分内容最好是到 B 站找视频看，这样会更直观一些。我们这里会分析一段稍显复杂的代码：</p>
+<pre><code class="java">public class BytecodeDemo &#123;
+    public static final String mstring = &quot;hicsc.com&quot;;
+    public static int mint;
+    static &#123;
+        mint = 1;
+    &#125;
+
+    public BytecodeDemo() &#123;
+        System.out.println(&quot;创建bytecodeDemo对象&quot;);
+    &#125;
+
+    public synchronized void syncMethod(String param) &#123;
+        System.out.println(&quot;这是一个同步方法:&quot; + param);
+    &#125;
+
+    public void syncBlockMethod() &#123;
+        synchronized (this) &#123;
+            System.out.println(&quot;这是同步代码块&quot;);
+        &#125;
+        mint = 2;
+    &#125;
+
+    public void exceptionMethod() &#123;
+        try &#123;
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(new File(&quot;test.txt&quot;)));
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) &#123;
+                System.out.println(line);
+            &#125;
+            bufferedReader.close();
+            reader.close();
+        &#125; catch (FileNotFoundException e) &#123;
+            e.printStackTrace();
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125; finally &#123;
+            System.out.println(&quot;执行finally方法&quot;);
+        &#125;
+    &#125;
+</code></pre>
+<p>这段代码虽然简单，却涵盖了一些关键的字节码操作，如静态代码块、同步块、同步方法和异常处理。如果你能深入理解这段代码生成的字节码，那么分析其他字节码也将变得轻而易举。接下来我将逐步介绍这段代码生成的字节码，请仔细阅读和理解代码中的注释。</p>
+<h4 id="1-魔数与-Class-文件的版本"><a href="#1-魔数与-Class-文件的版本" class="headerlink" title="1. 魔数与 Class 文件的版本"></a>1. <strong>魔数与 Class 文件的版本</strong></h4><pre><code class="java">public class com.hicsc.proxy.BytecodeDemo
+  // 次版本号
+  minor version: 0
+  // 主版本号
+  major version: 52
+  // 类的访问控制符
+  // 这个类是public，所以其访问控制符是ACC_PUBLIC
+  // ACC_SUPER用于兼容以前的JDK版本，具体原因可自行搜索
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  // 当前类名，#26表示常量池下标，代表常量池中的第26个常量
+  this_class: #26                         // com/hicsc/proxy/BytecodeDemo
+  // 父类名称，#2同上
+  super_class: #2                         // java/lang/Object
+  // 接口数、字段数、方法数、
+  // 接口数和字段数上面数数就清楚，但方法数为什么是5，代码中明明只有4个？接着看下面
+  interfaces: 0, fields: 2, methods: 5, attributes: 1
+</code></pre>
+<p>每个 Class 文件的头 4 个字节被称为魔数，它的唯一作用是确定这个文件是否为一个可被虚拟机接受的 Class 文件，其值为  <code>0xCAFEBABE</code> ，在上面的字节码中并未体现。</p>
+<h4 id="2-常量池"><a href="#2-常量池" class="headerlink" title="2. 常量池"></a>2. 常量池</h4><pre><code class="java">// 总共包含109个常量，其中#数字表示索引
+// 等号后面表示常量的类型，具体的类型信息参考代码后面的表格
+// 紧接着是常量代表的内容
+// 注意：下面的代码中省略了部分注释
+Constant pool:
+   // 类中方法的符号引用，其值是 #2.#3
+   // 其中 #2 = #4 = java/lang/Object
+   //     #3 = #5:#6 = &lt;init&gt;:()V
+   // 合起来就是：java/lang/Object.&quot;&lt;init&gt;&quot;:()V，即跟后面的注释是一样的
+   // 即：Object类的构造方法，这也是前面为什么方法数是5的原因，出了代码中给出的方法
+   // 还包含父类和当前类的构造方法
+    #1 = Methodref          #2.#3          // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // &quot;&lt;init&gt;&quot;:()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               &lt;init&gt;
+    #6 = Utf8               ()V
+    #7 = Fieldref           #8.#9         // java/lang/System.out:Ljava/io/PrintStream;
+    #8 = Class              #10           // java/lang/System
+    #9 = NameAndType        #11:#12       // out:Ljava/io/PrintStream;
+   #10 = Utf8               java/lang/System
+   #11 = Utf8               out
+   #12 = Utf8               Ljava/io/PrintStream;
+   #13 = String             #14           // 创建bytecodeDemo对象
+   #14 = Utf8               创建bytecodeDemo对象
+   #15 = Methodref          #16.#17       // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #16 = Class              #18           // java/io/PrintStream
+   #17 = NameAndType        #19:#20       // println:(Ljava/lang/String;)V
+   #18 = Utf8               java/io/PrintStream
+   #19 = Utf8               println
+   #20 = Utf8               (Ljava/lang/String;)V
+   #21 = Class              #22           // java/lang/StringBuilder
+   #22 = Utf8               java/lang/StringBuilder
+   #23 = Methodref          #21.#3        // java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+   #24 = String             #25           // 这是一个同步方法:
+   #25 = Utf8               这是一个同步方法:
+   #26 = Methodref          #21.#27       // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #27 = NameAndType        #28:#29       // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #28 = Utf8               append
+   #29 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #30 = Methodref          #21.#31       // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #31 = NameAndType        #32:#33       // toString:()Ljava/lang/String;
+   #32 = Utf8               toString
+   #33 = Utf8               ()Ljava/lang/String;
+   #34 = String             #35           // 这是同步代码块
+   #35 = Utf8               这是同步代码块
+   #36 = Fieldref           #37.#38       // com/hicsc/proxy/BytecodeDemo.mint:I
+   #37 = Class              #39           // com/hicsc/proxy/BytecodeDemo
+   #38 = NameAndType        #40:#41       // mint:I
+   #39 = Utf8               com/hicsc/proxy/BytecodeDemo
+   #40 = Utf8               mint
+   #41 = Utf8               I
+   #42 = Class              #43           // java/io/InputStreamReader
+   #43 = Utf8               java/io/InputStreamReader
+   #44 = Class              #45           // java/io/FileInputStream
+   #45 = Utf8               java/io/FileInputStream
+   #46 = Class              #47           // java/io/File
+   #47 = Utf8               java/io/File
+   #48 = String             #49           // test.txt
+   #49 = Utf8               test.txt
+   #50 = Methodref          #46.#51       // java/io/File.&quot;&lt;init&gt;&quot;:(Ljava/lang/String;)V
+   #51 = NameAndType        #5:#20        // &quot;&lt;init&gt;&quot;:(Ljava/lang/String;)V
+   #52 = Methodref          #44.#53       // java/io/FileInputStream.&quot;&lt;init&gt;&quot;:(Ljava/io/File;)V
+   #53 = NameAndType        #5:#54        // &quot;&lt;init&gt;&quot;:(Ljava/io/File;)V
+   #54 = Utf8               (Ljava/io/File;)V
+   #55 = Methodref          #42.#56       // java/io/InputStreamReader.&quot;&lt;init&gt;&quot;:(Ljava/io/InputStream;)V
+   #56 = NameAndType        #5:#57        // &quot;&lt;init&gt;&quot;:(Ljava/io/InputStream;)V
+   #57 = Utf8               (Ljava/io/InputStream;)V
+   #58 = Class              #59           // java/io/BufferedReader
+   #59 = Utf8               java/io/BufferedReader
+   #60 = Methodref          #58.#61       // java/io/BufferedReader.&quot;&lt;init&gt;&quot;:(Ljava/io/Reader;)V
+   #61 = NameAndType        #5:#62        // &quot;&lt;init&gt;&quot;:(Ljava/io/Reader;)V
+   #62 = Utf8               (Ljava/io/Reader;)V
+   #63 = Methodref          #58.#64       // java/io/BufferedReader.readLine:()Ljava/lang/String;
+   #64 = NameAndType        #65:#33       // readLine:()Ljava/lang/String;
+   #65 = Utf8               readLine
+   #66 = Methodref          #58.#67       // java/io/BufferedReader.close:()V
+   #67 = NameAndType        #68:#6        // close:()V
+   #68 = Utf8               close
+   #69 = Methodref          #42.#67       // java/io/InputStreamReader.close:()V
+   #70 = String             #71           // 执行finally方法
+   #71 = Utf8               执行finally方法
+   #72 = Class              #73           // java/io/FileNotFoundException
+   #73 = Utf8               java/io/FileNotFoundException
+   #74 = Methodref          #72.#75       // java/io/FileNotFoundException.printStackTrace:()V
+   #75 = NameAndType        #76:#6        // printStackTrace:()V
+   #76 = Utf8               printStackTrace
+   #77 = Class              #78           // java/io/IOException
+   #78 = Utf8               java/io/IOException
+   #79 = Methodref          #77.#75       // java/io/IOException.printStackTrace:()V
+   #80 = Utf8               mstring
+   #81 = Utf8               Ljava/lang/String;
+   #82 = Utf8               ConstantValue
+   #83 = String             #84           // hicsc.com
+   #84 = Utf8               hicsc.com
+   #85 = Utf8               Code
+   #86 = Utf8               LineNumberTable
+   #87 = Utf8               LocalVariableTable
+   #88 = Utf8               this
+   #89 = Utf8               Lcom/hicsc/proxy/BytecodeDemo;
+   #90 = Utf8               syncMethod
+   #91 = Utf8               param
+   #92 = Utf8               syncBlockMethod
+   #93 = Utf8               StackMapTable
+   #94 = Class              #95           // java/lang/Throwable
+   #95 = Utf8               java/lang/Throwable
+   #96 = Utf8               exceptionMethod
+   #97 = Utf8               reader
+   #98 = Utf8               Ljava/io/InputStreamReader;
+   #99 = Utf8               bufferedReader
+  #100 = Utf8               Ljava/io/BufferedReader;
+  #101 = Utf8               line
+  #102 = Utf8               e
+  #103 = Utf8               Ljava/io/FileNotFoundException;
+  #104 = Utf8               Ljava/io/IOException;
+  #105 = Class              #106          // java/lang/String
+  #106 = Utf8               java/lang/String
+  #107 = Utf8               &lt;clinit&gt;
+  #108 = Utf8               SourceFile
+  #109 = Utf8               BytecodeDemo.java
+</code></pre>
+<p>常量池中每个项目的类型如下</p>
+<ul>
+<li>Methodref：类中方法的符号引用</li>
+<li>Class：类或接口的符号引用</li>
+<li>NameAndType：字段或方法的部分符号引用</li>
+<li>Utf8：UTF-8 编码的字符串</li>
+<li>Fieldref：字段的符号引用</li>
+<li>String：字符串类型的字面量</li>
+</ul>
+<p>常量池被喻为 Class 文件的资源仓库，它是 Class 文件结构中与其他项目关联最多的数据，通常也是占用 Class 文件空间最大的数据项目之一。</p>
+<h4 id="3-常量与变量"><a href="#3-常量与变量" class="headerlink" title="3. 常量与变量"></a>3. 常量与变量</h4><pre><code class="java">  public static final java.lang.String mstring;
+    // 常量的修饰符，即类型是字符串，L表示字符串
+    descriptor: Ljava/lang/String;
+      // 常量访问修饰符：public static final
+    flags: (0x0019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    // 常量值
+    ConstantValue: String hicsc.com
+
+  public static int mint;
+      // 变量类型是I，int
+    descriptor: I
+    // 访问修饰符：public static
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+</code></pre>
+<h4 id="4-构造方法"><a href="#4-构造方法" class="headerlink" title="4. 构造方法"></a>4. 构造方法</h4><pre><code class="java">  public com.hicsc.proxy.BytecodeDemo();
+      // 构造方法返回值是空
+    descriptor: ()V
+    // 访问修饰符
+    flags: (0x0001) ACC_PUBLIC
+    // 代码
+    Code:
+          // 堆栈深度为2，局部变量1个，方法的参数1个
+      // 每个方法出了给出的参数以外，
+          // 还包含一个隐藏的this参数，这样就可以在方法内部使用this.变量来访问当前对象的变量
+      // 
+      stack=2, locals=1, args_size=1
+         // 将第0个变量槽中为reference类型的本地变量推送到操作数栈顶
+         0: aload_0
+         // 以栈顶的reference类型的数据所指向的对象作为方法接收者
+         // 调用此对象的实例构造器方法、private方法或者它的父类的方法
+         // #1 常量池中的第1号常量，即Object的构造方法
+         // 这句指令即表示调用父类构造方法
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         // 从类中获取一个静态变量 #7，即系统输出流
+         4: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         // 将 #13 常量值推送到栈顶
+         7: ldc           #13                 // String 创建bytecodeDemo对象
+         // 用于调用对象的实例方法
+         9: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        12: return
+      // 行号表
+      LineNumberTable:
+        // 上面 aload_0指令对应代码的22行
+        line 22: 0
+        // getstatic指令对应代码的23行
+        line 23: 4
+        // return指令对应代码的24行
+        line 24: 12
+      // 用于描述栈帧中局部变量表的变量与Java源码中定义的变量之间的关系，
+      // 它不是运行时必需的属性，但默认会生成到Class文件之中
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lcom/hicsc/proxy/BytecodeDemo;
+</code></pre>
+<p>LocalVariableTable 属性可以在 Javac 中使用 <code>-g:none</code> 或 <code>-g:vars</code> 选项来取消或要求生成这项信息。如果没有生成这项属性，最大的影响就是当其他人引用这个方法时，所有的参数名称都将会丢失。譬如 IDE 将会使用诸如 <code>arg0</code>、<code>arg1</code> 之类的占位符代替原有的参数名，这对程序运行没有影响，但是会对代码编写带来较大不便，而且在调试期间无法根据参数名称从上下文中获得参数值，在接下来会有更自观的感受。</p>
+<h4 id="5-同步方法"><a href="#5-同步方法" class="headerlink" title="5. 同步方法"></a>5. 同步方法</h4><pre><code class="java"> public synchronized void syncMethod(java.lang.String);
+    // 字符串类型参数，返回值为Void
+    descriptor: (Ljava/lang/String;)V
+    // 访问控制符 public synchronized
+    flags: (0x0021) ACC_PUBLIC, ACC_SYNCHRONIZED
+    Code:
+      // 堆栈深度3，局部变量2个，方法参数2个
+      stack=3, locals=2, args_size=2
+         0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: new           #21                 // class java/lang/StringBuilder
+         6: dup
+         7: invokespecial #23                 // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:()V
+        10: ldc           #24                 // String 这是一个同步方法:
+        12: invokevirtual #26                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        15: aload_1
+        16: invokevirtual #26                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        19: invokevirtual #30                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        22: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        25: return
+      LineNumberTable:
+        line 27: 0
+        line 28: 25
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      26     0  this   Lcom/hicsc/proxy/BytecodeDemo;
+            0      26     1 param   Ljava/lang/String;
+</code></pre>
+<p>关于具体的指令这里不再作过多的说明，每条指令代表的具体含义，大家可以参考 <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html">The Java Virtual Machine Instruction Set</a>。这个方法的字节码中有两点需要注意：</p>
+<ul>
+<li>可能你听说过，<code>synchronized</code> 关键字实现的原理是在字节码中生成 <code>monitorenter</code> 和  <code>monitorexit</code> 指令来实现的，但这里的 <code>synchronized</code> 方法并没有生成这两条指令，而是用 <code>ACC_SYNCHRONIZED</code> 来描述，其实原理是一样的</li>
+<li>这里对 <code>LocalVariableTable</code> 的理解会更直观一些，里就是描述了这个方法的两个参数名，一个是 <code>this</code>，一个是 <code>param</code></li>
+</ul>
+<h4 id="6-同步代码块"><a href="#6-同步代码块" class="headerlink" title="6. 同步代码块"></a>6. 同步代码块</h4><pre><code class="java">  public void syncBlockMethod();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: aload_0
+         1: dup
+         2: astore_1
+         3: monitorenter
+         4: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         7: ldc           #34                 // String 这是同步代码块
+         9: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        12: aload_1
+        // 正常结束
+        13: monitorexit
+        14: goto          22
+        17: astore_2
+        18: aload_1
+        // 如果同步代码块中抛出异常，仍然会执行monitorexit
+        19: monitorexit
+        20: aload_2
+        21: athrow
+        22: iconst_2
+        23: putstatic     #36                 // Field mint:I
+        26: return
+      // 异常表，在下文介绍异常方法时具体介绍
+      Exception table:
+         from    to  target type
+             4    14    17   any
+            17    20    17   any
+      LineNumberTable:
+        line 31: 0
+        line 32: 4
+        line 33: 12
+        line 34: 22
+        line 35: 26
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      27     0  this   Lcom/hicsc/proxy/BytecodeDemo;
+            // 记录方法中操作数栈与局部变量区的类型在一些特定位置的状态
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 17
+          locals = [ class com/hicsc/proxy/BytecodeDemo, class java/lang/Object ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 250 /* chop */
+          offset_delta = 4
+</code></pre>
+<p><code>StackMapTable</code> 属性在 JDK 6 增加到 Class 文件规范之中，它是一个相当复杂的变长属性，位于 Code 属性的属性表中。这个属性会在虚拟机类加载的字节码验证阶段被新类型检查验证器 ( Type Checker ) 使用，目的在于代替以前比较消耗性能的基于数据流分析的类型推导验证器。</p>
+<p>可能大家对类型推导的感知不强，毕竟大家所写的 Java 代码对每个变量都定义了类型，但实际上 JVM 在加载字节码时需要验证每个变量与其实际定义的类型是否一致，比如，如果一个变量被自定为字符串类型，那么我们就不能给它赋值为数字，这属于验证。而如果你关注最新的 JDK 特性的话，Java 在很早以前就引入了 var 关键字，比如：</p>
+<pre><code class="java">var mint = 1;
+var mstring = &quot;hicsc.com&quot;;
+</code></pre>
+<p>如果你对这部分内容感兴趣的话，可以参考：<a target="_blank" rel="noopener" href="https://hllvm-group.iteye.com/group/topic/26545">能介绍一下StackMapTable属性的运作原理吗？</a></p>
+<h4 id="7-异常处理"><a href="#7-异常处理" class="headerlink" title="7. 异常处理"></a>7. 异常处理</h4><pre><code class="java">  public void exceptionMethod();
+        // 方法返回Void
+    descriptor: ()V
+    // 访问修饰符 public
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=7, locals=5, args_size=1
+         // 创建InputStreamReader
+         0: new           #42                 // class java/io/InputStreamReader
+         // 复制操作数堆栈上的顶部值，并将复制的值推送到操作数堆栈上
+         // 具体作用请参考代码下的文字说明
+         3: dup
+         4: new           #44                 // class java/io/FileInputStream
+         7: dup
+         8: new           #46                 // class java/io/File
+        11: dup
+        // 将字符串 test.txt 从常量池中推送至栈顶
+        12: ldc           #48                 // String test.txt
+        14: invokespecial #50                 // Method java/io/File.&quot;&lt;init&gt;&quot;:(Ljava/lang/String;)V
+        17: invokespecial #52                 // Method java/io/FileInputStream.&quot;&lt;init&gt;&quot;:(Ljava/io/File;)V
+        20: invokespecial #55                 // Method java/io/InputStreamReader.&quot;&lt;init&gt;&quot;:(Ljava/io/InputStream;)V
+        // 将创建的InputStreamReader对象放到局部变量中
+        23: astore_1
+        24: new           #58                 // class java/io/BufferedReader
+        27: dup
+        // 将InputStreamReader对象从局部变量中捞出来
+        28: aload_1
+        29: invokespecial #60                 // Method java/io/BufferedReader.&quot;&lt;init&gt;&quot;:(Ljava/io/Reader;)V
+        // 将创建的BufferReader对象放到局部变量中去
+        32: astore_2
+        // 定义局部变量 line = null；
+        33: aconst_null
+        // 将line放到操作数栈顶
+        34: astore_3
+        // 捞出BufferReader对象放到栈顶
+        35: aload_2
+        // 调用BufferReader的readLine方法，读取数据
+        36: invokevirtual #63                 // Method java/io/BufferedReader.readLine:()Ljava/lang/String;
+        // invokevirtual消耗掉栈顶的BufferReader对象，现在栈顶是line=null
+        // 先复制一份line=null，因为astore_3会把刚才readline的结果复制给line
+        39: dup
+        // line=readLine放到局部变量中去，栈顶还是line=null，继续后面的循环
+        40: astore_3
+        // 如果为空，goto到54，即是 aload_2，捞出BufferReader并调用close方法
+        41: ifnull        54
+        // 如果不为空，调用println方法打印
+        44: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        47: aload_3
+        48: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        // 打印完成，goto到35，继续readLine读取下一行
+        51: goto          35
+        // 从局部变量中把BufferedReader对象捞出来放到栈顶
+        54: aload_2
+        // 调用BufferedReaer对象的close方法
+        55: invokevirtual #66                 // Method java/io/BufferedReader.close:()V
+        // 从局部变量中把InputStreamReader对象捞出来放到栈顶
+        58: aload_1
+        // 调用InputStreamReader对象的close方法
+        59: invokevirtual #69                 // Method java/io/InputStreamReader.close:()V
+        // 接着是finally中的println语句
+        62: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        65: ldc           #70                 // String 执行finally方法
+        67: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        // goto到118，即reture，方法执行结束
+        70: goto          118
+        // 73-83行是执行 FileNotFoundException.printStackTrace:()打印异常的堆栈信息
+        73: astore_1
+        74: aload_1
+        75: invokevirtual #74                 // Method java/io/FileNotFoundException.printStackTrace:()V
+        78: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        81: ldc           #70                 // String 执行finally方法
+        83: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        86: goto          118
+        // 89-99行是执行 IOException.printStackTrace:()打印异常的堆栈信息
+        89: astore_1
+        90: aload_1
+        91: invokevirtual #79                 // Method java/io/IOException.printStackTrace:()V
+        94: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        97: ldc           #70                 // String 执行finally方法
+        99: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       102: goto          118
+       // 又是执行finally方法，前面是指正常执行完代码走到finally，
+       // 这里是抛出异常后，做了相关处理后，再到finally
+       105: astore        4
+       107: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       110: ldc           #70                 // String 执行finally方法
+       112: invokevirtual #15                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       115: aload         4
+       // 如果到这个位置还有未处理的异常，那么直接抛出去
+       117: athrow
+       118: return
+      Exception table:
+         from    to  target type
+             0    62    73   Class java/io/FileNotFoundException
+             0    62    89   Class java/io/IOException
+             0    62   105   any
+            73    78   105   any
+            89    94   105   any
+           105   107   105   any
+      LineNumberTable:
+      // ......
+      LocalVariableTable:
+            // ......
+      StackMapTable: number_of_entries = 6
+      // ......
+</code></pre>
+<h5 id="7-1-dup-与-astore-指令"><a href="#7-1-dup-与-astore-指令" class="headerlink" title="7.1 dup 与 astore 指令"></a>7.1 dup 与 astore 指令</h5><p>其实每个 new 指令之后，都会跟一个 dup 指令，而紧接着就是 <code>invokespecial</code> 指令来调用构造方法，比如：</p>
+<pre><code class="java">Object obj = new Object();
+</code></pre>
+<p>其字节码大致是：</p>
+<pre><code class="java">new Object
+dup
+invokespecial Object.&lt;init&gt;()V
+</code></pre>
+<p>创建一个对象的大致分为 3 个步骤：</p>
+<ul>
+<li>创建并初始化 Object 类型的对象</li>
+<li>调用 Object 的构造方法</li>
+<li>将 obj 指向新创建的对象</li>
+</ul>
+<p>而 new 指令的作用是创建指定类型的对象实例，对其进行默认初始化(注意跟调用构造函数的初始化不同，在类加载部分已经详细讲解，如有疑问，可翻看前面几篇文章)，并将指向该实例的一个引用压入操作数栈顶。</p>
+<p>然后 invokespecial 指令会消耗掉栈顶的引用，因为构造方法有一个默认的参数 this，jvm 会把操作数栈顶的对象应用拿出来作为构造方法的 this 参数。如果我们希望在 invokespecial 调用后，在操作数栈顶还有一个指向新建对象的应用，就得在调用这个指令之前先复制一份该对象的引用。</p>
+<p>这就是 dup 指令的作用。</p>
+<p>在此基础上，如果我们把这个引用保存到局部变量中去，就会有对应的 astore 指令，它会把操作数栈顶的那个引用消耗掉，保存到指定的局部变量去。就比如：</p>
+<pre><code class="java">20: invokespecial #55    // Method InputStreamReader.&quot;&lt;init&gt;&quot;:(Ljava/io/InputStream;)V
+23: astore_1
+24: new           #58    // class java/io/BufferedReader
+27: dup
+28: aload_1
+</code></pre>
+<p>在调用完 InputStreamReader 的构造方法后，会把 InputStreamReader 对象保存到局部变量中，因为代码是这样写的：</p>
+<pre><code class="java">InputStreamReader reader = new InputStreamReader(new FileInputStream(new File(&quot;test.txt&quot;)));
+BufferedReader bufferedReader = new BufferedReader(reader);
+</code></pre>
+<p>保存到局部变量后，在创建 BufferedReader 对象，注意在 dup 指令后，有一个 aload 指令，这是因为在构造 BufferedReader 对象时需要 InputStreamReader 对象，所以需要首先把 InputStreamReader 对象从局部变量中给捞出来。</p>
+<h5 id="7-2-异常表"><a href="#7-2-异常表" class="headerlink" title="7.2 异常表"></a>7.2 异常表</h5><p>字节码是代码编译过后得到的二进制文件，是静态的，简单的理解也就是把源码翻译了一下，但异常在哪儿抛出来，抛出来以后又往什么地方走，这些都是在运行过程中才知道的。因此，在上面的字节码中可以看到很多的 goto 语句。而到底异常在哪儿抛出来，抛出来后又改如何处理？这就是异常表，JVM 会在出现异常的方法中，查找异常表，看看能否找到合适的处理者来处理，异常表的具体内容如下：</p>
+<pre><code class="java">Exception table:
+    from   to  target type
+    0    62    73   Class java/io/FileNotFoundException
+    0    62    89   Class java/io/IOException
+    0    62   105   any
+   73    78   105   any
+   89    94   105   any
+  105   107   105   any
+</code></pre>
+<p>其中 from 表示可能发生异常的起始索引，to 表示可能发生异常的结束索引，target 表示抛出对应类型异常后开始处理异常的字节码索引，连起来也就是说：如果从第 0-62 行中，抛出了 FileNotFoundException 异常，那么程序就跳转到第 73 行。回过去，看看第 73 行指令是什么：</p>
+<pre><code class="java">// 73-83行是执行 FileNotFoundException.printStackTrace:()打印异常的堆栈信息
+73: astore_1
+74: aload_1
+75: invokevirtual #74 // Method java/io/FileNotFoundException.printStackTrace:()V
+78: getstatic     #7  // Field java/lang/System.out:Ljava/io/PrintStream;
+81: ldc           #70 // String 执行finally方法
+83: invokevirtual #15 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+</code></pre>
+<p>如果某个异常，既不属于 FileNotFoundException，也不属于 IOException，JVM 会继续查找异常表中的剩余条目，比如这里的 any，表示可以处理任何异常，即无论发生任何异常都跳转到 105 行，开始处理异常。</p>
+<p>异常表的后面 3 个条目，表示 catch 或者 finally 中出现异常的话，仍然跳转的 105 行继续处理。</p>
+<h4 id="8-静态代码块"><a href="#8-静态代码块" class="headerlink" title="8. 静态代码块"></a>8. 静态代码块</h4><pre><code class="java">  static &#123;&#125;;
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: iconst_1
+         1: putstatic     #36                 // Field mint:I
+         4: return
+      LineNumberTable:
+        line 19: 0
+        line 20: 4
+</code></pre>
+<p>静态代码块，表示给静态变量 mint 赋值为 1，指令 iconst_n 表示将 int 类型数字 n 推送至栈顶，n 取值 0~5。</p>
+<h4 id="9-字节码小结"><a href="#9-字节码小结" class="headerlink" title="9. 字节码小结"></a>9. 字节码小结</h4><p>到这，基本上把日常开发中最基础最常用的字节码都介绍完了，如果你能够很好的理解上面的内容，在结合 Oracle 官方的指令说明文档，基本上能够很好的阅读理解复杂的字节码。当然，如果你的代码本身使用了很多新的特性以及很复杂的逻辑，生成的字节码肯定会很复杂，这时候你想理解这些字节码仍然不易，一个简单的方法是另写一个类，保留主要逻辑，去掉一些判断、循环、异常处理等细枝末节再看看，也许会简单一些。</p>
+<p>如果你对上面内容的理解仍有困难，建议去 B 站上面看看，有相当多的视频教你一个字节一个字节的读，对你理解最基础的内容应该有帮助。</p>
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><p>常量池是字节码中的内容，是存储在 Class 文件中的，而 Class 文件中存储的各种信息，最终都需要加载到虚拟机中之后才能运行和使用。运行时常量池就可以理解为 Class 文件中常量池运行时表示形式，它包括若干种不同的常量，从编译期可知的数值字面量到必须在运行期解析后才能获得的方法或字段引用。但并非只有 Class 文件中常量池的内容才能进入方法区的运行时常量池，运行期间也可能产生新的常量，它们也可以放入运行时常量池中。</p>
+<p>很多同学在学习这部分内容的时候，对「直接引用」和「符号引用」这两个概念不是很清楚，建议大家看看：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30300585/answer/51335493">JVM里的符号引用如何存储</a> ，应当对你有帮助。</p>
+<h3 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h3><p>在 Java 中，通常有两种创建字符串对象的方式，一种是通过字符串常量的方式创建，如 <code>String str=&quot;hello&quot;</code>；另一种是字符串变量通过 new 形式的创建，如 <code>String str = new String(&quot;hicsc&quot;)</code>。</p>
+<p>当使用第一种方式创建字符串对象时，JVM 首先会检查该对象是否在字符串常量池中，如果在，就返回该对象引用，否则新的字符串将在常量池中被创建。这种方式可以减少同一个值的字符串对象的重复创建，节约内存。</p>
+<p>当使用第二种方式创建字符串对象时，首先在编译类文件时，<code>hicsc</code> 常量字符串将会放入到常量结构中，在类加载时，<code>hicsc</code> 将会在常量池中创建；其次，在调用 new 时，JVM 命令将会调用 String 的构造函数，同时引用常量池中的 <code>hicsc</code> 字符串，在堆内存中创建一个 String 对象；最后，str 将引用 String 对象。</p>
+<p>举个简单的例子，下面的代码创建了 3 个字符串变量，其内存占用的示意图如下图所示。</p>
+<pre><code class="java">String str1 = &quot;hello&quot;;
+String str2 = new String(&quot;hicsc&quot;);
+String str3 = &quot;hello&quot;;
+</code></pre>
+<p><img src="https://graph.hicsc.com/forest/ulyuwn.png" alt="Java字符串内存占用示意图"></p>
+<blockquote>
+<p>备注：在 JDK1.7 版本后，常量池已经合并到堆中</p>
+</blockquote>
+<p>简单总结下，在字符串常量中，默认会将对象放入常量池；在字符串变量中，对象是会创建在堆内存中，同时也会在常量池中创建一个字符串对象，String 对象中的 char 数组将会引用常量池中的 char 数组，并返回堆内存对象引用。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>除了上述三种类型的常量池，你可能还会在其他地方看到 <code>包装/封装类型常量池</code>。但实际上并不存在所谓的包装类型常量池，那只是各个包装类型自己实现的缓存实例而已。比如：在 Integer 中的 <code>IntegerCache</code> 类中提前缓存了 -128 ~127 之间的数据实例，这就意味着这个区间的数据，都采用了同样的数据对象。</p>
+<pre><code class="java">private static class IntegerCache &#123;
+    static final int low = -128;
+    static final int high;
+    static final Integer[] cache;
+    static Integer[] archivedCache;
+
+    private IntegerCache() &#123;
+    &#125;
+
+    static &#123;
+        int h = 127;
+        String integerCacheHighPropValue = VM.getSavedProperty(&quot;java.lang.Integer.IntegerCache.high&quot;);
+        int size;
+        if (integerCacheHighPropValue != null) &#123;
+            try &#123;
+                size = Integer.parseInt(integerCacheHighPropValue);
+                size = Math.max(size, 127);
+                h = Math.min(size, 2147483518);
+            &#125; catch (NumberFormatException var6) &#123;&#125;
+        &#125;
+        high = h;
+        VM.initializeFromArchive(IntegerCache.class);
+        size = high - -128 + 1;
+        if (archivedCache == null || size &gt; archivedCache.length) &#123;
+            Integer[] c = new Integer[size];
+            int j = -128;
+            for(int k = 0; k &lt; c.length; ++k) &#123;
+                c[k] = new Integer(j++);
+            &#125;
+            archivedCache = c;
+        &#125;
+        cache = archivedCache;
+        assert high &gt;= 127;
+    &#125;
+&#125;
+</code></pre>
+<p>除了 <code>Integer</code> 之外，Java 的基本类型的包装类大部分也都实现了缓存。还包括 <code>Byte</code>、<code>Short</code>、<code>Long</code>、<code>Character</code>、<code>Boolean</code>，而浮点数据类型 <code>Float</code> 和 <code>Double</code> 是没有类似的缓存的。</p>
+
+        </div>
+    
+<!-- tags -->
+
+<div class="post-back">
+    <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a>
+</div>
+</div>
+                <div class="footer">
+    <div>
+        ©2022 - 2024  橙子陈绩好. ALL RIGHTS RESERVED
+        <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-twitter"></i>
+		</a>
+		<a href="https://weibo.com/luecsc" title="在微博上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-weibo"></i>
+		</a>
+		<a href="mailto:yanxiaoyanx@gmail.com" title="发邮件给我">
+		    <i class="fas fa-at"></i>
+		</a>
+		<a href="/atom.xml" title="订阅RSS">
+            <i class="fas fa-rss"></i>
+        </a>
+		<a href="/archives" title="全部文章列表">
+            <i class="fas fa-archive"></i>
+        </a>&nbsp;
+        <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
+    </div>
+    <div>
+        <a target="_blank" rel="noopener" href="https://hexo.io">POWERED BY HEXO</a> |
+        <a href="/theme-of-hicsc/">DESIGNED BY SKYE</a> |
+        <a href="https://beian.miit.gov.cn" title="工信部域名备案查询" target="_blank">
+		    蜀ICP备2022026154号-1
+		</a> |
+		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
+			川公网安备51012202000545号
+		</a>
+    </div>	
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+    </body>
+</html>

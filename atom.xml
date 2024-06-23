@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-06-19T07:37:24.751Z</updated>
+  <updated>2024-06-23T06:37:17.721Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解JVM内存结构番外篇：常量池</title>
+    <link href="https://hicsc.com/jvm-constant-pool/"/>
+    <id>https://hicsc.com/jvm-constant-pool/</id>
+    <published>2024-06-23T06:34:12.000Z</published>
+    <updated>2024-06-23T06:37:17.721Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>深入理解 ClassLoader</title>
@@ -449,24 +472,6 @@ System.out.println(is.getClass().getClassLoader());
     
     
     <category term="读万卷书" scheme="https://hicsc.com/books/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>我在为谁创造内容？</title>
-    <link href="https://hicsc.com/who-am-i-creating-content-for/"/>
-    <id>https://hicsc.com/who-am-i-creating-content-for/</id>
-    <published>2022-11-15T12:00:02.000Z</published>
-    <updated>2024-04-03T13:12:36.200Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;写博客的初衷只是为了养成随时记录点什么的习惯，并没有仔细思考对面的读者是谁？他为什么要花时间阅读你的文字？直到这周读了某期 &lt;a href=&quot;https://xiaobot.net/p/pmthinking2022&quot;&gt;产品沉思录&lt;/a&gt;，里面关于创造的话题，我深以为然，也在逐步思考未来应该提供什么有价值的内容。&lt;/p&gt;
-&lt;p&gt;一个人创作内容，你问他是在为谁创作时，如果他回答：「我是为自己做内容」时，他往往是为了避免回答「我的内容到底能帮助别人解决什么问题」。因为是你关注的问题，决定了受众的大小，而非内容的质量。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
