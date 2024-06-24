@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+  <title>深入理解 ContextClassLoader - 橙子陈绩好</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解 ContextClassLoader">
+<meta property="og:url" content="https://hicsc.com/jvm-context-class-loader/index.html">
+<meta property="og:site_name" content="橙子陈绩好">
+<meta property="og:description" content="类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-06-23T15:01:04.000Z">
+<meta property="article:modified_time" content="2024-06-24T15:22:22.309Z">
+<meta property="article:author" content="Skye">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="https://hicsc.com/jvm-context-class-loader/">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <!-- CSS -->
+<!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
+  
+<link rel="stylesheet" href="/css/reset.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/markdown.css">
+
+  <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            深入理解 ContextClassLoader
+        </div>
+        <div class="post-meta">
+            2024-06-23 ｜ 
+            
+                
+                    <a href="/knowledge/"><i class="fas fa-hashtag"></i> 知识 </a>
+                 ｜ 
+            
+            <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a> ｜
+            <i class="fas fa-fire-alt" title=本文访问量></i> <span id="busuanzi_value_page_pv" title="本文访问量"></span>
+        </div>
+        <div class="post-md">
+            <p>类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？</p>
+<span id="more"></span>
+
+<p>一些典型的例子，如 JNDI 服务、JDBC 等，它们都是 Java 的标准服务，其代码都是由启动类加载器来完成加载的，但这些服务并不能自己提供服务，而是需要调用外部厂商的实现。以 JDBC 为例，Java 应用在连接数据库时，需要调用以下代码来向驱动管理器注册对应数据库的驱动：</p>
+<pre><code class="java">/**
+ * 向DriverManager注册指定的驱动程序
+ */
+DriverManager.registerDriver(java.sql.Driver driver);
+</code></pre>
+<p>透过前面的文章我们知道，一个类会尝试使用自己的类加载器 (  即加载自身的类加载器 ) 去加载其所依赖的类，比如 A 类引用了 B 类，那么加载 A 的类加载器就会尝试去加载 B ( 前提是 B 尚未加载 )。在这里，DriverManager 是 Java 核心类，由启动类加载器加载，而 Driver 则是由第三方厂商根据 JDBC 标准来实现的，启动类加载器是不可能认识并加载这些类的，那该怎么办？</p>
+<p>为了解决这个困境，Java 的设计团队只好引入了一个不太优雅的设计：线程上下文类加载器 ( Thread Context ClassLoader )。它是 JDK1.2 引入的，可以通过 Thread 类的 <code>getContextClassLoader()</code> 与 <code>setContextClassLoader(ClassLoader cl)</code> 来获取和设置当前线程的类加载器。如果创建线程时没有设置，它将继承其父线程的，如果应该程序在全局范围内都没有设置过的话，那这个类加载器默认是系统类加载器 ( AppClassLoader )。</p>
+<p>有了上下文加载器，应用就可以破坏类的双亲委托加载机制了。还是以 JDBC 为例，看看 DriverManager 类中如何获取数据库连接的。</p>
+<pre><code class="java">//代码摘自：java.sql.DriverManager
+public static Connection getConnection(String url, java.util.Properties info) &#123;
+    // Reflection.getCallerClass() 返回调用此方法的调用类的类型，即：Class&lt;?&gt;
+    return (getConnection(url, info, Reflection.getCallerClass()));
+&#125;
+</code></pre>
+<p>注意代码中的 <code>Reflection.getCallerClass()</code> ，它回返回调用此方法的调用类的类型信息，即 Class&lt;?&gt;。然后再往下看：</p>
+<pre><code class="java">// 省略部分判断代码，仅保留核心逻辑
+private static Connection getConnection(String url, java.util.Properties info, Class&lt;?&gt; caller) &#123;
+    // callerCL 为调用类的类加载器，即调用getConnection方法的类的类加载器
+    // 如果 callerCL 为空，则使用线程上下文类加载器
+    ClassLoader callerCL = caller != null ? caller.getClassLoader() : null;
+    if (callerCL == null || callerCL == ClassLoader.getPlatformClassLoader()) &#123;
+        callerCL = Thread.currentThread().getContextClassLoader();
+    &#125;
+
+    ensureDriversInitialized();
+    
+    // 遍历已注册的驱动程序，尝试建立连接，并记录首个异常 
+    SQLException reason = null;
+    for (DriverInfo aDriver : registeredDrivers) &#123;
+        // 如果调用方没有加载驱动程序的权限，则跳过它。
+        if (isDriverAllowed(aDriver.driver, callerCL)) &#123;
+            try &#123;
+                Connection con = aDriver.driver.connect(url, info);
+                if (con != null) &#123;
+                    return (con);
+                &#125;
+            &#125; catch (SQLException ex) &#123;
+                if (reason == null) &#123;
+                    reason = ex;
+                &#125;
+            &#125;
+        &#125; else &#123;
+            println(&quot;skipping: &quot; + aDriver.getClass().getName());
+        &#125;
+    &#125;
+    // 所有注册驱动均无法建立连接
+    if (reason != null)    &#123;
+        throw reason;
+    &#125;
+&#125;
+</code></pre>
+<p>首先获取调用类的类加载器，如果没有传调用类，那么就使用当前线程的上下文加载器。用获取到的类加载器来判断是否有权限加载已经注册的驱动程序：</p>
+<pre><code class="java">private static boolean isDriverAllowed(Driver driver, ClassLoader classLoader) &#123;
+    boolean result = false;
+    if (driver != null) &#123;
+        Class&lt;?&gt; aClass = null;
+        try &#123;
+            aClass =  Class.forName(driver.getClass().getName(), true, classLoader);
+        &#125; catch (Exception ex) &#123;
+            result = false;
+        &#125;
+         result = ( aClass == driver.getClass() ) ? true : false;
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<p>在使用 DriverManager 之前都需要先注册驱动程序，即 <code>isDriverAllowed</code> 方法的 <code>driver</code> 参数就是获取数据库连接前注册的驱动，这个方法中使用获取到的类加载器再重新初始化一次 Driver 类的目的就是为了确保事先注册的驱动与当前的驱动是通过同一个类加载器加载的。</p>
+<p>JDBC 使用线程上下文类加载器来加载第三方厂商的服务代码，完成数据库连接的管理工作。这种由父类加载器去请求子类加载器完成类加载的行为，实际上打破了双亲委派模型的层次结构，也违背了双亲委派机制的一般性原则。</p>
+<p>最后，除了 SPI 外，如无必要，不建议在业务场景中使用 ContextClassLoader。</p>
+
+        </div>
+    
+<!-- tags -->
+
+<div class="post-back">
+    <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a>
+</div>
+</div>
+                <div class="footer">
+    <div>
+        ©2022 - 2024  橙子陈绩好. ALL RIGHTS RESERVED
+        <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-twitter"></i>
+		</a>
+		<a href="https://weibo.com/luecsc" title="在微博上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-weibo"></i>
+		</a>
+		<a href="mailto:yanxiaoyanx@gmail.com" title="发邮件给我">
+		    <i class="fas fa-at"></i>
+		</a>
+		<a href="/atom.xml" title="订阅RSS">
+            <i class="fas fa-rss"></i>
+        </a>
+		<a href="/archives" title="全部文章列表">
+            <i class="fas fa-archive"></i>
+        </a>&nbsp;
+        <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
+    </div>
+    <div>
+        <a target="_blank" rel="noopener" href="https://hexo.io">POWERED BY HEXO</a> |
+        <a href="/theme-of-hicsc/">DESIGNED BY SKYE</a> |
+        <a href="https://beian.miit.gov.cn" title="工信部域名备案查询" target="_blank">
+		    蜀ICP备2022026154号-1
+		</a> |
+		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
+			川公网安备51012202000545号
+		</a>
+    </div>	
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+    </body>
+</html>

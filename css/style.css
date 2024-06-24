@@ -4,7 +4,7 @@
 {
     --font-color-0: #e00000;
     --font-color-1: #252525;
-    --font-color-2: #333;
+    --font-color-2: #444;
     --font-color-3: #aaa;
     --bg-color-1: #eee;
     --line-1: #eee;
@@ -34,12 +34,11 @@ a
 .paper-main
 {
     width: 100%;
-    max-width: 1260px;
+    max-width: 1160px;
     margin: 0 auto;
     padding: 4px 6vw 24px;
     background: #fff;
     border-radius: 24px;
-    background: #fff;
 }
 
 .header
