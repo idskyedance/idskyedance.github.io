@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-06-24T15:22:29.698Z</updated>
+  <updated>2024-06-27T16:37:17.341Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -17,11 +17,29 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深入理解JVM内存结构番外篇：常量池</title>
+    <title>深入理解JVM运行时内存结构</title>
+    <link href="https://hicsc.com/jvm-runtime-memory/"/>
+    <id>https://hicsc.com/jvm-runtime-memory/</id>
+    <published>2024-06-27T16:10:10.000Z</published>
+    <updated>2024-06-27T16:37:17.341Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。&lt;/p&gt;
+&lt;p&gt;JVM 在执行程序时会把其所管理的内存划分成多个不同的数据区域，每个区域的创建时间、销毁时间以及用途都各不相同。比如有的内存区域是所有线程共享的，而有的内存区域是线程隔离的。线程隔离的区域就会随着线程的启动和结束而创建和销毁。JVM 所管理的内存将会包含以下几个运行时数据区域，如下图所示。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/7ipahk.png&quot; alt=&quot;JVM运行时内存数据区示意图&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解JVM常量池与字节码</title>
     <link href="https://hicsc.com/jvm-constant-pool/"/>
     <id>https://hicsc.com/jvm-constant-pool/</id>
     <published>2024-06-24T15:34:12.000Z</published>
-    <updated>2024-06-24T15:22:29.698Z</updated>
+    <updated>2024-06-27T16:36:36.227Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。&lt;/p&gt;
@@ -40,7 +58,7 @@
     <link href="https://hicsc.com/jvm-context-class-loader/"/>
     <id>https://hicsc.com/jvm-context-class-loader/</id>
     <published>2024-06-23T15:01:04.000Z</published>
-    <updated>2024-06-24T15:22:22.309Z</updated>
+    <updated>2024-06-27T16:36:25.313Z</updated>
     
     
     <summary type="html">&lt;p&gt;类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？&lt;/p&gt;</summary>
@@ -57,7 +75,7 @@
     <link href="https://hicsc.com/jvm-class-loader/"/>
     <id>https://hicsc.com/jvm-class-loader/</id>
     <published>2024-06-19T07:01:04.000Z</published>
-    <updated>2024-06-19T07:37:24.751Z</updated>
+    <updated>2024-06-27T16:36:25.309Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;ClassLoader-源码初探&quot;&gt;&lt;a href=&quot;#ClassLoader-源码初探&quot; class=&quot;headerlink&quot; title=&quot;ClassLoader 源码初探&quot;&gt;&lt;/a&gt;ClassLoader 源码初探&lt;/h3&gt;&lt;p&gt;类加载器用于加载 Java 类到虚拟机中，其实现类 &lt;code&gt;java.lang.ClassLoader&lt;/code&gt; 是一个抽象类，其职责是通过指定类的完全限定名 ( &lt;code&gt;binary name&lt;/code&gt; )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 &lt;code&gt;java.lang.Class&lt;/code&gt; 对象。&lt;/p&gt;
@@ -84,7 +102,7 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/jvm-class-loading-mechanism/"/>
     <id>https://hicsc.com/jvm-class-loading-mechanism/</id>
     <published>2024-06-19T01:12:06.000Z</published>
-    <updated>2024-06-19T06:08:55.441Z</updated>
+    <updated>2024-06-27T16:36:41.238Z</updated>
     
     
     <summary type="html">&lt;p&gt;Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。&lt;/p&gt;
@@ -441,29 +459,6 @@ System.out.println(is.getClass().getClassLoader());
     
     
     <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>怎样成为一个内心强大的人？</title>
-    <link href="https://hicsc.com/how-to-become-a-strong-person/"/>
-    <id>https://hicsc.com/how-to-become-a-strong-person/</id>
-    <published>2022-11-16T14:06:21.000Z</published>
-    <updated>2024-04-03T11:54:16.523Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;最近开始断断续续的听万维钢的&lt;a href=&quot;https://www.dedao.cn/course/article?id=Ozpeyw8lG6QaXknQkEJRd1ZoA75NLB&quot;&gt;「精英日课」第5季&lt;/a&gt;，刚听完他讲的第一本书，内容还挺丰富的，简单地做做笔记，也聊聊自己的理解。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061545.png&quot; alt=&quot;Photo by Alex Lehner&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;什么是领导力？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;瓦德瓦讲过这样一个故事。&lt;/p&gt;
-&lt;p&gt;他有个女学生，13岁的时候得了一场重病，在医院里等待手术。有一天医生将她的父亲叫到病房外，说了两个坏消息。第一，你女儿的病情已经非常严重，原计划一星期之后的手术必须得提前到今天晚上。第二，医院出现了一个状况，没法给孩子提供麻醉，手术只能在没有麻醉的情况下进行。&lt;/p&gt;
-&lt;p&gt;没有哪个父亲受得了这样的消息……但是父亲回到病房，带给女儿的，却是两个好消息。&lt;/p&gt;
-&lt;p&gt;第一，医生说今天就可以做手术了，不用再等一星期，这意味着三天之后你就能出院回家了！第二，医生们一直在观察你，他们认为你是最勇敢的少年，所以手术甚至不需要麻醉！&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>

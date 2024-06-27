@@ -80,7 +80,25 @@
     
     
     <div class="post">
-        <a class="post-title" href="/jvm-constant-pool/">深入理解JVM内存结构番外篇：常量池</a>
+        <a class="post-title" href="/jvm-runtime-memory/">深入理解JVM运行时内存结构</a>
+        <div class="post-except post-md">
+            <p>得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。</p>
+<p>JVM 在执行程序时会把其所管理的内存划分成多个不同的数据区域，每个区域的创建时间、销毁时间以及用途都各不相同。比如有的内存区域是所有线程共享的，而有的内存区域是线程隔离的。线程隔离的区域就会随着线程的启动和结束而创建和销毁。JVM 所管理的内存将会包含以下几个运行时数据区域，如下图所示。<br><img src="https://graph.hicsc.com/forest/7ipahk.png" alt="JVM运行时内存数据区示意图"></p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-runtime-memory/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月28日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/jvm-constant-pool/">深入理解JVM常量池与字节码</a>
         <div class="post-except post-md">
             <p>在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。</p>
 <h3 id="Class-文件常量池"><a href="#Class-文件常量池" class="headerlink" title="Class 文件常量池"></a>Class 文件常量池</h3><p>Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节存放魔数，用于确定这个文件是否能够被 JVM 接受，接下来的 4 个字节用于存放版本号，再接着存放的就是常量池。常量池的长度是不固定的，所以，在常量池的入口存放着常量池容量的计数值。</p>
@@ -161,29 +179,6 @@ System.out.println(is.getClass().getClassLoader());
             本文发布于2024年06月19日，属于
             
                 <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
-            
-            分类
-        </div>
-    </div>
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/how-to-eat-better/">非奋斗减肥：关于运动和减脂的一些小误区</a>
-        <div class="post-except post-md">
-            <p>最近一段时间想控制下体重，随手翻的健康类书籍比较多，在这本<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35238738/">「非奋斗减肥」</a>中确实收获到不少与常规认知有差异的知识。</p>
-<h3 id="Part-ONE"><a href="#Part-ONE" class="headerlink" title="Part ONE"></a>Part ONE</h3><p>首先，介绍几种日常生活中随处都能听到，但又说不明白的几种物质。</p>
-<h4 id="胰岛素"><a href="#胰岛素" class="headerlink" title="胰岛素"></a>胰岛素</h4><p>当我们摄入糖类食物时，食物中的糖开始被不同的酶分解，最终被小肠吸收后转化成为葡萄糖，通过血液输送到全身。血液中的葡萄糖转化为糖原后，会优先储存在肝脏和肌肉当中，但是肝脏和肌肉中储存糖原的空间十分有限。剩余的大量糖原就会进入脂肪细胞，转化成为脂肪储存在人体内，于是肥胖就形成了。</p>
-<p>当血液中的葡萄糖升高时，胰腺就开始工作了。胰腺会分泌胰岛素，胰岛素的作用就是促进血液中的葡萄糖转移到细胞中，帮助调节血糖，保证血糖值维持在一定的安全水平。因此，你摄入的糖越多，胰腺就要分泌更多的胰岛素来调节血糖，那么就会有更多的糖原进入脂肪细胞中。更重要的是，<strong>如果血液中的胰岛素水平长期居高不下，那么细胞对胰岛素的敏感度就会降低，形成胰岛素抵抗</strong>。</p>
-<p>胰岛素抵抗，跟抗生素的耐药性是一样的道理，对于有胰岛素抵抗的人来说，同等剂量的胰岛素无法使原先血液中的糖原进入细胞，于是胰腺就需要分泌更多的胰岛素才能把血糖降下来。而胰岛素又是促进脂肪合成的激素，这些大量的胰岛素会使身体合成更多的脂肪，所以胰岛素抵抗是现代人日渐肥胖的主要原因之一。胰岛素抵抗最容易导致腹部脂肪堆积。如果你的腰围和臀围的比例大于 0.9，就有较大可能存在明显的胰岛素抵抗。</p>
-<p>因此，<strong>胰岛素又被称为肥胖激素</strong>，想要把胰岛素控制在很低的水平，关键就是控制糖的摄入。</p>
-<p><img src="https://graph.hicsc.com/forest/h76pea.jpg" alt="非奋斗减肥"> Photo by <a target="_blank" rel="noopener" href="https://unsplash.com/photos/sliced-vegetables-ocnsb17U6FE">Dose Juice</a></p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/how-to-eat-better/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年05月05日，属于
-            
-                <a href="/books/"><i class="fas fa-hashtag"></i>读万卷书</a>
             
             分类
         </div>
