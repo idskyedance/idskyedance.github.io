@@ -80,6 +80,23 @@
     
     
     <div class="post">
+        <a class="post-title" href="/jvm-what-objects-are-garbage/">深入理解 JVM 垃圾回收机制 - 何为垃圾？</a>
+        <div class="post-except post-md">
+            
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-what-objects-are-garbage/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月30日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/jvm-runtime-memory/">深入理解JVM运行时内存结构</a>
         <div class="post-except post-md">
             <p>得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。</p>
@@ -149,32 +166,6 @@ System.out.println(is.getClass().getClassLoader());
 </code></pre>
         </div>
         <div class="post-date"> <a class="read-more" href="/jvm-class-loader/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年06月19日，属于
-            
-                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
-            
-            分类
-        </div>
-    </div>
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/jvm-class-loading-mechanism/">深入理解JVM类加载机制</a>
-        <div class="post-except post-md">
-            <p>Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。</p>
-<h3 id="类编译过程"><a href="#类编译过程" class="headerlink" title="类编译过程"></a>类编译过程</h3><p>Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。<br><img src="https://graph.hicsc.com/forest/m9lohs.png" alt="Java类编译过程示意图"><br>一般会把<code>.java</code>文件编译成<code>.class</code>文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。</p>
-<p>编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。</p>
-<p>接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：</p>
-<ul>
-<li>解释执行：逐条将字节码翻译成机器码并执行</li>
-<li>即时编译：将一个方法中所包含的所有字节码编译出机器码后再执行</li>
-</ul>
-<p>在起始阶段，JVM 中的字节码是由解释器(Interpreter)完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁时，这些代码块就会被认定为热点代码。为了提高热点代码的执行效率，在运行时，JIT 会把这些代码编译成本地平台相关的机器码，并进行各层次的优化，然后保存到内存中，这一过程就被称为即时编译。</p>
-<p>这种将两种编译方式混合执行的策略，在上图中被描述为“运行时编译”，也是 Hotspot 默认采用的策略。</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/jvm-class-loading-mechanism/"> 继续阅读 </a> </div>
         <div class="post-date">
             本文发布于2024年06月19日，属于
             

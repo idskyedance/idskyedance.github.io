@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+<meta name="baidu-site-verification" content="codeva-1LJwv3vvs2" />
+  <!-- title -->
+  
+    
+  <title>深入理解 JVM 垃圾回收机制 - 何为垃圾？ - 橙子陈绩好</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？ 不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解 JVM 垃圾回收机制 - 何为垃圾？">
+<meta property="og:url" content="https://hicsc.com/jvm-what-objects-are-garbage/index.html">
+<meta property="og:site_name" content="橙子陈绩好">
+<meta property="og:description" content="随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？ 不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停时">
+<meta property="og:locale">
+<meta property="og:image" content="https://graph.hicsc.com/forest/359adi.png">
+<meta property="og:image" content="https://graph.hicsc.com/forest/hhhn1b.png">
+<meta property="og:image" content="https://graph.hicsc.com/forest/73040a.png">
+<meta property="article:published_time" content="2024-06-30T00:28:29.000Z">
+<meta property="article:modified_time" content="2024-06-30T00:34:45.599Z">
+<meta property="article:author" content="Skye">
+<meta property="article:tag" content="JVM,Java,后端,数据库,MongoDB,MySQL,业务流程,流程自动化,业财一体化,团队管理,读万卷书,行万里路,生活漫记,旅行游记,生活片段">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://graph.hicsc.com/forest/359adi.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="https://hicsc.com/jvm-what-objects-are-garbage/">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+  <!-- CSS -->
+<!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
+  
+<link rel="stylesheet" href="/css/reset.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/markdown.css">
+
+  <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            深入理解 JVM 垃圾回收机制 - 何为垃圾？
+        </div>
+        <div class="post-meta">
+            2024-06-30 ｜ 
+            
+                
+                    <a href="/knowledge/"><i class="fas fa-hashtag"></i> 知识 </a>
+                 ｜ 
+            
+            <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a> ｜
+            <i class="fas fa-fire-alt" title=本文访问量></i> <span id="busuanzi_value_page_pv" title="本文访问量"></span>
+        </div>
+        <div class="post-md">
+            <p>随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？</p>
+<p>不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停时间 (GC 会导致应用线程处于暂停状态)，举两个例子：</p>
+<ul>
+<li>实时对战游戏：如果因为 GC 导致玩家频繁卡顿，任谁都会想摔手机吧。</li>
+<li>金融交易：在某些对价格非常敏感的交易(比如：外汇)场景下，如果因为 GC 导致没有按照投资者指定的价格进行交易，相信我，这些投资者非生吃了你。</li>
+</ul>
+<p>但也有许多场景，GC 的最大暂停时间没那么重要，比如，离线分析、视频网站等等。因此，知道 <strong>这个 GC 算法有这样的特征，所以它适合这个场景</strong>，对程序员来说非常有价值，这也是我们学习 GC 最重要的意义。</p>
+<p>接下来，我们将一步步走进 GC 的世界。</p>
+<p>从诞生之初，人们就在思考 GC 需要完成的 3 件事情：何为垃圾？何时回收？如何回收？垃圾收集器在对内存进行回收前，第一件事就是要确定这些对象之中哪些还”活着“，哪些已经”死去“，而这些”死去“的对象，也就是我们所说的垃圾。</p>
+<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>判断对象是否存活，其中的一种方法是给对象添加一个引用计数器，每当有一个地方引用它，计数器的值就加 1，当引用失效时，计数器的值减 1，任一时刻，如果对象的计数器值为 0，那么这个对象就不会再被使用，这种方法被称为引用计数法。</p>
+<p>在整个回收过程中，引用计数器的值会以极快的速度更新，因而计数值的更新任务变得繁重，而且需要给计数器预留足够大的内存空间，以确保它不会溢出。引用计数法的算法很简单，但在实际运用中要考虑非常多的因素，所以它的实现往往比较复杂，更为重要的是它不能解决对象之间的循环引用问题。</p>
+<p>举个例子，下面的代码片段展示了为什么引用计数法无法解决循环引用的问题。</p>
+<pre><code class="java">public class GcDemo &#123;
+    public static void main(String[] args) &#123;
+        // 在栈中分配内存空间给obj1，然后在堆中创建GcObject对象实例A
+        // 将obj1指向A实例，这时A的引用计数值 = 1
+        GcObject obj1 = new GcObject();
+        // 同理，GcObject实例B的引用计数值 = 1
+        GcObject obj2 = new GcObject();
+        // GcObject实例2被引用，所以B引用计数值 = 2
+        obj1.instance = obj2;
+        // 同理A的引用计数值 = 2
+        obj2.instance = obj1;
+        // 栈中的obj1不再指向堆中A，这时A的计数值减1，变成1
+        obj1 = null;
+        // 栈中的obj2不再指向堆中B，这时B的计数值减1，变成1
+        obj2 = null;
+    &#125;
+&#125;
+
+class GcObject &#123;
+    public Object instance = null;
+&#125;
+</code></pre>
+<p>仔细阅读代码中的注释，并结合下面的内存结构示意图，应该可以很好的理解其中的原因：如果 JVM 垃圾收集器采用引用计数法，当 obj1 和 obj2 不再指向堆中的实例 A、B 时，虽然 A、B 已经不可能再被访问，但彼此间相互引用导致计数器的值不为 0，最终导致无法回收 A 和 B。<br><img src="https://graph.hicsc.com/forest/359adi.png" alt="引用计数示例"></p>
+<h3 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h3><p>引用计数法有一个致命的问题，即无法释放有循环引用的垃圾。因此，主流的 Java 虚拟机都没有使用引用计数法来管理内存，而是通过可达性分析(Reachability Analysis)来判定对象是否存活。</p>
+<p>可达性分析的基本思路是找到一系列被称为<code>GC Roots</code>的对象引用 (Reference) 作为起始节点，通过引用关系向下搜索，能被遍历到的(可到达的)对象就被判定为存活，其余对象(也就是没有被遍历到的)自然被判定为死亡。这里需要着重理解的是：<strong>可达性分析本质是找出活的对象来把其余空间判定为“无用”，而不是找出所有死掉的对象并回收它们占用的空间</strong>，简略的示意图如下所示。<br><img src="https://graph.hicsc.com/forest/hhhn1b.png" alt="可达性分析示意图"><br>从图中可以看出，经过可达性分析后，有不少对象没有在 GC Roots 的引用链条上，其中还包含一些相互引用的对象，这些对象在不久以后都会被垃圾收集器回收。由此可见，可达性分析算法可以有效解决引用计数法存在的致命问题。</p>
+<p>在实际应用中，首次被标记的对象并一定会被回收，它还有自救的机会。一个对象真正的死亡至少需要经历两次标记过程：</p>
+<ul>
+<li>标记所有不可达对象，并进行筛选，筛选的标准是该对象覆盖了<code>finalize()</code>方法且<code>finalize()</code>方法没有被虚拟机调用过，选出的对象将被放置在一个<code>即将被回收</code>的队列中。稍后虚拟机会创建一个低优先级的 Finalizer 线程去遍历队列中的所有对象并执行<code>finalize()</code>方法</li>
+<li>对队列中的对象进行第二次标记，如果对象在<code>finalize()</code>方法中重新与引用链上的任何一个对象建立关联，那么这个对象将被移除队列，这时候还留在队列中的对象，就会被回收了。</li>
+</ul>
+<p>要正确的实现可达性分析算法，就必须完整地枚举出所有的 GC Roots，否则就有可能会漏掉本应存活的对象，如果垃圾收集器错误的回收了这些被漏掉的活对象，将会造成严重的 bug。GC Roots 作为垃圾回收的起点，必须是一系列活的引用(Reference)集合，那这个集合中究竟包含哪些引用？为什么这些引用可以作为 GC Roots？要回答好这两个问题，需要对 Java 对象在内存中布局有一些初步的了解，所以，在下节会对相关知识进行补充说明。</p>
+<h3 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h3><p>尽管引用计数法存在比较严重的问题，但仍有不少主流语言采用这一方法来管理内存，比如 Objective-C。那它们是如何解决循环依赖问题的？</p>
+<p>在 OC 中有两个方法可以解决：</p>
+<ul>
+<li>开发者明确的知道某些地方存在循环引用，在合理的位置主动断开循环中的一个引用，使得对象可以被回收。</li>
+<li>使用弱引用。弱引用虽然持有对象，但并不增加引用计数，这就避免了循环引用的产生。</li>
+</ul>
+<p>对于前者，需要开发者手动显式地控制，相当于回到了<code>谁申请谁释放</code>的年代。因此，这种方法并不常用。对于后者，貌似解决了循环引用的问题，但又引入了新的问题：<strong>弱引用什么时候被回收呢？</strong></p>
+<p>其实，系统对于每一个有弱引用的对象，都维护一个表来记录它所有的弱引用的指针地址。这样，当一个对象的引用计数为 0 时，系统就通过这张表，找到所有的弱引用指针，继而把它们都置成 nil。</p>
+<p>除此之外，Xcode 还提供循环引用检测工具来帮助开发者检查代码。</p>
+<p>你会发现，在 OC 中，即使是弱引用，仍然需要开发者关注语言层面的内存管理问题，至少你得知道什么时候使用弱引用吧。在我看来，这对开发者仍是一种负担。</p>
+<p>最后，Java、Python 等语言都是采用可达性分析的方法来进行垃圾回收，而 Objective-C、Swift 等还是采用引用计数法。需要注意的是，不同语言都有自己的发展路径，采用何种方法来管理内存，并不存在孰优孰劣的问题。</p>
+<blockquote>
+<p>深入理解 JVM 系列的第 6 篇，完整目录请移步：<a href="https://hicsc.com/topics/">深入理解 JVM 系列</a><br>文章已经同步更新到同名公众号，有疑问的小伙伴们，快来公众号留言吧！<br>手机扫描下方二维码或微信搜索 <code>橙子成绩好</code> 或 <code>hicscorange</code><br><img src="https://graph.hicsc.com/forest/73040a.png" alt="微信公众号二维码" style="height: 90px;margin-left: -8px;"></p>
+</blockquote>
+
+        </div>
+    
+<!-- tags -->
+
+<div class="post-back">
+    <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a>
+</div>
+</div>
+                <div class="footer">
+    <div>
+        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED.
+        <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-twitter"></i>
+		</a>
+		<a href="https://weibo.com/luecsc" title="在微博上关注我" style="text-decoration: none;" target="_blank">
+		    <i class="fab fa-weibo"></i>
+		</a>
+		<a href="mailto:yanxiaoyanx@gmail.com" title="发邮件给我">
+		    <i class="fas fa-at"></i>
+		</a>
+		<a href="/atom.xml" title="订阅RSS">
+            <i class="fas fa-rss"></i>
+        </a>
+		<a href="/archives" title="全部文章列表">
+            <i class="fas fa-archive"></i>
+        </a>&nbsp;
+        <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
+    </div>
+    <div>
+        <a target="_blank" rel="noopener" href="https://hexo.io">POWERED BY HEXO</a> |
+        <a href="/theme-of-hicsc/">DESIGNED BY SKYE</a> |
+        <a href="https://beian.miit.gov.cn" title="工信部域名备案查询" target="_blank">
+		    蜀ICP备2022026154号-1
+		</a> |
+		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
+			川公网安备51012202000545号
+		</a>
+    </div>	
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+    </body>
+</html>

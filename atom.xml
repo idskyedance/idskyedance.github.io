@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-06-27T16:37:17.341Z</updated>
+  <updated>2024-06-30T00:34:45.599Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解 JVM 垃圾回收机制 - 何为垃圾？</title>
+    <link href="https://hicsc.com/jvm-what-objects-are-garbage/"/>
+    <id>https://hicsc.com/jvm-what-objects-are-garbage/</id>
+    <published>2024-06-30T00:28:29.000Z</published>
+    <updated>2024-06-30T00:34:45.599Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>深入理解JVM运行时内存结构</title>
@@ -435,30 +458,6 @@ System.out.println(is.getClass().getClassLoader());
     
     
     <category term="读万卷书" scheme="https://hicsc.com/books/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>生活就像一个鱼缸</title>
-    <link href="https://hicsc.com/life-is-like-a-fish-tank/"/>
-    <id>https://hicsc.com/life-is-like-a-fish-tank/</id>
-    <published>2022-11-20T10:36:19.000Z</published>
-    <updated>2024-04-03T13:14:31.354Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;这里我想向你推荐一下 &lt;a href=&quot;https://mp.weixin.qq.com/s/YgkrFPpFtoP_HtUR7m89nw&quot;&gt;马岩松在一席的演讲&lt;/a&gt;，这是我在 &lt;a href=&quot;https://telegra.ph/weekly-234-12-09&quot;&gt;阮一峰的科技爱好者周刊第233期&lt;/a&gt; 看到的一个小故事。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;事务所刚成立的时候，没有项目可做，有天在大街上溜达，看到一个售卖金鱼的摊位，所有鱼都生活在一个方形的小盒子里面。&lt;/p&gt;
-&lt;p&gt;金鱼在里面，看上去非常迷茫，似乎过得闷闷不乐，有时候还会撞在玻璃壁上。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;他就想到，人在城市中生活的处境，不也像金鱼一样吗，被局限在一个看不见的盒子里面。&lt;/p&gt;
-&lt;p&gt;那么，作为一个设计师，能不能把鱼缸重新设计一下，让鱼过得快乐一些？&lt;/p&gt;
-&lt;p&gt;说干就干，他每隔几分钟，就去记录一下鱼的位置，画成散点图（下图）。结果发现，跟大家想的不一样，虽然关在鱼缸里面，鱼并不是什么角落都去，而是高度重复某些路线。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/rvzbbe.png&quot; alt=&quot;鱼的位置画成散点图&quot;&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="生活漫记" scheme="https://hicsc.com/ramble/"/>
     
     
   </entry>
