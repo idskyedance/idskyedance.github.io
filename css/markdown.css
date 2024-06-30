@@ -93,6 +93,10 @@
     margin-top: -10px;
     padding-left: 24px;
 }
+.post-md li::marker
+{
+    color: red;
+}
 .post-md img
 {
     border-radius: 4px;

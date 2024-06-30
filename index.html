@@ -82,7 +82,15 @@
     <div class="post">
         <a class="post-title" href="/jvm-what-objects-are-garbage/">深入理解 JVM 垃圾回收机制 - 何为垃圾？</a>
         <div class="post-except post-md">
-            
+            <p>随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？</p>
+<p><img src="https://graph.hicsc.com/forest/2w1ksw.png" alt="何为垃圾题图"></p>
+<p>不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停时间 (GC 会导致应用线程处于暂停状态)，举两个例子：</p>
+<ul>
+<li>实时对战游戏：如果因为 GC 导致玩家频繁卡顿，任谁都会想摔手机吧。</li>
+<li>金融交易：在某些对价格非常敏感的交易(比如：外汇)场景下，如果因为 GC 导致没有按照投资者指定的价格进行交易，相信我，这些投资者非生吃了你。</li>
+</ul>
+<p>但也有许多场景，GC 的最大暂停时间没那么重要，比如，离线分析、视频网站等等。因此，知道 <strong>这个 GC 算法有这样的特征，所以它适合这个场景</strong>，对程序员来说非常有价值，这也是我们学习 GC 最重要的意义。</p>
+<p>接下来，我们将一步步走进 GC 的世界。</p>
         </div>
         <div class="post-date"> <a class="read-more" href="/jvm-what-objects-are-garbage/"> 继续阅读 </a> </div>
         <div class="post-date">
