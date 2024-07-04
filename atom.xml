@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-06-30T15:28:44.174Z</updated>
+  <updated>2024-07-04T14:54:58.869Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>深入理解 JVM 对象模型</title>
+    <link href="https://hicsc.com/jvm-object-model/"/>
+    <id>https://hicsc.com/jvm-object-model/</id>
+    <published>2024-07-03T15:00:12.000Z</published>
+    <updated>2024-07-04T14:54:58.869Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;在 &lt;a href=&quot;https://hicsc.com/jvm-runtime-memory/&quot;&gt;深入理解JVM运行时内存结构&lt;/a&gt; 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对象在堆内存中是如何布局的？&lt;/li&gt;
+&lt;li&gt;JVM 是如何实现 Java 对象？&lt;/li&gt;
+&lt;li&gt;对象是如何创建出来的？&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>深入理解 JVM 垃圾回收机制 - 何为垃圾？</title>
     <link href="https://hicsc.com/jvm-what-objects-are-garbage/"/>
     <id>https://hicsc.com/jvm-what-objects-are-garbage/</id>
     <published>2024-06-30T00:28:29.000Z</published>
-    <updated>2024-06-30T15:28:44.174Z</updated>
+    <updated>2024-07-03T15:58:16.821Z</updated>
     
     
     <summary type="html">&lt;p&gt;随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？&lt;/p&gt;
@@ -426,36 +448,6 @@ System.out.println(is.getClass().getClassLoader());
 &lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/060935.png&quot; alt=&quot;图片来源于网络&quot;&gt;&lt;/p&gt;
 &lt;p&gt;反智不是反“智力”，毕竟没人会怀疑智力的价值，人们对从事科学创造、技术发面的高智力人群普遍是持推崇和赞赏态度的。反智的“智”指的是“智识”，它在含义上与智力没什么区别，只不过智力体现的是解决实际问题的能力，而智识更多的是体现人类思考、创新和批判的能力。也就是说，智力重在“务实”，而智识更“务虚”一点，反映在现实生活中，像科学家、实干者往往会比哲学家、基础理论研究者要更受欢迎。&lt;/p&gt;
 &lt;p&gt;如果一定要下一个定义，反智就是对运用智识的智识分子，抱有怀疑和怨恨。美国传染病专家安东尼·福奇就是一个很好的例子，比如特朗普吹嘘阿奇霉素等可以抑制新冠病毒，而福奇立即辟谣必须要进行足够的实现才能证实；副总统彭斯夸口要让每个美国人都能接受核酸检测，而福奇直言，美国的检测系统并不能达到……而福奇得到的是什么，被阻止出席关于疫情的众议院听证会，甚至遭到人身威胁。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>如何设计简单的用户体验？</title>
-    <link href="https://hicsc.com/how-to-design-simple-user-experience/"/>
-    <id>https://hicsc.com/how-to-design-simple-user-experience/</id>
-    <published>2022-11-25T13:46:48.000Z</published>
-    <updated>2024-04-03T11:54:08.206Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;团队最近几个月都在给产品做减法，作为一款2B的SaaS产品，想要删减功能实在是不容易。每当团队讨论是否应该删除某项功能时，头脑里总会有一些声音：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;假如有的客户想要…&lt;/li&gt;
-&lt;li&gt;都已经做了，也有客户在使用，何必要删除&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061647.png&quot; alt=&quot;Photo by UX Store&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后某些功能又会安然无恙地回到产品中。正好最近读到 &lt;a href=&quot;https://book.douban.com/subject/30253370/&quot;&gt;简约至上&lt;/a&gt; 这本书，其介绍了四种设计简单用户体验的策略：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;删除：仅保留最能打动用户的东西&lt;/li&gt;
-&lt;li&gt;组织：按照有意义的标准将信息分组&lt;/li&gt;
-&lt;li&gt;隐藏：尽可能彻底地隐藏所有需要隐藏的功能&lt;/li&gt;
-&lt;li&gt;转移：将复杂功能转移到其应用形式或设备上&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;作者经常思考如何简化其他设备和体验，会时不时地应用上述四个策略，它们不仅适用于简化功能，也适用于简化内容。而且，无论项目大小，这四个策略都同样适用。接下来，我根据自己的理解为你详细说说这四个策略。&lt;/p&gt;</summary>
     
     
     

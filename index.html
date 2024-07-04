@@ -80,6 +80,28 @@
     
     
     <div class="post">
+        <a class="post-title" href="/jvm-object-model/">深入理解 JVM 对象模型</a>
+        <div class="post-except post-md">
+            <p>在 <a href="https://hicsc.com/jvm-runtime-memory/">深入理解JVM运行时内存结构</a> 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：</p>
+<ol>
+<li>对象在堆内存中是如何布局的？</li>
+<li>JVM 是如何实现 Java 对象？</li>
+<li>对象是如何创建出来的？</li>
+</ol>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-object-model/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年07月03日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/jvm-what-objects-are-garbage/">深入理解 JVM 垃圾回收机制 - 何为垃圾？</a>
         <div class="post-except post-md">
             <p>随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？</p>
@@ -157,37 +179,10 @@
     </div>
     
     
-    
-    <div class="post">
-        <a class="post-title" href="/jvm-class-loader/">深入理解 ClassLoader</a>
-        <div class="post-except post-md">
-            <h3 id="ClassLoader-源码初探"><a href="#ClassLoader-源码初探" class="headerlink" title="ClassLoader 源码初探"></a>ClassLoader 源码初探</h3><p>类加载器用于加载 Java 类到虚拟机中，其实现类 <code>java.lang.ClassLoader</code> 是一个抽象类，其职责是通过指定类的完全限定名 ( <code>binary name</code> )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 <code>java.lang.Class</code> 对象。</p>
-<p>每个 Class 对象都包含一个定义它的类加载器的引用，而数组的 Class 对象不是用类加载器创建的，而是在 Java 运行时根据需要自动创建的，如果调用数组的 Class 对象的 <code>getClassLoader()</code> 方法返回的类加载器与其元素类型的类加载器相同，如果数组元素是基本数据类，则没有类加载，返回空。比如：</p>
-<pre><code class="java">// C为自定义类
-C[] cs = new C[2];
-// jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69
-System.out.println(cs.getClass().getClassLoader());
-
-int[] is = new int[2];
-// null
-System.out.println(is.getClass().getClassLoader());
-</code></pre>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/jvm-class-loader/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年06月19日，属于
-            
-                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
-            
-            分类
-        </div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
 </div>
 
                 <div class="footer">
