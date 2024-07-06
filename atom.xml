@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-07-04T15:50:26.752Z</updated>
+  <updated>2024-07-06T05:45:53.049Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -17,11 +17,29 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>深入理解JVM运行时内存结构(续)</title>
+    <link href="https://hicsc.com/jvm-runtime-memory-2/"/>
+    <id>https://hicsc.com/jvm-runtime-memory-2/</id>
+    <published>2024-07-06T05:30:10.000Z</published>
+    <updated>2024-07-06T05:45:53.049Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。&lt;/p&gt;
+&lt;p&gt;Java 代码在编译时就已经计算出栈帧需要多大的局部变量表，需要多深的操作数栈，并把它们写入到方法表的 Code 属性之中。换句话说，一个栈帧需要分配多少内存，在编译时已经确定，并不会受到程序运行期间变量数据的影响，仅取决于源码和具体的虚拟机是如何实现栈帧的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>深入理解 JVM 对象模型</title>
     <link href="https://hicsc.com/jvm-object-model/"/>
     <id>https://hicsc.com/jvm-object-model/</id>
     <published>2024-07-03T15:00:12.000Z</published>
-    <updated>2024-07-04T15:50:26.752Z</updated>
+    <updated>2024-07-06T05:42:25.178Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 &lt;a href=&quot;https://hicsc.com/jvm-runtime-memory/&quot;&gt;深入理解JVM运行时内存结构&lt;/a&gt; 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：&lt;/p&gt;
@@ -46,7 +64,7 @@
     <link href="https://hicsc.com/jvm-what-objects-are-garbage/"/>
     <id>https://hicsc.com/jvm-what-objects-are-garbage/</id>
     <published>2024-06-30T00:28:29.000Z</published>
-    <updated>2024-07-03T15:58:16.821Z</updated>
+    <updated>2024-07-06T05:42:33.442Z</updated>
     
     
     <summary type="html">&lt;p&gt;随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？&lt;/p&gt;
@@ -435,26 +453,6 @@ System.out.println(is.getClass().getClassLoader());
     
     
     <category term="知识" scheme="https://hicsc.com/knowledge/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>美国生活中的反智主义</title>
-    <link href="https://hicsc.com/anti-intellectualism-in-american/"/>
-    <id>https://hicsc.com/anti-intellectualism-in-american/</id>
-    <published>2022-12-01T05:21:26.000Z</published>
-    <updated>2024-04-03T11:54:38.802Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;近年来，美国民间出现了很多反智现象，比如疫情之下拒绝戴口罩、游行抗议打疫苗、极端民众攻占国会等等，种种离奇现象让我们大为不解，崇尚民主和科学的美国为什么会这样？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/060935.png&quot; alt=&quot;图片来源于网络&quot;&gt;&lt;/p&gt;
-&lt;p&gt;反智不是反“智力”，毕竟没人会怀疑智力的价值，人们对从事科学创造、技术发面的高智力人群普遍是持推崇和赞赏态度的。反智的“智”指的是“智识”，它在含义上与智力没什么区别，只不过智力体现的是解决实际问题的能力，而智识更多的是体现人类思考、创新和批判的能力。也就是说，智力重在“务实”，而智识更“务虚”一点，反映在现实生活中，像科学家、实干者往往会比哲学家、基础理论研究者要更受欢迎。&lt;/p&gt;
-&lt;p&gt;如果一定要下一个定义，反智就是对运用智识的智识分子，抱有怀疑和怨恨。美国传染病专家安东尼·福奇就是一个很好的例子，比如特朗普吹嘘阿奇霉素等可以抑制新冠病毒，而福奇立即辟谣必须要进行足够的实现才能证实；副总统彭斯夸口要让每个美国人都能接受核酸检测，而福奇直言，美国的检测系统并不能达到……而福奇得到的是什么，被阻止出席关于疫情的众议院听证会，甚至遭到人身威胁。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="读万卷书" scheme="https://hicsc.com/books/"/>
     
     
   </entry>

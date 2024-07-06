@@ -76,6 +76,22 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/jvm-runtime-memory-2/">深入理解JVM运行时内存结构(续)</a>
+        <div class="post-except post-md">
+            <p>JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。</p>
+<p>Java 代码在编译时就已经计算出栈帧需要多大的局部变量表，需要多深的操作数栈，并把它们写入到方法表的 Code 属性之中。换句话说，一个栈帧需要分配多少内存，在编译时已经确定，并不会受到程序运行期间变量数据的影响，仅取决于源码和具体的虚拟机是如何实现栈帧的。</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-runtime-memory-2/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年07月06日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/jvm-object-model/">深入理解 JVM 对象模型</a>
         <div class="post-except post-md">
             <p>在 <a href="https://hicsc.com/jvm-runtime-memory/">深入理解JVM运行时内存结构</a> 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：</p>
@@ -147,21 +163,6 @@
         <div class="post-date"> <a class="read-more" href="/jvm-constant-pool/"> 继续阅读 </a> </div>
         <div class="post-date">
             本文发布于2024年06月24日，属于
-            
-                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
-            
-            分类
-        </div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/jvm-context-class-loader/">深入理解 ContextClassLoader</a>
-        <div class="post-except post-md">
-            <p>类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/jvm-context-class-loader/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年06月23日，属于
             
                 <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
             

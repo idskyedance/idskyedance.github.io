@@ -76,6 +76,21 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/jvm-context-class-loader/">深入理解 ContextClassLoader</a>
+        <div class="post-except post-md">
+            <p>类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-context-class-loader/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月23日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/jvm-class-loader/">深入理解 ClassLoader</a>
         <div class="post-except post-md">
             <h3 id="ClassLoader-源码初探"><a href="#ClassLoader-源码初探" class="headerlink" title="ClassLoader 源码初探"></a>ClassLoader 源码初探</h3><p>类加载器用于加载 Java 类到虚拟机中，其实现类 <code>java.lang.ClassLoader</code> 是一个抽象类，其职责是通过指定类的完全限定名 ( <code>binary name</code> )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 <code>java.lang.Class</code> 对象。</p>
@@ -168,23 +183,6 @@ System.out.println(is.getClass().getClassLoader());
             本文发布于2024年04月22日，属于
             
                 <a href="/ramble/"><i class="fas fa-hashtag"></i>生活漫记</a>
-            
-            分类
-        </div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/m-type-society/">M型社会：我们从哪儿开始？</a>
-        <div class="post-except post-md">
-            <p>三十年前，日本经济开始衰退，人民收入开始减少，年收入在600万日元以下的中低阶层，已经占了日本总人口的八成。原先占比八成的中产阶级，一大部分人落到中低阶层，一小部分人挤入富裕阶层。中产彻底解体，一个人要么是富人，要么是穷人，没有中间层，收入严重两极分化，这就是所谓的M型社会。</p>
-<p><img src="https://graph.hicsc.com/works/M-type%20society.jpeg" alt="M型社会文章题图"></p>
-<p>中国在经历了三十年的高速发展之后，也不可避免的慢了下来。经历了这几年的经济不景气，谁也不知道我们会不会经历日本那种长期的经济衰退，但短期的衰退是不可避免了。那我们应该怎么办？也许这本书能给我们些启发。</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/m-type-society/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年03月13日，属于
-            
-                <a href="/books/"><i class="fas fa-hashtag"></i>读万卷书</a>
             
             分类
         </div>
