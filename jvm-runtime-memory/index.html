@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
   <meta name="robots" content="index, follow">
-<meta name="baidu-site-verification" content="codeva-1LJwv3vvs2" />
   <!-- title -->
   
     
@@ -12,7 +11,6 @@
     
   
   
-  <!-- open graph -->
   <meta name="description" content="得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。 JVM 在执行程序时会把其所管理的内存划分成多个不同的数据区域，每个区域的创建时间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM运行时内存结构">
@@ -29,17 +27,15 @@
 <meta property="article:tag" content="JVM,Java,后端,数据库,MongoDB,MySQL,业务流程,流程自动化,业财一体化,团队管理,读万卷书,行万里路,生活漫记,旅行游记,生活片段">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://graph.hicsc.com/forest/7ipahk.png">
-  <!-- canonical -->
   
   <link rel="canonical" href="https://hicsc.com/jvm-runtime-memory/">
   
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+
   <!-- CSS -->
-<!--   
-<link rel="stylesheet" href="/css/proxima.css">
- -->
   
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -49,6 +45,9 @@
   
 <link rel="stylesheet" href="/css/markdown.css">
 
+  <!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
   <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
@@ -188,7 +187,7 @@ public class CGlibProxyDemo &#123;
 </div>
                 <div class="footer">
     <div>
-        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED.
+        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED
         <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
 		    <i class="fab fa-twitter"></i>
 		</a>
@@ -215,7 +214,7 @@ public class CGlibProxyDemo &#123;
 		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
 			川公网安备51012202000545号
 		</a>
-    </div>	
+    </div>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">

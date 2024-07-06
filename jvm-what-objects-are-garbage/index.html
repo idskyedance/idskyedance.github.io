@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
   <meta name="robots" content="index, follow">
-<meta name="baidu-site-verification" content="codeva-1LJwv3vvs2" />
   <!-- title -->
   
     
@@ -12,7 +11,6 @@
     
   
   
-  <!-- open graph -->
   <meta name="description" content="随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？  不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解 JVM 垃圾回收机制 - 何为垃圾？">
@@ -30,17 +28,15 @@
 <meta property="article:tag" content="JVM,Java,后端,数据库,MongoDB,MySQL,业务流程,流程自动化,业财一体化,团队管理,读万卷书,行万里路,生活漫记,旅行游记,生活片段">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://graph.hicsc.com/forest/2w1ksw.png">
-  <!-- canonical -->
   
   <link rel="canonical" href="https://hicsc.com/jvm-what-objects-are-garbage/">
   
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+
   <!-- CSS -->
-<!--   
-<link rel="stylesheet" href="/css/proxima.css">
- -->
   
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -50,6 +46,9 @@
   
 <link rel="stylesheet" href="/css/markdown.css">
 
+  <!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
   <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
@@ -146,7 +145,7 @@ class GcObject &#123;
 </div>
                 <div class="footer">
     <div>
-        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED.
+        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED
         <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
 		    <i class="fab fa-twitter"></i>
 		</a>
@@ -173,7 +172,7 @@ class GcObject &#123;
 		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
 			川公网安备51012202000545号
 		</a>
-    </div>	
+    </div>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">

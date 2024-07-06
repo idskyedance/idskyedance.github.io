@@ -517,7 +517,7 @@
 
   <url>
     <loc>https://hicsc.com/</loc>
-    <lastmod>2024-07-04</lastmod>
+    <lastmod>2024-07-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -527,21 +527,21 @@
   
   <url>
     <loc>https://hicsc.com/books/</loc>
-    <lastmod>2024-07-04</lastmod>
+    <lastmod>2024-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hicsc.com/knowledge/</loc>
-    <lastmod>2024-07-04</lastmod>
+    <lastmod>2024-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hicsc.com/ramble/</loc>
-    <lastmod>2024-07-04</lastmod>
+    <lastmod>2024-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

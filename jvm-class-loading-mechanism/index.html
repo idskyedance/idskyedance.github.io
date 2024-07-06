@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
   <meta name="robots" content="index, follow">
-<meta name="baidu-site-verification" content="codeva-1LJwv3vvs2" />
   <!-- title -->
   
     
@@ -12,7 +11,6 @@
     
   
   
-  <!-- open graph -->
   <meta name="description" content="Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。 类编译过程Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM类加载机制">
@@ -30,17 +28,15 @@
 <meta property="article:tag" content="JVM,Java,后端,数据库,MongoDB,MySQL,业务流程,流程自动化,业财一体化,团队管理,读万卷书,行万里路,生活漫记,旅行游记,生活片段">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://graph.hicsc.com/forest/m9lohs.png">
-  <!-- canonical -->
   
   <link rel="canonical" href="https://hicsc.com/jvm-class-loading-mechanism/">
   
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="https://graph.hicsc.com/orange/logo-medium.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://graph.hicsc.com/orange/logo-medium.png">
+
   <!-- CSS -->
-<!--   
-<link rel="stylesheet" href="/css/proxima.css">
- -->
   
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -50,6 +46,9 @@
   
 <link rel="stylesheet" href="/css/markdown.css">
 
+  <!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
   <link rel="stylesheet" href="https://graph.hicsc.com/fonts/ProximaSoft/proxima.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
@@ -546,7 +545,7 @@ counter2:0
 </div>
                 <div class="footer">
     <div>
-        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED.
+        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED
         <a href="https://twitter.com/Yanxiaoyanx" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
 		    <i class="fab fa-twitter"></i>
 		</a>
@@ -573,7 +572,7 @@ counter2:0
 		<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012202000545" title="工信部域名备案查询" target="_blank">
 			川公网安备51012202000545号
 		</a>
-    </div>	
+    </div>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
