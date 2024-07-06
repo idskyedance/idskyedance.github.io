@@ -74,19 +74,19 @@
 
     button {
         background: linear-gradient(#EC5DC1,#D61A6F);
-        padding: 0 12px;
+        padding: 0 24px;
         border: 0;
         border-radius: 20px;
         box-shadow: 0 30px 15px rgba(0,0,0,0.15);
         outline: 0;
         color: #FFF;
-        font: 400 16px/2.5 Nunito,"Varela Round",Sans-serif;
+        font: 400 14px/2.5 Nunito,"Varela Round",Sans-serif;
         text-transform: uppercase;
         cursor: pointer
     }
 
     .bubble {
-        background: linear-gradient(#EC5DC1,#D61A6F);
+        background: linear-gradient(rgb(255, 107, 0),#D61A6F);
         border-radius: 50%;
         box-shadow: 0 30px 15px rgba(0,0,0,0.15);
         position: absolute
@@ -94,7 +94,7 @@
 
     .bubble:before,.bubble:after {
         content: "";
-        background: linear-gradient(#EC5DC1,#D61A6F);
+        background: linear-gradient(#EC5DC1,rgb(255, 107, 0));
         border-radius: 50%;
         box-shadow: 0 30px 15px rgba(0,0,0,0.15);
         position: absolute
@@ -184,8 +184,8 @@
         <div class="bubble"></div>
         <div class="main">
             <h1>404</h1>
-            <p>It looks like you're lost...<br/>That's a trouble?</p>
-            <button type="button">Go back</button>
+            <p>Oops! Sorry! page not found.</p>
+            <button type="button" onclick='location.href=("/")'>回到首页</button>
         </div>
     </body>
 </html>
