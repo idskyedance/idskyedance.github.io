@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-07-06T05:45:53.049Z</updated>
+  <updated>2024-09-29T09:13:02.266Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hicsc.com/jvm-runtime-memory-2/"/>
     <id>https://hicsc.com/jvm-runtime-memory-2/</id>
     <published>2024-07-06T05:30:10.000Z</published>
-    <updated>2024-07-06T05:45:53.049Z</updated>
+    <updated>2024-09-29T09:13:02.266Z</updated>
     
     
     <summary type="html">&lt;p&gt;JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。&lt;/p&gt;
@@ -39,7 +39,7 @@
     <link href="https://hicsc.com/jvm-object-model/"/>
     <id>https://hicsc.com/jvm-object-model/</id>
     <published>2024-07-03T15:00:12.000Z</published>
-    <updated>2024-07-06T05:42:25.178Z</updated>
+    <updated>2024-09-29T09:36:46.818Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 &lt;a href=&quot;https://hicsc.com/jvm-runtime-memory/&quot;&gt;深入理解JVM运行时内存结构&lt;/a&gt; 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：&lt;/p&gt;
@@ -64,11 +64,11 @@
     <link href="https://hicsc.com/jvm-what-objects-are-garbage/"/>
     <id>https://hicsc.com/jvm-what-objects-are-garbage/</id>
     <published>2024-06-30T00:28:29.000Z</published>
-    <updated>2024-07-06T05:42:33.442Z</updated>
+    <updated>2024-09-29T09:18:50.602Z</updated>
     
     
     <summary type="html">&lt;p&gt;随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/2w1ksw.png&quot; alt=&quot;何为垃圾题图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tvax1.sinaimg.cn/large/8692a139ly1hu4p31y7kdj21iy0twai0.jpg&quot; alt=&quot;何为垃圾题图&quot;&gt;&lt;/p&gt;
 &lt;p&gt;不管性能提高到何种程度，GC 都需要花费一定的时间，对于实时性要求较高的场景，就必须尽量压低 GC 导致的最大暂停时间 (GC 会导致应用线程处于暂停状态)，举两个例子：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;实时对战游戏：如果因为 GC 导致玩家频繁卡顿，任谁都会想摔手机吧。&lt;/li&gt;
@@ -89,11 +89,11 @@
     <link href="https://hicsc.com/jvm-runtime-memory/"/>
     <id>https://hicsc.com/jvm-runtime-memory/</id>
     <published>2024-06-27T16:10:10.000Z</published>
-    <updated>2024-06-30T15:28:55.342Z</updated>
+    <updated>2024-09-29T09:17:44.578Z</updated>
     
     
     <summary type="html">&lt;p&gt;得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。&lt;/p&gt;
-&lt;p&gt;JVM 在执行程序时会把其所管理的内存划分成多个不同的数据区域，每个区域的创建时间、销毁时间以及用途都各不相同。比如有的内存区域是所有线程共享的，而有的内存区域是线程隔离的。线程隔离的区域就会随着线程的启动和结束而创建和销毁。JVM 所管理的内存将会包含以下几个运行时数据区域，如下图所示。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/7ipahk.png&quot; alt=&quot;JVM运行时内存数据区示意图&quot;&gt;&lt;/p&gt;</summary>
+&lt;p&gt;JVM 在执行程序时会把其所管理的内存划分成多个不同的数据区域，每个区域的创建时间、销毁时间以及用途都各不相同。比如有的内存区域是所有线程共享的，而有的内存区域是线程隔离的。线程隔离的区域就会随着线程的启动和结束而创建和销毁。JVM 所管理的内存将会包含以下几个运行时数据区域，如下图所示。&lt;br&gt;&lt;img src=&quot;https://tvax3.sinaimg.cn/large/8692a139ly1hu4p2zo00bj21hi0re169.jpg&quot; alt=&quot;JVM运行时内存数据区示意图&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -107,7 +107,7 @@
     <link href="https://hicsc.com/jvm-constant-pool/"/>
     <id>https://hicsc.com/jvm-constant-pool/</id>
     <published>2024-06-24T15:34:12.000Z</published>
-    <updated>2024-06-30T15:28:10.424Z</updated>
+    <updated>2024-09-29T09:14:13.243Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。&lt;/p&gt;
@@ -126,7 +126,7 @@
     <link href="https://hicsc.com/jvm-context-class-loader/"/>
     <id>https://hicsc.com/jvm-context-class-loader/</id>
     <published>2024-06-23T15:01:04.000Z</published>
-    <updated>2024-06-30T15:28:36.336Z</updated>
+    <updated>2024-09-29T09:13:02.268Z</updated>
     
     
     <summary type="html">&lt;p&gt;类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？&lt;/p&gt;</summary>
@@ -143,7 +143,7 @@
     <link href="https://hicsc.com/jvm-class-loader/"/>
     <id>https://hicsc.com/jvm-class-loader/</id>
     <published>2024-06-19T07:01:04.000Z</published>
-    <updated>2024-06-30T15:28:30.634Z</updated>
+    <updated>2024-09-29T09:13:02.259Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;ClassLoader-源码初探&quot;&gt;&lt;a href=&quot;#ClassLoader-源码初探&quot; class=&quot;headerlink&quot; title=&quot;ClassLoader 源码初探&quot;&gt;&lt;/a&gt;ClassLoader 源码初探&lt;/h3&gt;&lt;p&gt;类加载器用于加载 Java 类到虚拟机中，其实现类 &lt;code&gt;java.lang.ClassLoader&lt;/code&gt; 是一个抽象类，其职责是通过指定类的完全限定名 ( &lt;code&gt;binary name&lt;/code&gt; )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 &lt;code&gt;java.lang.Class&lt;/code&gt; 对象。&lt;/p&gt;
@@ -170,11 +170,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/jvm-class-loading-mechanism/"/>
     <id>https://hicsc.com/jvm-class-loading-mechanism/</id>
     <published>2024-06-19T01:12:06.000Z</published>
-    <updated>2024-06-30T15:28:49.875Z</updated>
+    <updated>2024-09-29T09:13:02.260Z</updated>
     
     
     <summary type="html">&lt;p&gt;Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。&lt;/p&gt;
-&lt;h3 id=&quot;类编译过程&quot;&gt;&lt;a href=&quot;#类编译过程&quot; class=&quot;headerlink&quot; title=&quot;类编译过程&quot;&gt;&lt;/a&gt;类编译过程&lt;/h3&gt;&lt;p&gt;Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/m9lohs.png&quot; alt=&quot;Java类编译过程示意图&quot;&gt;&lt;br&gt;一般会把&lt;code&gt;.java&lt;/code&gt;文件编译成&lt;code&gt;.class&lt;/code&gt;文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。&lt;/p&gt;
+&lt;h3 id=&quot;类编译过程&quot;&gt;&lt;a href=&quot;#类编译过程&quot; class=&quot;headerlink&quot; title=&quot;类编译过程&quot;&gt;&lt;/a&gt;类编译过程&lt;/h3&gt;&lt;p&gt;Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。&lt;br&gt;&lt;img src=&quot;https://tvax2.sinaimg.cn/large/8692a139ly1hu4p2wavkwj21b60dctbc.jpg&quot; alt=&quot;Java类编译过程示意图&quot;&gt;&lt;br&gt;一般会把&lt;code&gt;.java&lt;/code&gt;文件编译成&lt;code&gt;.class&lt;/code&gt;文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。&lt;/p&gt;
 &lt;p&gt;编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。&lt;/p&gt;
 &lt;p&gt;接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：&lt;/p&gt;
 &lt;ul&gt;
@@ -196,7 +196,7 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/how-to-eat-better/"/>
     <id>https://hicsc.com/how-to-eat-better/</id>
     <published>2024-05-05T08:16:49.000Z</published>
-    <updated>2024-05-08T01:18:39.348Z</updated>
+    <updated>2024-09-29T09:20:17.868Z</updated>
     
     
     <summary type="html">&lt;p&gt;最近一段时间想控制下体重，随手翻的健康类书籍比较多，在这本&lt;a href=&quot;https://book.douban.com/subject/35238738/&quot;&gt;「非奋斗减肥」&lt;/a&gt;中确实收获到不少与常规认知有差异的知识。&lt;/p&gt;
@@ -205,7 +205,7 @@ System.out.println(is.getClass().getClassLoader());
 &lt;p&gt;当血液中的葡萄糖升高时，胰腺就开始工作了。胰腺会分泌胰岛素，胰岛素的作用就是促进血液中的葡萄糖转移到细胞中，帮助调节血糖，保证血糖值维持在一定的安全水平。因此，你摄入的糖越多，胰腺就要分泌更多的胰岛素来调节血糖，那么就会有更多的糖原进入脂肪细胞中。更重要的是，&lt;strong&gt;如果血液中的胰岛素水平长期居高不下，那么细胞对胰岛素的敏感度就会降低，形成胰岛素抵抗&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;胰岛素抵抗，跟抗生素的耐药性是一样的道理，对于有胰岛素抵抗的人来说，同等剂量的胰岛素无法使原先血液中的糖原进入细胞，于是胰腺就需要分泌更多的胰岛素才能把血糖降下来。而胰岛素又是促进脂肪合成的激素，这些大量的胰岛素会使身体合成更多的脂肪，所以胰岛素抵抗是现代人日渐肥胖的主要原因之一。胰岛素抵抗最容易导致腹部脂肪堆积。如果你的腰围和臀围的比例大于 0.9，就有较大可能存在明显的胰岛素抵抗。&lt;/p&gt;
 &lt;p&gt;因此，&lt;strong&gt;胰岛素又被称为肥胖激素&lt;/strong&gt;，想要把胰岛素控制在很低的水平，关键就是控制糖的摄入。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/h76pea.jpg&quot; alt=&quot;非奋斗减肥&quot;&gt; Photo by &lt;a href=&quot;https://unsplash.com/photos/sliced-vegetables-ocnsb17U6FE&quot;&gt;Dose Juice&lt;/a&gt;&lt;/p&gt;</summary>
+&lt;p&gt;&lt;img src=&quot;https://tvax4.sinaimg.cn/large/8692a139ly1hu4p309uvwj22bc0zjnji.jpg&quot; alt=&quot;非奋斗减肥&quot;&gt; Photo by &lt;a href=&quot;https://unsplash.com/photos/sliced-vegetables-ocnsb17U6FE&quot;&gt;Dose Juice&lt;/a&gt;&lt;/p&gt;</summary>
     
     
     
@@ -219,11 +219,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/im-going-to-start-exercising/"/>
     <id>https://hicsc.com/im-going-to-start-exercising/</id>
     <published>2024-04-22T12:56:24.000Z</published>
-    <updated>2024-06-17T14:58:21.250Z</updated>
+    <updated>2024-09-29T09:31:19.647Z</updated>
     
     
     <summary type="html">&lt;p&gt;年初下定了决心今年体重一定要掉到 110 斤，但从春节后就一直没怎么运动，饮食也没节制，体重相较与去年还涨了近 10 斤。眼看时间来到了 5 月，时间也快过半了，想想也该行动起来了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/qqazjr.jpg&quot; alt=&quot;我要开始卷腹肌&quot;&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/group-of-women-doing-yoga-gJtDg6WfMlQ&quot;&gt;bruce mars&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tvax3.sinaimg.cn/large/8692a139ly1hu4p2vzvpqj21hc0zk0zp.jpg&quot; alt=&quot;我要开始卷腹肌&quot;&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/group-of-women-doing-yoga-gJtDg6WfMlQ&quot;&gt;bruce mars&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在 B 站上找了个 &lt;a href=&quot;https://www.bilibili.com/cheese/play/ss3237&quot;&gt;练腹肌的课程&lt;/a&gt;，不仅能跟着练，还介绍了饮食的底层逻辑，甚至还推荐了食谱。正好最近也看了基本有关健康的书籍，结合自己的实际情况，定制了下面的食谱。&lt;/p&gt;
 &lt;p&gt;像速食鸡胸肉、荞麦面、面包这些东西，我先前吃得也不多，也不知道好不好吃，但暂且先吃着。&lt;/p&gt;
 &lt;h4 id=&quot;饮食原则&quot;&gt;&lt;a href=&quot;#饮食原则&quot; class=&quot;headerlink&quot; title=&quot;饮食原则&quot;&gt;&lt;/a&gt;饮食原则&lt;/h4&gt;&lt;p&gt;根据课程的内容，总结了几点我的饮食原则：&lt;/p&gt;
@@ -249,11 +249,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/m-type-society/"/>
     <id>https://hicsc.com/m-type-society/</id>
     <published>2024-03-13T13:36:03.000Z</published>
-    <updated>2024-04-03T11:53:47.390Z</updated>
+    <updated>2024-09-29T09:22:40.119Z</updated>
     
     
     <summary type="html">&lt;p&gt;三十年前，日本经济开始衰退，人民收入开始减少，年收入在600万日元以下的中低阶层，已经占了日本总人口的八成。原先占比八成的中产阶级，一大部分人落到中低阶层，一小部分人挤入富裕阶层。中产彻底解体，一个人要么是富人，要么是穷人，没有中间层，收入严重两极分化，这就是所谓的M型社会。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/M-type%20society.jpeg&quot; alt=&quot;M型社会文章题图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tvax1.sinaimg.cn/large/8692a139ly1hu4pl6f7kdj216o0scq8n.jpg&quot; alt=&quot;M型社会文章题图&quot;&gt;&lt;/p&gt;
 &lt;p&gt;中国在经历了三十年的高速发展之后，也不可避免的慢了下来。经历了这几年的经济不景气，谁也不知道我们会不会经历日本那种长期的经济衰退，但短期的衰退是不可避免了。那我们应该怎么办？也许这本书能给我们些启发。&lt;/p&gt;</summary>
     
     
@@ -268,7 +268,7 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/chinese-new-year-2024/"/>
     <id>https://hicsc.com/chinese-new-year-2024/</id>
     <published>2024-02-18T13:14:30.000Z</published>
-    <updated>2024-04-03T11:55:27.013Z</updated>
+    <updated>2024-09-29T09:23:30.432Z</updated>
     
     
     <summary type="html">&lt;p&gt;从年三十到正月初七这八天是我过去一年过得最轻松的一周，这一周没有客户需求、没有业绩目标、没有技术难题、更没有不学习的罪恶感，真的是太爽了。&lt;/p&gt;
@@ -287,11 +287,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/the-method-of-taking-notes/"/>
     <id>https://hicsc.com/the-method-of-taking-notes/</id>
     <published>2024-02-07T09:37:06.000Z</published>
-    <updated>2024-04-03T11:54:34.922Z</updated>
+    <updated>2024-09-29T09:24:13.417Z</updated>
     
     
     <summary type="html">&lt;p&gt;在电子书上划过很多线、在浏览器中裁剪过很多网页、在微信中也收藏过不少文章，如果这些能够算作笔记的话，我确实记录过不少东西。然并卵，这些文字于我而言有什么意义？也许只是在当时多了些情绪价值而已。因此，在阅读这本书以后，我重新开始审视记笔记这个动作。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062032.png&quot; alt=&quot;笔记的方法&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tvax3.sinaimg.cn/large/8692a139ly1hu4pmz40ojj20m80gjk1r.jpg&quot; alt=&quot;笔记的方法&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;用自己的话来记笔记&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;记笔记的核心是用自己的话来记录。为什么？&lt;/p&gt;
 &lt;p&gt;首先，人的记忆有两种机制：存储和提取。研究表明，信息存入记忆越容易，提取就越困难；反之，存入记忆越困难，知识提取会更方便，这就是「必要难度理论」。用自己的话来记录，就是为了增加存储时的难度，以便未来遇到难题时，更有可能想起（提取）记过的笔记。&lt;/p&gt;
@@ -310,13 +310,13 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/this-difficult-and-bumpy-world/"/>
     <id>https://hicsc.com/this-difficult-and-bumpy-world/</id>
     <published>2024-01-14T08:02:37.000Z</published>
-    <updated>2024-05-08T01:18:13.716Z</updated>
+    <updated>2024-09-29T09:28:17.272Z</updated>
     
     
     <summary type="html">&lt;p&gt;看多了网络上灯红酒绿的生活，读读「我在北京送快递」吧，作者胡安焉用类似于“流水账”的方式记录他在约十多年间干的近二十份工作，写下了这个艰辛颠簸的世界。&lt;/p&gt;
 &lt;p&gt;我对现实世界的反应有点迟钝，很多人会误以为这是乐观，觉得什么问题在我这儿都云淡风轻似的，但实际上可能是我对现实并没有那么多期待，甚至有点迟钝而已。在整个阅读过程中，其实我并没有那么感同身受，也没有那种窥探到另一个阶层生活的快感，尽管我并不认为我和快递员不在同一个阶层。&lt;/p&gt;
 &lt;p&gt;但作为一个社畜，同为社会的最底层，总还能找到些许共鸣。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062129.png&quot; alt=&quot;我在北京送快递&quot;&gt;&lt;/p&gt;</summary>
+&lt;p&gt;&lt;img src=&quot;https://tvax2.sinaimg.cn/large/8692a139ly1hu4pqo4ib1j20go0gln1y.jpg&quot; alt=&quot;我在北京送快递&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -330,11 +330,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/went-through-in-2023/"/>
     <id>https://hicsc.com/went-through-in-2023/</id>
     <published>2024-01-01T10:36:19.000Z</published>
-    <updated>2024-04-03T11:55:18.461Z</updated>
+    <updated>2024-09-29T09:31:39.563Z</updated>
     
     
     <summary type="html">&lt;p&gt;新年第一天，坐在桌前，试着想回忆过去一年干了些什么，除了些许情绪，脑袋一片空白。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/062057.png&quot; alt=&quot;Photo by Morgan Sessions&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/@morgansessions?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Morgan Sessions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tvax3.sinaimg.cn/large/8692a139ly1hu4p2w6l1sj20sg0gp42o.jpg&quot; alt=&quot;Photo by Morgan Sessions&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/@morgansessions?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Morgan Sessions&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们六个人的团队运营着一款B端产品，这一年，我们在研发、销售、客户成功方面都做了不少尝试，营收相较于22年并没有太大的提升，但付出的代价却是账上的现金消耗一空。这也意味着，24年我们必须要实现收支平衡，否则团队就要散了。当然这一年也不是完全没有收获，最大的收获就是知道哪些事我们做不了，哪些路我们走不通。最重要的是，仍然有小伙伴愿意继续坚持，愿意乐观的相信我们仍能成功。&lt;/p&gt;
 &lt;p&gt;2024年，我们六人团队的营收目标是200万，如果这个目标能够实现，除了能够保证大家的收入不减少以外，还能验证我们的一些猜想，为后年打下一个好的基础。感兴趣的话，年底再来看看，如果目标实现了，我就详细地说说我们这一年是怎么做的；如果目标没实现，我就发个简历找工作。&lt;/p&gt;
 &lt;p&gt;工作就说这么多吧，接下来是一些碎碎念。&lt;/p&gt;</summary>
@@ -373,11 +373,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/my-2022/"/>
     <id>https://hicsc.com/my-2022/</id>
     <published>2022-12-31T12:11:00.000Z</published>
-    <updated>2024-04-03T13:26:58.827Z</updated>
+    <updated>2024-09-29T09:32:11.042Z</updated>
     
     
     <summary type="html">&lt;p&gt;2022年，疫情进入第三个年头，经历无尽的封控和核酸后，却在年底来了个大转弯，老司机的方向盘都差点甩飞出去。这一年因为国际局势和疫情，周围的人失业的失业，破产的破产，过得尤为不容易。我们盼望2022年早点过去，期望2023年能够不那么艰难。&lt;/p&gt;
-&lt;p&gt;2022年我印象最深刻的国际事件当属俄乌战争，让人真切地感受到战争的残酷——几百万人流亡欧洲、城镇变成废墟、大量士兵和平民伤亡…… 战争给乌克兰造成至少超千亿美元损失，重建至少需要2000亿美元。在我们看来的一串串数字，是千千万万乌克兰人支离破碎的生活。&lt;br&gt;&lt;img src=&quot;https://graph.hicsc.com/forest/6thdvr.png&quot; alt=&quot;2022年的乌克兰&quot;&gt;&lt;/p&gt;</summary>
+&lt;p&gt;2022年我印象最深刻的国际事件当属俄乌战争，让人真切地感受到战争的残酷——几百万人流亡欧洲、城镇变成废墟、大量士兵和平民伤亡…… 战争给乌克兰造成至少超千亿美元损失，重建至少需要2000亿美元。在我们看来的一串串数字，是千千万万乌克兰人支离破碎的生活。&lt;br&gt;&lt;img src=&quot;https://tvax1.sinaimg.cn/large/8692a139ly1hu4p301spnj21920jk4bx.jpg&quot; alt=&quot;2022年的乌克兰&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -417,11 +417,11 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/serve-worthwhile-customers/"/>
     <id>https://hicsc.com/serve-worthwhile-customers/</id>
     <published>2022-12-09T03:21:48.000Z</published>
-    <updated>2024-04-03T11:53:51.463Z</updated>
+    <updated>2024-09-29T08:27:57.822Z</updated>
     
     
     <summary type="html">&lt;p&gt;之前，我很少读访谈和传记类的书，感觉里面的人物离自己都太远，不能共情。浑浑噩噩地过了这么些年，越发觉得无聊，突然想看看别人的生活是咋样的，遂开始读访谈和传记。我和团队正在开发和运营一款零代码的SaaS产品，因此对科技圈要更关注一点，比如最近刚读完 &lt;a href=&quot;https://book.douban.com/subject/35254632&quot;&gt;详谈：左晖&lt;/a&gt;，这本小册子记录了李翔围绕组织、使命、价值观、行业竞争、选人用人等话题，与左晖进行的两次深度访谈。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://graph.hicsc.com/works/061920.png&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/iWTamkU5kiI&quot;&gt;David Iskander&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.postimg.cc/1zTtPFyP/061920.png&quot;&gt;&lt;br&gt;Photo by &lt;a href=&quot;https://unsplash.com/photos/iWTamkU5kiI&quot;&gt;David Iskander&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在我看来，左晖是一个很低调的人，不对外界或是竞争对手做过多的评价，不在乎自己是否成功，也不在乎外界对自己的误解，只关心自己做的事是否正确，关心自己是否让行业变得更好。&lt;/p&gt;</summary>
     
     
