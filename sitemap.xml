@@ -2,115 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hicsc.com/how-do-we-get-speed/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hicsc.com/jvm-what-objects-are-garbage/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/went-through-in-2023/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/life-is-like-a-fish-tank/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-object-model/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/my-2022/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/im-going-to-start-exercising/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/why-are-we-all-irrational/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/anti-intellectualism-in-american/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/this-difficult-and-bumpy-world/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/the-method-of-taking-notes/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/chinese-new-year-2024/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/m-type-society/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/how-to-eat-better/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
@@ -155,6 +56,15 @@
   </url>
   
   <url>
+    <loc>https://hicsc.com/jvm-object-model/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hicsc.com/jvm-class-loading-mechanism/</loc>
     
     <lastmod>2024-09-29</lastmod>
@@ -173,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/dujiangyan-irrigation-project/</loc>
+    <loc>https://hicsc.com/chinese-new-year-2024/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
@@ -191,25 +101,43 @@
   </url>
   
   <url>
+    <loc>https://hicsc.com/life-is-like-a-fish-tank/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/im-going-to-start-exercising/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/went-through-in-2023/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/my-2022/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hicsc.com/why-did-they-miss80s/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/whats-the-best-way-to-learn/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/serve-worthwhile-customers/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
@@ -227,7 +155,52 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/how-to-design-simple-user-experience/</loc>
+    <loc>https://hicsc.com/dujiangyan-irrigation-project/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/this-difficult-and-bumpy-world/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/anti-intellectualism-in-american/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/the-method-of-taking-notes/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/whats-the-best-way-to-learn/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/why-are-we-all-irrational/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
@@ -245,7 +218,34 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/how-do-we-get-speed/</loc>
+    <loc>https://hicsc.com/how-to-design-simple-user-experience/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/how-to-eat-better/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/serve-worthwhile-customers/</loc>
+    
+    <lastmod>2024-09-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/m-type-society/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
