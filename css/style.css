@@ -19,9 +19,9 @@ p
 
 body
 {
-    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: 'Rubik', 'Rubik','helvetica neue',helvetica,arial,sans-serif,"Apple Color Emoji";
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 2;
     letter-spacing: 0.6px;
     color: var(--font-color-2);
 }
