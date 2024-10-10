@@ -173,10 +173,112 @@
         </div>
     </div>
     
+    <div class="post">
+        <a class="post-title" href="/jvm-constant-pool/">深入理解JVM常量池与字节码</a>
+        <div class="post-except post-md">
+            <p>在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。</p>
+<h3 id="Class-文件常量池"><a href="#Class-文件常量池" class="headerlink" title="Class 文件常量池"></a>Class 文件常量池</h3><p>Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节存放魔数，用于确定这个文件是否能够被 JVM 接受，接下来的 4 个字节用于存放版本号，再接着存放的就是常量池。常量池的长度是不固定的，所以，在常量池的入口存放着常量池容量的计数值。</p>
+<p>常量池主要用于存放两大类常量：字面量和符号引用量，字面量相当于 Java 语言层面常量的概念，比如：字符串常量、声明为 final 的常量等等。符号引用是用一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-constant-pool/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月24日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/jvm-context-class-loader/">深入理解 ContextClassLoader</a>
+        <div class="post-except post-md">
+            <p>类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-context-class-loader/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月23日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/jvm-class-loader/">深入理解 ClassLoader</a>
+        <div class="post-except post-md">
+            <h3 id="ClassLoader-源码初探"><a href="#ClassLoader-源码初探" class="headerlink" title="ClassLoader 源码初探"></a>ClassLoader 源码初探</h3><p>类加载器用于加载 Java 类到虚拟机中，其实现类 <code>java.lang.ClassLoader</code> 是一个抽象类，其职责是通过指定类的完全限定名 ( <code>binary name</code> )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 <code>java.lang.Class</code> 对象。</p>
+<p>每个 Class 对象都包含一个定义它的类加载器的引用，而数组的 Class 对象不是用类加载器创建的，而是在 Java 运行时根据需要自动创建的，如果调用数组的 Class 对象的 <code>getClassLoader()</code> 方法返回的类加载器与其元素类型的类加载器相同，如果数组元素是基本数据类，则没有类加载，返回空。比如：</p>
+<pre><code class="java">// C为自定义类
+C[] cs = new C[2];
+// jdk.internal.loader.ClassLoaders$AppClassLoader@3d4eac69
+System.out.println(cs.getClass().getClassLoader());
+
+int[] is = new int[2];
+// null
+System.out.println(is.getClass().getClassLoader());
+</code></pre>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-class-loader/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月19日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/jvm-class-loading-mechanism/">深入理解JVM类加载机制</a>
+        <div class="post-except post-md">
+            <p>Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。</p>
+<h3 id="类编译过程"><a href="#类编译过程" class="headerlink" title="类编译过程"></a>类编译过程</h3><p>Java 源码通过 JDK 自带的 Javac 编译器编译成 class 文件，我们把 class 文件中包含的代码称为字节码。但字节码并不能直接在计算机上运行，所以 JVM 需要将字节码翻译成机器码，其大致流程如下图所示。<br><img src="/images/forest/jvm-class-loading-mechanism1.png" alt="Java类编译过程示意图"><br>一般会把<code>.java</code>文件编译成<code>.class</code>文件的过程称为前端编译，其由 JDK 自带的 javac 工具完成。前端编译是一个非常复杂的过程，包含词法分析、注解处理、语义分析等，因此，代码中的大部分语法错误，在这个阶段就能够被识别出来。</p>
+<p>编译后的字节码文件中主要包含常量池和方法表集合两个部分，可以通过 Javap 命令来查看，后面的文章也会详细的讲解。</p>
+<p>接下来，JVM 会把 class 文件中的字节码加载到内存中，经过连接和初始化以后，类在调用执行的过程中，会继续把字节码翻译成机器码，这个翻译过程在 Hotspot 中有两种形式：</p>
+<ul>
+<li>解释执行：逐条将字节码翻译成机器码并执行</li>
+<li>即时编译：将一个方法中所包含的所有字节码编译出机器码后再执行</li>
+</ul>
+<p>在起始阶段，JVM 中的字节码是由解释器(Interpreter)完成编译的，当虚拟机发现某个方法或代码块的运行特别频繁时，这些代码块就会被认定为热点代码。为了提高热点代码的执行效率，在运行时，JIT 会把这些代码编译成本地平台相关的机器码，并进行各层次的优化，然后保存到内存中，这一过程就被称为即时编译。</p>
+<p>这种将两种编译方式混合执行的策略，在上图中被描述为“运行时编译”，也是 Hotspot 默认采用的策略。</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/jvm-class-loading-mechanism/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年06月19日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/how-to-eat-better/">非奋斗减肥：关于运动和减脂的一些小误区</a>
+        <div class="post-except post-md">
+            <p>最近一段时间想控制下体重，随手翻的健康类书籍比较多，在这本<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35238738/">「非奋斗减肥」</a>中确实收获到不少与常规认知有差异的知识。</p>
+<h3 id="Part-ONE"><a href="#Part-ONE" class="headerlink" title="Part ONE"></a>Part ONE</h3><p>首先，介绍几种日常生活中随处都能听到，但又说不明白的几种物质。</p>
+<h4 id="胰岛素"><a href="#胰岛素" class="headerlink" title="胰岛素"></a>胰岛素</h4><p>当我们摄入糖类食物时，食物中的糖开始被不同的酶分解，最终被小肠吸收后转化成为葡萄糖，通过血液输送到全身。血液中的葡萄糖转化为糖原后，会优先储存在肝脏和肌肉当中，但是肝脏和肌肉中储存糖原的空间十分有限。剩余的大量糖原就会进入脂肪细胞，转化成为脂肪储存在人体内，于是肥胖就形成了。</p>
+<p>当血液中的葡萄糖升高时，胰腺就开始工作了。胰腺会分泌胰岛素，胰岛素的作用就是促进血液中的葡萄糖转移到细胞中，帮助调节血糖，保证血糖值维持在一定的安全水平。因此，你摄入的糖越多，胰腺就要分泌更多的胰岛素来调节血糖，那么就会有更多的糖原进入脂肪细胞中。更重要的是，<strong>如果血液中的胰岛素水平长期居高不下，那么细胞对胰岛素的敏感度就会降低，形成胰岛素抵抗</strong>。</p>
+<p>胰岛素抵抗，跟抗生素的耐药性是一样的道理，对于有胰岛素抵抗的人来说，同等剂量的胰岛素无法使原先血液中的糖原进入细胞，于是胰腺就需要分泌更多的胰岛素才能把血糖降下来。而胰岛素又是促进脂肪合成的激素，这些大量的胰岛素会使身体合成更多的脂肪，所以胰岛素抵抗是现代人日渐肥胖的主要原因之一。胰岛素抵抗最容易导致腹部脂肪堆积。如果你的腰围和臀围的比例大于 0.9，就有较大可能存在明显的胰岛素抵抗。</p>
+<p>因此，<strong>胰岛素又被称为肥胖激素</strong>，想要把胰岛素控制在很低的水平，关键就是控制糖的摄入。</p>
+<p><img src="/images/forest/how-to-eat-better.jpg" alt="非奋斗减肥"> Photo by <a target="_blank" rel="noopener" href="https://unsplash.com/photos/sliced-vegetables-ocnsb17U6FE">Dose Juice</a></p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/how-to-eat-better/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年05月05日，属于
+            
+                <a href="/books/"><i class="fas fa-hashtag"></i>读万卷书</a>
+            
+            分类
+        </div>
+    </div>
+    
 </div>
 
 <div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">更早文章</a>
 </div>
 
                 <div class="footer">
