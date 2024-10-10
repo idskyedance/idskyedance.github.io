@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-10-09T15:44:22.959Z</updated>
+  <updated>2024-10-10T14:50:03.191Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何做技术选型?</title>
+    <link href="https://hicsc.com/choosing-technology-guide/"/>
+    <id>https://hicsc.com/choosing-technology-guide/</id>
+    <published>2024-10-10T14:24:41.000Z</published>
+    <updated>2024-10-10T14:50:03.191Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。&lt;/p&gt;
+&lt;p&gt;说句题外话，身边的工程师朋友比较多，所以倒闭的公司看到的也挺多。很多公司一上来就高并发、分布式、分库分表，但真的，到最后死的时候，数据也没能把一张 MySQL 表装满。可能是看得多了的缘故，不管是做架构还是写代码，就特别推崇 KISS 原则，所以才有了前面的那些话，但这仅是个人感悟，绝非通用的设计原则。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/forest/how-to-make-technology-selection.png&quot; alt=&quot;封面图&quot;&gt;&lt;em&gt;图片来自：&lt;a href=&quot;https://xie.infoq.cn/link?target=https://unsplash.com/@epicantus?utm%253Ci%253Esource=unsplash&amp;amp;utm%253C/i%253Emedium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Daria Nepriakhina&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;作为架构设计的重要环节，技术选型的思路和原则应当与我们之前所学一样。那如何为业务场景选择适合的实现技术？又如何构建自己的技术选型方法论？&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>深入理解JVM运行时内存结构(续)</title>
@@ -427,32 +447,6 @@ System.out.println(is.getClass().getClassLoader());
     
     
     <category term="读万卷书" scheme="https://hicsc.com/books/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>美国为什么可以在芯片上“卡”中国脖子？</title>
-    <link href="https://hicsc.com/chip-wars/"/>
-    <id>https://hicsc.com/chip-wars/</id>
-    <published>2022-12-04T12:11:00.000Z</published>
-    <updated>2024-04-03T13:20:37.292Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;最近万维钢老师在他的 &lt;a href=&quot;https://www.dedao.cn/course/article?id=Ay7GQpR6ndOgX6k2gOK8eBvPzMN4lw&quot;&gt;精英日课&lt;/a&gt; 中讲解「Chip War」这本书，从中可以了解到整个芯片产业的发展历程、美方视角下的中美芯片之争、美国为什么可以在芯片上“卡”中国脖子，以及中国的破局之道。下面我抽两个可能是大家最关注的问题，跟你讲讲。&lt;/p&gt;
-&lt;p&gt;像台积电和ASML并不是美国公司，为啥听美国的呢？总不至于说我用了你的技术就得接受你的长臂管辖吧？其实美国并没有直接动用什么霸权，它只用了一个简单的商业逻辑：如果你违反禁令，我就会要求美国公司不卖上游设备给你。&lt;/p&gt;
-&lt;p&gt;美国手里的牌：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;几乎所有芯片设计软件都是美国的&lt;/li&gt;
-&lt;li&gt;ASML用的一些关键部件，包括光刻的光源，是美国生产的&lt;/li&gt;
-&lt;li&gt;三星和台积电都需要的一些关键工具和原材料是美国和日本控制的&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;基于此，美国并不需要什么政治霸权、更不需要走什么法律程序，直接从芯片产业链的逻辑上把中国卡死。这个原理，被美国学者称为“武器化的互相依赖”，因为在这几个关键技术上，你只能依赖我，那么我就可以控制你，我就可以利用这个依赖对付你。&lt;/p&gt;
-&lt;p&gt;那中国该如何破局？米勒在书中分享了三个策略。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="知识" scheme="https://hicsc.com/knowledge/"/>
     
     
   </entry>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+  <title>如何做技术选型? - 橙子陈绩好</title>
+    
+  
+  
+  <meta name="description" content="曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。 说句题外话，身边的工程师朋友比较多，所以倒闭的公司看到的也挺多。很多公司一上来就高并发、分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何做技术选型?">
+<meta property="og:url" content="https://hicsc.com/choosing-technology-guide/index.html">
+<meta property="og:site_name" content="橙子陈绩好">
+<meta property="og:description" content="曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。 说句题外话，身边的工程师朋友比较多，所以倒闭的公司看到的也挺多。很多公司一上来就高并发、分">
+<meta property="og:locale">
+<meta property="og:image" content="https://hicsc.com/images/forest/how-to-make-technology-selection.png">
+<meta property="article:published_time" content="2024-10-10T14:24:41.000Z">
+<meta property="article:modified_time" content="2024-10-10T14:50:03.191Z">
+<meta property="article:author" content="Skye">
+<meta property="article:tag" content="JVM,Java,后端,数据库,MongoDB,MySQL,业务流程,流程自动化,业财一体化,团队管理,读万卷书,行万里路,生活漫记,旅行游记,生活片段">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hicsc.com/images/forest/how-to-make-technology-selection.png">
+  
+  <link rel="canonical" href="https://hicsc.com/choosing-technology-guide/">
+  
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/images/logo/logo-medium.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo/logo-medium.png">
+
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="/css/rubik.css">
+
+  
+<link rel="stylesheet" href="/css/reset.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/css/markdown.css">
+
+  <!--   
+<link rel="stylesheet" href="/css/proxima.css">
+ -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙子陈绩好" type="application/atom+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            如何做技术选型?
+        </div>
+        <div class="post-meta">
+            2024-10-10 ｜ 
+            
+                
+                    <a href="/knowledge/"><i class="fas fa-hashtag"></i> 知识 </a>
+                 ｜ 
+            
+            <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a> ｜
+            <i class="fas fa-fire-alt" title=本文访问量></i> <span id="busuanzi_value_page_pv" title="本文访问量"></span>
+        </div>
+        <div class="post-md">
+            <p>曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。</p>
+<p>说句题外话，身边的工程师朋友比较多，所以倒闭的公司看到的也挺多。很多公司一上来就高并发、分布式、分库分表，但真的，到最后死的时候，数据也没能把一张 MySQL 表装满。可能是看得多了的缘故，不管是做架构还是写代码，就特别推崇 KISS 原则，所以才有了前面的那些话，但这仅是个人感悟，绝非通用的设计原则。</p>
+<p><img src="/images/forest/how-to-make-technology-selection.png" alt="封面图"><em>图片来自：<a href="https://xie.infoq.cn/link?target=https://unsplash.com/@epicantus?utm%253Ci%253Esource=unsplash&amp;utm%253C/i%253Emedium=referral&amp;utm_content=creditCopyText">Daria Nepriakhina</a></em></p>
+<p>作为架构设计的重要环节，技术选型的思路和原则应当与我们之前所学一样。那如何为业务场景选择适合的实现技术？又如何构建自己的技术选型方法论？</p>
+<span id="more"></span>
+
+<h2 id="技术选型指南"><a href="#技术选型指南" class="headerlink" title="技术选型指南"></a>技术选型指南</h2><p>作为工程师，在选择实现技术的时候，往往会不由自主的陷入技术实现细节的泥潭中。比如，设计数据存储的时候，不由自主的就会想到如何根据业务来分库分表，是否需要做主从复制，如何解决复制延迟等很细节的问题。除此之外，我们还会考虑这项技术的性能、社区支持、扩展性、已知问题等等技术细节。这些问题重要吗？很重要，但不是在技术选型时首要考虑的问题。下面是 ThoughtWorks 洞见总结的一份比较通用的技术选型思维框架，希望能够给大家一些启发。</p>
+<h3 id="产品纬度"><a href="#产品纬度" class="headerlink" title="产品纬度"></a>产品纬度</h3><p>产品本身的特征将影响技术选型时的很多因素，所以它是选择技术时最重要的一个维度。从不同的角度，可以把产品分成不同的类别：</p>
+<ul>
+<li>短生命周期产品和长生命周期产品</li>
+<li>探索型产品和守成型产品</li>
+<li>边缘产品和生命线产品</li>
+</ul>
+<p><strong>短生命周期产品</strong>通常要求快速交付，对产品质量不做太多要求，当它的使命结束时，代码会被直接抛弃。所以对于这类产品，“快糙猛”的技术是较好的选择，当然，能做到“快精猛”更佳。而<strong>长生命周期产品</strong>则正好相反，它往往是一个公司的收入来源，在很长时间内是不可能报废的。因此，系统的可用性、扩展性、可维护性、性能等都是我们要考虑的问题，这样的产品需要团队拥有很高的工程能力。</p>
+<p><strong>探索性产品</strong>则是团队为了尝试某些新技术或者新业务而创建的前瞻性短生命周期产品，它要求快速交付的同时，往往还需要有较高的质量。因为，如果探索性产品证明了可行性，则很有可能过渡到长生命周期产品。因此，这类产品，最好是一个微内核系统，并提前预留一些扩展空间。在技术栈的选择上一定要严谨。而<strong>守成型产品</strong>的技术选型则会侧重于与现有团队的技术栈的相似程度以及无缝整合能力。在引入新技术时，尽量符合现有的开发流程、基础设施和开发习惯。即使现有的这些已经严重过时，也需要找新老技术专家，共同设计一个路线图，以便平稳地引入新技术。</p>
+<p>在团队成员学习能力和意愿的前提下，<strong>边缘产品</strong>是最佳的试验场，适合探索各种新技术，实验各种激进方案，积累经验教训。其影响范围可控，即使失控也不会带来太大的损失。而<strong>生命线产品</strong>则应当稳妥优先，采用保守方案。其技术栈的选择尽量与长生命周期产品一致。</p>
+<p>因此，在产品纬度上，低价值产品追求快速，优先考虑门槛低的技术，但高价值产品应当在保持产品稳定的前提下，尽早进行投资性技术积累。</p>
+<h3 id="用户纬度"><a href="#用户纬度" class="headerlink" title="用户纬度"></a>用户纬度</h3><p>产品的目标用户对技术选型具有显著的影响，下面是一些比较通用的影响因素：</p>
+<ul>
+<li>浏览器版本</li>
+<li>可访问性</li>
+<li>国际化</li>
+<li>访问频率</li>
+</ul>
+<p>在前端领域，<strong>浏览器版本</strong>是永远的痛，但需要支持哪些浏览器的哪些版本是需要权衡的。比如，支持高版本的浏览器会显著的节约开发成本，但可能会损失一些用户。该如何决策？肯定不能拍脑袋决定。如果已有同领域系统上线，就应该统计这些线上系统的访问情况，得出比较准确的目标客户群统计，然后分析不同版本的浏览器有多大价值，有没有可能通过非技术手段让用户使用你们的目标浏览器。即使没有线上系统，也可以随机对目标用户群发一些调查问卷，确定他们的实际使用情况，以及安装新版浏览器的可能性。</p>
+<p>在产品的用户群体中，可能有残疾人，我们的产品是否应当考虑这些人的需求？如果要考虑这方面的需求，就要把它纳入到技术选型的过程中，而支持<strong>可访问性</strong>的代价比较高，最好提早考虑。</p>
+<p><strong>国际化</strong>也是一个需要提前考虑的问题，如果在产品后期再来添加国际化，后端还好，对于前端来说，简直是灾难。如果产品在预期的生命周期内需要提供多语言，那么，在初期选型时，就要把候选技术的国际化能力和质量纳入你的主要考量。</p>
+<p><strong>访问频率</strong>对技术选型都有很大影响。比如一个一些统计数据，只会在某些时间节点查看，这时候，考虑其性能就不是很有必要，在几秒内出结果还是几小时出结果没有显著的价值差异。但这两种技术方案却在资源占用、编程复杂度、运维复杂度等方面有显著的成本差异。这时候就要考虑这些技术是否能够给团队带来足够的价值。</p>
+<h3 id="团队维度"><a href="#团队维度" class="headerlink" title="团队维度"></a>团队维度</h3><p>团队对技术选型的影响可能都已经被说烂，一般会从团队的技术背景、团队规模、组织架构、人员流动等几个方面来考虑。比如，小团队，沟通成本低，大家又比较专业，可以选择灵活的技术和框架，以便更好的发挥团队的智慧。又比如，在整个组织架构中，就要考虑与其他团队技术的匹配程度、运维层面的支持等等因素。</p>
+<h3 id="技术本身"><a href="#技术本身" class="headerlink" title="技术本身"></a>技术本身</h3><p>最后是技术本身的考量，主要是带入前面的纬度之后，看其匹配程度。通常来说，在选择实现技术时，我们往往会考虑这项技术的功能、性能、社区支持、可扩展性、可定制性以及已知问题和约束等方面。</p>
+<p>这里有个比较棘手的问题是，你需要了解这些技术，或者说，如果你不了解，通过什么方法能够让你快速的掌握：</p>
+<ul>
+<li>这项技术的典型应用场景，比如 Spring web 和 webFlux 都可以用作应用网关，该如何选择？</li>
+<li>这项技术是如何解决一些通用的技术难点，比如缓存框架该如何解决缓存穿透和缓存雪崩问题？</li>
+<li>理性的评估这项技术的缺点，很多时候特别容易被一些技术的宣传文案吸引，盲目的引入，最后一地鸡毛。</li>
+</ul>
+<p>作为架构师，如何解决这些问题？没什么好的办法，也没啥捷径。只有一边督促自己不断学习新技术，自己能够上手使用；另外一边结合团队实际情况，规划新技术的预研和落地步骤，不断的去尝试新事物。</p>
+<h2 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h2><p>架构师在技术选型时要尽量避免自身眼界以及思维惯性的限制，如果你选择某项技术是因为以下几种原因，那就需要注意了：</p>
+<ul>
+<li>因为大家都在用，所以我们也应当选择这项技术</li>
+<li>我对这项技术非常感兴趣，好想学学，那就在项目中试试吧</li>
+<li>解决这个问题的技术，我只知道这一个，就用这个吧</li>
+</ul>
+<p>在尽量避免架构师自身因素以后，技术选型时仍然需要注意以下反模式。</p>
+<h3 id="舆论驱动型"><a href="#舆论驱动型" class="headerlink" title="舆论驱动型"></a>舆论驱动型</h3><p>人云亦云，盲目听信外人或某些布道师的主观言论，这就是舆论驱动型。特别是，现如今，开源越来越流行，大小公司开源的技术和框架也越来越多，我们很容易就会因为某某的主观言论和自己的兴趣爱好，来选择某项技术，这往往会给团队带来很多麻烦。</p>
+<p>在做任何决策时，如果要参考某人的言论和某些资料，最重要的不是看它告诉了你什么，而是看它对你隐瞒了什么。因为这些资料往往只会正面的宣传自己，而不会告诉你它有什么缺陷，更不会告诉你它是在何种背景下产生的。这也是为什么很多大公司都在拼命造轮子，因为往往自己造的才是适合自己的。注意，这里绝不是鼓励重复造轮子。</p>
+<h3 id="单一指标驱动型"><a href="#单一指标驱动型" class="headerlink" title="单一指标驱动型"></a>单一指标驱动型</h3><p>根据任何一个单一指标进行选型都会给你带来灾难，更何况很多指标并不适合作为选型的依据。比如很多人选择开源项目时，觉得 GitHub 上的 Star 数量多，就一定好；单元测试覆盖率高，就认为代码都经过严格测试，没有质量问题。这些虽然是一些比较客观的指标，但仍然不可盲目轻信，如果要评估代码质量，最好去跑一跑代码，看一看测试用例。</p>
+<p>好的决策方法是选择一些主要的指标，并确认它们没有造假，然后综合评估这些指标对业务和团队的价值。</p>
+<h3 id="话语权驱动选型"><a href="#话语权驱动选型" class="headerlink" title="话语权驱动选型"></a>话语权驱动选型</h3><p>这几乎是最糟的选型，但却屡见不鲜。简单来说，如果一条业务线慢慢成为一个公司的主要收入来源，那么这个业务线的技术栈更迭往往会带来话语权的变化。这种影响是全方位，慢慢地，其他项目甚至是底层的基础设施都会往这条线的技术栈上靠，这对公司来说，并不是一件好事。</p>
+<p>还有一种情况是，决策者的话语权。技术的选型并不是依据客观的事实，而是高层的决策者，这在一些团队还挺常见的。如果遇到，努力去改变这种境况，不能改变就跑吧。</p>
+<h3 id="粉丝驱动选型"><a href="#粉丝驱动选型" class="headerlink" title="粉丝驱动选型"></a>粉丝驱动选型</h3><p>对于生命线产品，最糟糕的选型莫过于粉丝驱动选型了，这次可没有“<strong>几乎</strong>”。对于技术人员来讲，最重要的特质是客观冷静，这样才能配得上“<strong>专业</strong>”二字。而拜大神，当作玩笑尚可，如果让它影响到你的决策，那么你就应该趁早隐退。</p>
+<p>还不说，你膜拜的“大神”可能并非真的大神，就算是公认的大神，也不应该成为你技术选型的依据，顶多是相信他们会珍惜名誉、不会粗制滥造而已，因为即使是精品也仍然有着明确的适用范围，超出这个范围它也可能会成为毒药。</p>
+<p>当然，对于边缘产品，进行粉丝驱动选型也未尝不可，甚至可能更好。只是得记住，要做就请做好，别给你的偶像丢脸，更不要做好之后就觉得公司一定要把它应用于生命线产品中。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>影响技术选型最重要的因素仍然是业务 ( 产品+用户 )，其次是团队 ( 人 + 组织架构 )，最后才是技术，作为工程师的我们，把大部分精力花在技术上是理所应当的，但仍然应当抽时间关注业务和团队。</p>
+<p>临了，如果有同学不知道该关注或者学习哪些技术的话，可以关注一下 ThoughtWorks 每年的技术雷达。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.raychase.net/1638">实际技术选型的考虑因素</a><br><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/points-for-attention-with-technology-choice">谈谈技术选型的注意事项</a><br><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/choosing-technology-guide/">技术选型指南</a></p>
+
+        </div>
+    
+<!-- tags -->
+
+<div class="post-back">
+    <a href="/"><i class="fas fa-arrow-circle-left"></i> 回到首页</a>
+</div>
+</div>
+                <div class="footer">
+    <div>
+        ©2022 - 2024  <a href="/links" title="关于我" style="text-decoration: none;"> 橙子陈绩好.</a> ALL RIGHTS RESERVED
+    </div>
+    <div>
+        <a target="_blank" rel="noopener" href="https://hexo.io">POWERED BY HEXO</a> │
+        <a href="/theme-of-hicsc/">DESIGNED BY SKYE</a> │
+        <a href="https://x.com/skyeanything" title="在Twitter上关注我" style="text-decoration: none;" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://weibo.com/luecsc" title="在微博上关注我" style="text-decoration: none;" target="_blank">
+            <i class="fab fa-weibo"></i>
+        </a>
+        <a href="mailto:skyeanything@gmail.com" title="发邮件给我"><i class="fas fa-at"></i></a>
+        <a href="/atom.xml" title="订阅RSS"><i class="fas fa-rss"></i></a>
+        <a href="/archives" title="全部文章列表"><i class="fas fa-archive"></i></a> │
+        <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+            </div>
+        </div>
+    </body>
+</html>

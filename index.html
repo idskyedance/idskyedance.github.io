@@ -78,6 +78,24 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/choosing-technology-guide/">如何做技术选型?</a>
+        <div class="post-except post-md">
+            <p>曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。</p>
+<p>说句题外话，身边的工程师朋友比较多，所以倒闭的公司看到的也挺多。很多公司一上来就高并发、分布式、分库分表，但真的，到最后死的时候，数据也没能把一张 MySQL 表装满。可能是看得多了的缘故，不管是做架构还是写代码，就特别推崇 KISS 原则，所以才有了前面的那些话，但这仅是个人感悟，绝非通用的设计原则。</p>
+<p><img src="/images/forest/how-to-make-technology-selection.png" alt="封面图"><em>图片来自：<a href="https://xie.infoq.cn/link?target=https://unsplash.com/@epicantus?utm%253Ci%253Esource=unsplash&amp;utm%253C/i%253Emedium=referral&amp;utm_content=creditCopyText">Daria Nepriakhina</a></em></p>
+<p>作为架构设计的重要环节，技术选型的思路和原则应当与我们之前所学一样。那如何为业务场景选择适合的实现技术？又如何构建自己的技术选型方法论？</p>
+        </div>
+        <div class="post-date"> <a class="read-more" href="/choosing-technology-guide/"> 继续阅读 </a> </div>
+        <div class="post-date">
+            本文发布于2024年10月10日，属于
+            
+                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
+            
+            分类
+        </div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/jvm-runtime-memory-2/">深入理解JVM运行时内存结构(续)</a>
         <div class="post-except post-md">
             <p>JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。</p>
@@ -148,23 +166,6 @@
         <div class="post-date"> <a class="read-more" href="/jvm-runtime-memory/"> 继续阅读 </a> </div>
         <div class="post-date">
             本文发布于2024年06月28日，属于
-            
-                <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
-            
-            分类
-        </div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/jvm-constant-pool/">深入理解JVM常量池与字节码</a>
-        <div class="post-except post-md">
-            <p>在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。</p>
-<h3 id="Class-文件常量池"><a href="#Class-文件常量池" class="headerlink" title="Class 文件常量池"></a>Class 文件常量池</h3><p>Java 源文件经编译后得到存储字节码的 Class 文件，Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件中。也就是说，哪个字节代表什么含义，长度多少，先后顺序如何都是被严格限定的，是不允许改变的。比如：开头的 4 个字节存放魔数，用于确定这个文件是否能够被 JVM 接受，接下来的 4 个字节用于存放版本号，再接着存放的就是常量池。常量池的长度是不固定的，所以，在常量池的入口存放着常量池容量的计数值。</p>
-<p>常量池主要用于存放两大类常量：字面量和符号引用量，字面量相当于 Java 语言层面常量的概念，比如：字符串常量、声明为 final 的常量等等。符号引用是用一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。</p>
-        </div>
-        <div class="post-date"> <a class="read-more" href="/jvm-constant-pool/"> 继续阅读 </a> </div>
-        <div class="post-date">
-            本文发布于2024年06月24日，属于
             
                 <a href="/knowledge/"><i class="fas fa-hashtag"></i>知识</a>
             
