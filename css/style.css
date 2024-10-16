@@ -4,7 +4,7 @@
 {
     --font-color-0: #e00000;
     --font-color-1: #252525;
-    --font-color-2: #2c3e50;
+    --font-color-2: #2e3339;
     --font-color-3: #aaa;
     --font-color-4: rgb(255, 107, 0);
     --bg-color-1: #eee;
@@ -19,7 +19,7 @@ p
 
 body
 {
-    font-family: 'Rubik', 'Rubik','helvetica neue',helvetica,arial,sans-serif,"Apple Color Emoji";
+    font-family: 'Rubik','helvetica neue',helvetica,arial,sans-serif,"Apple Color Emoji";
     font-size: 15px;
     line-height: 2;
     letter-spacing: 0.6px;
@@ -155,7 +155,7 @@ a
 {
     display: inline-block;
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: bold;
     line-height: 1.5;
     margin-bottom: 12px;
     color: var(--font-color-1);

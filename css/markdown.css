@@ -26,36 +26,42 @@
 .post-md h2
 {
     font-size: 1.6rem;
+    color: #34495e;
     line-height: 1.2;
     padding: 10px 0;
 }
 .post-md h3
 {
     font-size: 1.4rem;
+    color: #34495e;
     line-height: 1.2;
     padding: 9px 0;
 }
 .post-md h4
 {
     font-size: 1.2rem;
+    color: #34495e;
     line-height: 1.2;
     padding: 8px 0;
 }
 .post-md h5
 {
     font-size: 1.15rem;
+    color: #34495e;
     line-height: 1.2;
     padding: 7px 0;
 }
 .post-md h6
 {
     font-size: 1.1rem;
+    color: #34495e;
     line-height: 1.2;
     padding: 6px 0;
 }
 .post-md a
 {
     color: var(--font-color-0);
+    font-weight: bold;
     /* box-shadow: 0 1.5px 0 #de1267; */
     /* text-decoration: underline dotted; */
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
@@ -68,8 +74,9 @@
 }
 .post-md strong
 {
-    font-weight: 700;
-    color: #D23918;
+    font-weight: bold;
+    margin: 0 2px;
+    color: #c05b4d;
 }
 .post-md em
 {
@@ -117,6 +124,8 @@
 {
     width: 100%;
     margin: 12px 0;
+    margin-block-start: 0.5em;
+        margin-block-end: 1.2em;
 }
 .post-md blockquote
 {
