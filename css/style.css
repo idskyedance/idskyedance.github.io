@@ -69,10 +69,9 @@ a:hover
 
 .logo
 {
-    font-size: 2rem;
-    margin-top: 12px;
-    font-weight: 600;
-    color: var(--font-color-1);
+    font-size: 24px;
+    font-family: lobster, sans-serif;
+    color: #34495e;
 }
 
 .nav
@@ -106,7 +105,7 @@ a:hover
 }
 
 .nav-item {
-    padding-top: 6px;
+    padding-top: 10px;
 }
 
 .post-header
