@@ -41,7 +41,7 @@
     <link href="https://hicsc.com/jvm-runtime-memory-2/"/>
     <id>https://hicsc.com/jvm-runtime-memory-2/</id>
     <published>2024-07-06T05:30:10.000Z</published>
-    <updated>2024-10-17T12:32:56.010Z</updated>
+    <updated>2024-10-17T13:28:53.347Z</updated>
     
     
     <summary type="html">&lt;p&gt;JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。&lt;/p&gt;
