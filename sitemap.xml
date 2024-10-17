@@ -551,14 +551,14 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/ramble/</loc>
+    <loc>https://hicsc.com/books/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hicsc.com/books/</loc>
+    <loc>https://hicsc.com/ramble/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

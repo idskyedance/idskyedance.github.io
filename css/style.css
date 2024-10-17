@@ -124,6 +124,12 @@ a:hover
     -webkit-font-smoothing: auto;
 }
 
+.menu-item-link:hover
+{
+    color: var(--font-color-0) !important;
+    transition: color ease-in-out .2s;
+}
+
 .header .site-navbar .menu .menu-item a {
     color: #34495e;
     background-color: transparent;
