@@ -57,25 +57,32 @@
             <div class="paper-main">
                 
                     <div class="header">
-    <ul id="pc-nav" class="nav">
-        <li class="logo"><a href="/." class="logo">skye anything</a></li>
-        
-            <li class="nav-item"><a href="/knowledge"><i class="fas fa-volleyball-ball"></i> 知识</a></li>
-        
-            <li class="nav-item"><a href="/ramble"><i class="fas fa-feather"></i> 生活漫记</a></li>
-        
-            <li class="nav-item"><a href="/books"><i class="fas fa-book"></i> 读万卷书</a></li>
-        
-            <li class="nav-item"><a href="/footprint"><i class="fas fa-plane-departure"></i> 行万里路</a></li>
-        
-            <li class="nav-item"><a href="/topics"><i class="fas fa-shapes"></i> 专题研究</a></li>
-        
-    </ul>
-    <ul id="mob-nav" class="nav">
-        <li class="logo"><a href="/." class="logo">skye anything</a></li>
-        <li class="nav-item"><a href="/archives"><i class="fas fa-circle-notch"></i> 全部文章</a></li>
-    </ul>
+    <div class="logo-wrapper">
+        <a href="/." class="logo">skye anything</a>
+    </div>
+    <nav class="site-navbar">
+        <ul id="menu" class="menu">
+            
+                <li class="menu-item"><a class="menu-item-link" href="/knowledge"><i class="fas fa-volleyball-ball"></i> 知识</a></li>
+            
+                <li class="menu-item"><a class="menu-item-link" href="/ramble"><i class="fas fa-feather"></i> 生活漫记</a></li>
+            
+                <li class="menu-item"><a class="menu-item-link" href="/books"><i class="fas fa-book"></i> 读万卷书</a></li>
+            
+                <li class="menu-item"><a class="menu-item-link" href="/footprint"><i class="fas fa-plane-departure"></i> 行万里路</a></li>
+            
+                <li class="menu-item"><a class="menu-item-link" href="/topics"><i class="fas fa-shapes"></i> 专题研究</a></li>
+            
+        </ul>
+    </nav>
 </div>
+<div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">skye anything</a>
+    <a href="/archives" style="margin-left: 24px;color: black;opacity: .7;transition: opacity ease-in-out .5s;"><i class="fas fa-circle-notch"></i> 全部文章</a>
+  </div>
+</div>
+
                 
                 
                 <header class="archive-header">
@@ -198,6 +205,7 @@
         <i class="fas fa-chart-line" title=本站访问次数统计></i> <span id="busuanzi_value_site_pv" title="本站访问次数统计"></span>
     </div>
 </div>
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/xcode.min.css">
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
