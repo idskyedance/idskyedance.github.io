@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hicsc.com/my-uncles-price/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hicsc.com/jvm-runtime-memory-2/</loc>
     
     <lastmod>2024-10-17</lastmod>
@@ -407,15 +416,6 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/my-uncles-price/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hicsc.com/how-to-manage-family-wealth/</loc>
     
     <lastmod>2024-04-03</lastmod>
@@ -544,13 +544,6 @@
 
   
   <url>
-    <loc>https://hicsc.com/knowledge/</loc>
-    <lastmod>2024-10-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://hicsc.com/books/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -559,6 +552,13 @@
   
   <url>
     <loc>https://hicsc.com/ramble/</loc>
+    <lastmod>2024-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/knowledge/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
