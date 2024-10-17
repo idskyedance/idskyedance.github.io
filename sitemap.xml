@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hicsc.com/how-to-eat-better/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hicsc.com/dont-write-reusable-code/</loc>
     
     <lastmod>2024-10-17</lastmod>
@@ -318,15 +327,6 @@
   
   <url>
     <loc>https://hicsc.com/how-to-design-simple-user-experience/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/how-to-eat-better/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
