@@ -2,45 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hicsc.com/choosing-technology-guide/</loc>
+    <loc>https://hicsc.com/dont-write-reusable-code/</loc>
     
-    <lastmod>2024-10-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-object-model/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-class-loader/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-context-class-loader/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-constant-pool/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
+    <lastmod>2024-10-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,34 +13,25 @@
   <url>
     <loc>https://hicsc.com/jvm-what-objects-are-garbage/</loc>
     
-    <lastmod>2024-10-09</lastmod>
+    <lastmod>2024-10-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hicsc.com/jvm-class-loading-mechanism/</loc>
+    <loc>https://hicsc.com/c919-localization-rate/</loc>
     
-    <lastmod>2024-10-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/jvm-runtime-memory/</loc>
-    
-    <lastmod>2024-10-09</lastmod>
+    <lastmod>2024-10-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hicsc.com/jvm-runtime-memory-2/</loc>
+    <loc>https://hicsc.com/jvm-constant-pool/</loc>
     
-    <lastmod>2024-10-09</lastmod>
+    <lastmod>2024-10-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -85,7 +40,160 @@
   <url>
     <loc>https://hicsc.com/how-do-we-get-speed/</loc>
     
-    <lastmod>2024-09-29</lastmod>
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-class-loader/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/small-points-in-China-energy-industry/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-runtime-memory/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-class-loading-mechanism/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-context-class-loader/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-object-model/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/jvm-runtime-memory-2/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/choosing-technology-guide/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/why-do-dictionaries-have-to-make-mistakes-right/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/what-is-writing/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/dujiangyan-irrigation-project/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/childrens-moral/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/how-to-update-data-in-db/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/chip-wars/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/carefully-read-reference-materials/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/software-architecture-principles/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hicsc.com/secret-of-the-verification-code/</loc>
+    
+    <lastmod>2024-10-17</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -147,24 +255,6 @@
   
   <url>
     <loc>https://hicsc.com/why-did-they-miss80s/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/how-to-update-data-in-db/</loc>
-    
-    <lastmod>2024-09-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/dujiangyan-irrigation-project/</loc>
     
     <lastmod>2024-09-29</lastmod>
     
@@ -281,25 +371,7 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/carefully-read-reference-materials/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hicsc.com/how-to-view-class-solidification/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/chip-wars/</loc>
     
     <lastmod>2024-04-03</lastmod>
     
@@ -326,42 +398,6 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/what-is-writing/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/why-do-dictionaries-have-to-make-mistakes-right/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/secret-of-the-verification-code/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/small-points-in-China-energy-industry/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hicsc.com/dont-exaggerate-the-problem/</loc>
     
     <lastmod>2024-04-03</lastmod>
@@ -380,15 +416,6 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/c919-localization-rate/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hicsc.com/how-to-manage-family-wealth/</loc>
     
     <lastmod>2024-04-03</lastmod>
@@ -399,33 +426,6 @@
   
   <url>
     <loc>https://hicsc.com/how-to-refuse-others-with-dignity/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/software-architecture-principles/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/childrens-moral/</loc>
-    
-    <lastmod>2024-04-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hicsc.com/dont-write-reusable-code/</loc>
     
     <lastmod>2024-04-03</lastmod>
     
@@ -551,14 +551,14 @@
   </url>
   
   <url>
-    <loc>https://hicsc.com/books/</loc>
+    <loc>https://hicsc.com/ramble/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://hicsc.com/ramble/</loc>
+    <loc>https://hicsc.com/books/</loc>
     <lastmod>2024-10-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
