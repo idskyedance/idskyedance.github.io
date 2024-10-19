@@ -6,7 +6,7 @@
   <link href="https://hicsc.com/atom.xml" rel="self"/>
   
   <link href="https://hicsc.com/"/>
-  <updated>2024-10-17T12:32:56.008Z</updated>
+  <updated>2024-10-19T12:58:50.764Z</updated>
   <id>https://hicsc.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hicsc.com/choosing-technology-guide/"/>
     <id>https://hicsc.com/choosing-technology-guide/</id>
     <published>2024-10-10T14:24:41.000Z</published>
-    <updated>2024-10-17T12:32:56.008Z</updated>
+    <updated>2024-10-19T12:58:50.764Z</updated>
     
     
     <summary type="html">&lt;p&gt;曾经在文章中说过一句话，大意是说判断架构的牛逼与否，不是看它有多复杂，而是看它在解决同样问题时有多简单。有同学回复说，牛逼的架构是靠时间验证，跟当时解决问题的复杂和简单没啥关系。这话当然没有问题，任何牛逼的架构都需要时间来验证，但我的本意其实是说在做架构设计时，应当尽量追求简单，坚决砍掉一些可有可无的设计。&lt;/p&gt;
@@ -31,7 +31,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="后端架构设计" scheme="https://hicsc.com/topics-architecture/"/>
     
     
   </entry>
@@ -41,7 +41,7 @@
     <link href="https://hicsc.com/jvm-runtime-memory-2/"/>
     <id>https://hicsc.com/jvm-runtime-memory-2/</id>
     <published>2024-07-06T05:30:10.000Z</published>
-    <updated>2024-10-17T13:28:53.347Z</updated>
+    <updated>2024-10-19T12:55:58.621Z</updated>
     
     
     <summary type="html">&lt;p&gt;JVM 以方法作为执行的基本单位，栈帧(Stack Frame)则是用于支持 JVM 进行方法调用和执行的数据结构。每个方法在执行的同时都会创建一个栈帧用于存储方法的局部变量表、操作数栈、动态连接、方法返回地址和一些额外的附加信息。每一个方法从调用开始至执行结束，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。当方法调用结束，栈帧即被销毁，局部变量表、操作数栈等也随之消失。&lt;/p&gt;
@@ -49,7 +49,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -59,7 +59,7 @@
     <link href="https://hicsc.com/jvm-object-model/"/>
     <id>https://hicsc.com/jvm-object-model/</id>
     <published>2024-07-03T15:00:12.000Z</published>
-    <updated>2024-10-17T12:32:56.013Z</updated>
+    <updated>2024-10-19T12:55:21.748Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 &lt;a href=&quot;https://hicsc.com/jvm-runtime-memory/&quot;&gt;深入理解JVM运行时内存结构&lt;/a&gt; 中，我们宏观地探讨了 JVM 运行时的内存布局。本文将深入分析每个内存区域的细节。由于不同虚拟机的内存管理实现不同，具体的讨论需要聚焦于特定虚拟机和内存区域。基于实用优先的原则，我们以最常用的 HotSpot 虚拟机和 Java 堆内存为例，深入探讨在 HotSpot 虚拟机里：&lt;/p&gt;
@@ -74,7 +74,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -84,7 +84,7 @@
     <link href="https://hicsc.com/jvm-what-objects-are-garbage/"/>
     <id>https://hicsc.com/jvm-what-objects-are-garbage/</id>
     <published>2024-06-30T00:28:29.000Z</published>
-    <updated>2024-10-17T12:32:56.030Z</updated>
+    <updated>2024-10-19T12:55:58.619Z</updated>
     
     
     <summary type="html">&lt;p&gt;随着编程语言的发展，GC 的功能不断增强，性能也不断提高，作为语言背后的无名英雄，GC 离我们的工作似乎越来越远。作为 Java 程序员，对这一点也许会有更深的体会，我们不需要了解太多与 GC 相关的知识，就能很好的完成工作。那还有必要深入了解 GC 吗？学习 GC 的意义在哪儿？&lt;/p&gt;
@@ -99,7 +99,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -109,7 +109,7 @@
     <link href="https://hicsc.com/jvm-runtime-memory/"/>
     <id>https://hicsc.com/jvm-runtime-memory/</id>
     <published>2024-06-27T16:10:10.000Z</published>
-    <updated>2024-10-17T12:32:56.019Z</updated>
+    <updated>2024-10-19T12:55:58.622Z</updated>
     
     
     <summary type="html">&lt;p&gt;得益于 JVM 的自动内存管理机制，开发者在写代码时，很少再去关注内存分配与释放。多数情况下，应用不会出现内存泄漏和溢出问题。不过，由于开发者把内存的控制权交给了 JVM，一旦出现内存泄露和溢出问题，如果不了解 JVM 是怎样使用内存的，将很难排查和修正错误。本文从概念上介绍 JVM 运行时内存的各个区域及其作用。&lt;/p&gt;
@@ -117,7 +117,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -127,7 +127,7 @@
     <link href="https://hicsc.com/jvm-constant-pool/"/>
     <id>https://hicsc.com/jvm-constant-pool/</id>
     <published>2024-06-24T15:34:12.000Z</published>
-    <updated>2024-10-17T12:32:56.028Z</updated>
+    <updated>2024-10-19T12:55:58.616Z</updated>
     
     
     <summary type="html">&lt;p&gt;在 JVM 中，常量池可以分成 Class 文件常量池、运行时常量池、字符串常量池三类。&lt;/p&gt;
@@ -136,7 +136,7 @@
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -146,14 +146,14 @@
     <link href="https://hicsc.com/jvm-context-class-loader/"/>
     <id>https://hicsc.com/jvm-context-class-loader/</id>
     <published>2024-06-23T15:01:04.000Z</published>
-    <updated>2024-10-17T12:32:56.015Z</updated>
+    <updated>2024-10-19T12:55:58.618Z</updated>
     
     
     <summary type="html">&lt;p&gt;类的加载器大多都遵循双亲委托机制，它不仅可以避免一个类被重复加载，也能够避免 Java 核心类被篡改，越基础的类由越上层的类加载器加载。但程序设计往往没有绝对不变的规则，如果有核心类想要调用用户的代码，那该怎么办？&lt;/p&gt;</summary>
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -163,7 +163,7 @@
     <link href="https://hicsc.com/jvm-class-loader/"/>
     <id>https://hicsc.com/jvm-class-loader/</id>
     <published>2024-06-19T07:01:04.000Z</published>
-    <updated>2024-10-17T12:32:56.024Z</updated>
+    <updated>2024-10-19T12:55:58.612Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;ClassLoader-源码初探&quot;&gt;&lt;a href=&quot;#ClassLoader-源码初探&quot; class=&quot;headerlink&quot; title=&quot;ClassLoader 源码初探&quot;&gt;&lt;/a&gt;ClassLoader 源码初探&lt;/h3&gt;&lt;p&gt;类加载器用于加载 Java 类到虚拟机中，其实现类 &lt;code&gt;java.lang.ClassLoader&lt;/code&gt; 是一个抽象类，其职责是通过指定类的完全限定名 ( &lt;code&gt;binary name&lt;/code&gt; )，找到或生成这个类对应的字节码，这些字节码中包含类的定义数据，通过字节码就可以构造出一个 &lt;code&gt;java.lang.Class&lt;/code&gt; 对象。&lt;/p&gt;
@@ -180,7 +180,7 @@ System.out.println(is.getClass().getClassLoader());
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
@@ -190,7 +190,7 @@ System.out.println(is.getClass().getClassLoader());
     <link href="https://hicsc.com/jvm-class-loading-mechanism/"/>
     <id>https://hicsc.com/jvm-class-loading-mechanism/</id>
     <published>2024-06-19T01:12:06.000Z</published>
-    <updated>2024-10-17T12:32:56.017Z</updated>
+    <updated>2024-10-19T12:55:58.614Z</updated>
     
     
     <summary type="html">&lt;p&gt;Java 代码在编译过后，想要被运行和使用，经过的第一个步骤就是将编译后的字节码文件加载的虚拟机，那虚拟机是如何把字节码文件加载到虚拟机的呢，接下来以一系列实例对这一流程作简要分析与介绍。&lt;/p&gt;
@@ -206,7 +206,7 @@ System.out.println(is.getClass().getClassLoader());
     
     
     
-    <category term="Technology &amp; Knowledge" scheme="https://hicsc.com/knowledge/"/>
+    <category term="深入理解Java虚拟机" scheme="https://hicsc.com/topics-jvm/"/>
     
     
   </entry>
